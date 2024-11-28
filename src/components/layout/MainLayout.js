@@ -25,7 +25,9 @@ const MainLayout = ({ children, headerType }) => {
         {/* Main Content */}
         <div className=' flex flex-col'>
           <Header type={headerType} onMenuClick={handleMenuClick} />
-          <main className='flex-1 p-4'>{children}</main>
+          <main className='flex-1 p-4'>
+            <div className='relative w-full'>{children}</div>
+          </main>
         </div>
       </div>
     </div>

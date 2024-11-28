@@ -35,11 +35,11 @@ const IntroSwiper = () => {
   ];
 
   return (
-    <div className='relative'>
+    <div className='absolute inset-0'>
       <Swiper
         modules={[Autoplay, Pagination, Navigation]}
         spaceBetween={0}
-        slidesPerView={1}
+        slidesPerView={'auto'}
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
@@ -49,7 +49,7 @@ const IntroSwiper = () => {
           type: 'bullets',
         }}
         navigation={true}
-        className='w-full h-[600px] bg-gray-900'
+        className='!w-full h-[600px] bg-gray-900'
       >
         {introSlides.map((slide) => (
           <SwiperSlide key={slide.id}>
