@@ -1,25 +1,29 @@
+'use client';
 import { menuItems } from '@/data/menuItems';
-import MenuButton from '../navigation/MenuButton';
 import { X } from 'lucide-react';
 import Image from 'next/image';
-import { ThemeToggle } from '../ThemeToggle';
+import { useColorMode } from '@chakra-ui/react';
+
 import Navigation from '../navigation/Navigation';
 
 export default function Sidebar({ isOpen, activeMenu, setActiveMenu, onClose }) {
   // const [isOpen, setIsOpen] = useState(false); // 반응형 메뉴 상태
-
+  const { colorMode } = useColorMode();
   return (
     <aside
       className={`
-      w-64 bg-gray-800 h-screen
+      h-screen
       lg:relative
       fixed inset-y-0 left-0
       transition-transform duration-300 ease-in-out
       ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       z-40
     `}
+      style={{
+        backgroundColor: colorMode === 'dark' ? '#1A1A1A' : '#FFFFFF',
+      }}
     >
-      <div className='h-full overflow-y-auto'>
+      <div className='h-full overflow-y-auto '>
         <div className='flex justify-between p-4'>
           <div className='flex justify-center items-center ml-[-15px]'>
             <Image src='/pattern/logo2.png' width={75} height={75} alt='logo' />
@@ -27,7 +31,7 @@ export default function Sidebar({ isOpen, activeMenu, setActiveMenu, onClose }) 
               <span className='bg-gradient-to-r mb-[-5px] from-purple-400 to-purple-600 bg-clip-text text-transparent'>
                 GAMER&apos;S
               </span>
-              <span className='text-sm text-gray-400'>NEST</span>
+              <span className='text-sm '>NEST</span>
             </h1>
           </div>
           <div>

@@ -1,5 +1,4 @@
 'use client';
-import React, { useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -8,46 +7,62 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-// import './styles.css';
-
-// import required modules
-import { Pagination, Navigation } from 'swiper/modules';
-import { Image } from '@chakra-ui/react';
+import GameSlider from '@/components/games/GameSlider';
 import MainLayout from '@/components/layout/MainLayout';
 
 export default function Community() {
+  const games = [
+    {
+      id: 1,
+      title: 'EA SPORTS FC™ 25 Standard Edition',
+      imageUrl: '/pattern/main/swiper-1.jpg',
+      playBadge: '/path-to-play-badge.png',
+      price: 80000,
+      originalPrice: null,
+      discountRate: null,
+    },
+    {
+      id: 2,
+      title: 'S.T.A.L.K.E.R. 2: Heart of Chornobyl',
+      imageUrl: '/pattern/main/swiper-2.jpg',
+      playBadge: null,
+      price: 64900,
+      originalPrice: null,
+      discountRate: null,
+    },
+    {
+      id: 3,
+      title: 'God of War Ragnarök',
+      imageUrl: '/pattern/main/swiper-1.jpg',
+      playBadge: null,
+      price: 62800,
+      originalPrice: null,
+      discountRate: null,
+    },
+    {
+      id: 4,
+      title: 'God of War Ragnarök',
+      imageUrl: '/pattern/main/swiper-2.jpg',
+      playBadge: null,
+      price: 62800,
+      originalPrice: null,
+      discountRate: null,
+    },
+    {
+      id: 5,
+      title: 'God of War Ragnarök',
+      imageUrl: '/pattern/main/swiper-1.jpg',
+      playBadge: null,
+      price: 62800,
+      originalPrice: null,
+      discountRate: null,
+    },
+    // ... 더 많은 게임 데이터
+  ];
   return (
     <>
       <MainLayout>
-        <Swiper
-          slidesPerView={'auto'}
-          spaceBetween={30}
-          loop={true}
-          pagination={{
-            clickable: true,
-          }}
-          navigation={true}
-          modules={[Pagination, Navigation]}
-          className='mySwiper h-[300px]'
-        >
-          <SwiperSlide>
-            <Image
-              src={'https://cdn-l-cyberpunk.cdprojektred.com/cyberpunk2077/whatsnew/update-21@2x.jpg'}
-              alt={'img'}
-              width={400}
-              height={225}
-              className='w-full object-cover'
-            />
-          </SwiperSlide>
-          <SwiperSlide>Slide 2</SwiperSlide>
-          <SwiperSlide>Slide 3</SwiperSlide>
-          <SwiperSlide>Slide 4</SwiperSlide>
-          <SwiperSlide>Slide 5</SwiperSlide>
-          <SwiperSlide>Slide 6</SwiperSlide>
-          <SwiperSlide>Slide 7</SwiperSlide>
-          <SwiperSlide>Slide 8</SwiperSlide>
-          <SwiperSlide>Slide 9</SwiperSlide>
-        </Swiper>
+        <GameSlider title='인기 신규 출시' games={games} />
       </MainLayout>
     </>
   );

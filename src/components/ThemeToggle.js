@@ -11,7 +11,7 @@ export function ThemeToggle() {
       aria-label='Toggle color mode'
       icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
       onClick={toggleColorMode}
-      size='md'
+      size='sm'
       // variant='ghost'
     />
   );

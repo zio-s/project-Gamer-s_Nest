@@ -1,5 +1,7 @@
+'use client';
 import '@/styles/globals.scss';
 import { Providers } from '@/components/providers';
+import { Box } from '@chakra-ui/react';
 
 export default function RootLayout({ children }) {
   return (
@@ -27,12 +29,13 @@ export default function RootLayout({ children }) {
           href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css'
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <Providers>
           <div id='skip-nav'>
             <a href='#gnb'>메뉴 바로가기</a>
             <a href='#container'>본문 바로가기</a>
           </div>
+
           {children}
         </Providers>
       </body>

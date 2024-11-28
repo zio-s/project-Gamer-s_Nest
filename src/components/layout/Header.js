@@ -1,7 +1,10 @@
-import { Menu, Filter, ChevronLeft } from 'lucide-react';
+import { Menu, Filter, ChevronLeft, CircleUserRound } from 'lucide-react';
 import Input from '../common/Input';
+import { useColorMode } from '@chakra-ui/react';
+import { ThemeToggle } from '../ThemeToggle';
 
 const Header = ({ type, onMenuClick }) => {
+  const { colorMode } = useColorMode();
   const headers = {
     default: (
       <div className='w-full flex items-center justify-between p-4 gap-4'>
@@ -11,7 +14,17 @@ const Header = ({ type, onMenuClick }) => {
         <div className='w-full max-w-md '>
           <Input placeholder='Search...' />
         </div>
-        <button className='w-8 h-8 rounded-full bg-gray-700 flex-shrink-0' />
+        <div className='flex gap-5 items-center'>
+          <button
+            onClick={() => {
+              alert('기능 구현중입니다...');
+            }}
+            className='w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center'
+          >
+            <CircleUserRound />
+          </button>
+          <ThemeToggle />
+        </div>
       </div>
     ),
     list: (
@@ -40,7 +53,18 @@ const Header = ({ type, onMenuClick }) => {
     ),
   };
 
-  return <header className='bg-gray-900 sticky top-0 z-30'>{headers[type] || headers.default}</header>;
+  return (
+    <header
+      className='bg-gray-900 sticky top-0 z-30'
+      style={{
+        backgroundColor: colorMode === 'dark' ? '#1A1A1A' : '#FFFFFF',
+        borderRight: colorMode === 'dark' ? '1px solid #2D2D2D' : '1px solid #E2E8F0',
+        color: colorMode === 'dark' ? 'gray' : '#444',
+      }}
+    >
+      {headers[type] || headers.default}
+    </header>
+  );
 };
 
 export default Header;

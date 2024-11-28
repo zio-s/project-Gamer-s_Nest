@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import Image from 'next/image';
+import Button from '../common/Button';
 
 const IntroSwiper = () => {
   // 슬라이더에 표시될 데이터
@@ -38,73 +39,68 @@ const IntroSwiper = () => {
   ];
 
   return (
-    <div className='absolute top-0 left-0 w-full h-full'>
-      <Swiper
-        modules={[Autoplay, Pagination, Navigation]}
-        spaceBetween={0}
-        slidesPerView={'auto'}
-        loop
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-          type: 'bullets',
-        }}
-        // navigation={true}
-        className='!w-full h-[600px] bg-gray-900'
-      >
-        {introSlides.map((slide) => (
-          <SwiperSlide key={slide.id}>
-            <div className='grid grid-cols-1 lg:grid-cols-2 h-full gap-5'>
-              <div className='flex flex-col justify-center space-y-6'>
-                {/* 별점 */}
-                <div className='flex gap-1'>
-                  {[...Array(5)].map((_, i) => (
-                    <span aria-hidden='true' key={i} className={i < slide.rating ? 'text-yellow-400' : 'text-gray-400'}>
-                      ★
-                    </span>
-                  ))}
+    <div className='h-[650px] md:h-[500]'>
+      <div className='absolute top-0 left-0 w-full h-full'>
+        <Swiper
+          modules={[Autoplay, Pagination, Navigation]}
+          spaceBetween={0}
+          slidesPerView={'auto'}
+          loop
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+            type: 'bullets',
+          }}
+          // navigation={true}
+          className='!w-full h-[600px] md:h-[500px] backdrop-filter-none'
+        >
+          {introSlides.map((slide) => (
+            <SwiperSlide key={slide.id}>
+              <div className='grid grid-cols-1 md:grid-cols-2 h-full gap-5'>
+                <div className='flex flex-col justify-center space-y-6'>
+                  {/* 별점 */}
+                  <div className='flex gap-1'>
+                    {[...Array(5)].map((_, i) => (
+                      <span
+                        aria-hidden='true'
+                        key={i}
+                        className={i < slide.rating ? 'text-yellow-400' : 'text-gray-400'}
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* 제목 & 부제목 */}
+                  <div className='space-y-2'>
+                    <h1 className='text-4xl font-bold'>{slide.title}</h1>
+                    <p className='text-base lg:text-xl '>{slide.subtitle}</p>
+                    <p className='text-base lg:text-xl'>
+                      <span className='text-purple-500'>{slide.category}</span>
+                    </p>
+                  </div>
+
+                  {/* 설명 */}
+                  <p className='text-gray-400 max-w-lg'>{slide.description}</p>
+
+                  {/* 버튼 그룹 */}
+                  <div className='flex gap-4 lg:flex-row'>
+                    <Button>자세히보기</Button>
+                    <Button>스트리머</Button>
+                  </div>
                 </div>
 
-                {/* 제목 & 부제목 */}
-                <div className='space-y-2'>
-                  <h1 className='text-4xl font-bold text-white'>{slide.title}</h1>
-                  <p className='text-base lg:text-xl text-gray-400'>{slide.subtitle}</p>
-                  <p className='text-base lg:text-xl'>
-                    <span className='text-purple-500'>{slide.category}</span>
-                  </p>
-                </div>
-
-                {/* 설명 */}
-                <p className='text-gray-400 max-w-lg'>{slide.description}</p>
-
-                {/* 버튼 그룹 */}
-                <div className='flex gap-4 lg:flex-row gap-4'>
-                  <button className='px-6 py-3 bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors'>
-                    COMMUNITY
-                  </button>
-                  <button className='px-6 py-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors'>
-                    GAMES
-                  </button>
+                <div className='relative flex items-center justify-center  aspect-auto'>
+                  <Image src={slide.image} width={1400} height={700} alt={'title'} className='object-center'></Image>
                 </div>
               </div>
-
-              <div className='relative flex items-center justify-center  aspect-auto'>
-                <Image
-                  src={slide.image}
-                  width={1400}
-                  height={700}
-                  objectFit='cover'
-                  alt={'title'}
-                  className='object-center'
-                ></Image>
-              </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </div>
   );
 };
