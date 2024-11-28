@@ -20,7 +20,7 @@ export default function Sidebar({ isOpen, activeMenu, setActiveMenu, onClose }) 
       z-40
     `}
       style={{
-        backgroundColor: colorMode === 'dark' ? '#1A1A1A' : '#FFFFFF',
+        backgroundColor: colorMode === 'dark' ? '#1f2937' : '#FFFFFF',
       }}
     >
       <div className='h-full overflow-y-auto '>

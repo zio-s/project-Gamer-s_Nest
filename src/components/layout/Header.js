@@ -57,7 +57,7 @@ const Header = ({ type, onMenuClick }) => {
     <header
       className='bg-gray-900 sticky top-0 z-30'
       style={{
-        backgroundColor: colorMode === 'dark' ? '#1A1A1A' : '#FFFFFF',
+        backgroundColor: colorMode === 'dark' ? 'inherit' : '#FFFFFF', //#111827
         borderRight: colorMode === 'dark' ? '1px solid #2D2D2D' : '1px solid #E2E8F0',
         color: colorMode === 'dark' ? 'gray' : '#444',
       }}

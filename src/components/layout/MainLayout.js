@@ -15,7 +15,7 @@ const MainLayout = ({ children, headerType }) => {
   };
   return (
     <div className=' min-h-screen '>
-      <div className=' grid lg:grid-cols-[260px_1fr] grid-cols-1'>
+      <div className=' grid lg:grid-cols-[260px_1fr] grid-cols-1 '>
         {/* Sidebar Container */}
         <div className='md:sticky md:top-0 lg:h-screen z-50 sidebar'>
           <Sidebar
@@ -42,7 +42,7 @@ const MainLayout = ({ children, headerType }) => {
             <div
               className='absolute inset-0 bg-black bg-opacity-80 z-5'
               style={{
-                backgroundColor: colorMode === 'dark' ? '#1A1A1A' : '#FFFFFF',
+                backgroundColor: colorMode === 'dark' ? '' : '#FFFFFF',
 
                 color: colorMode === 'dark' ? '#fff' : '#444',
               }}
