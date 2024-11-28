@@ -20,7 +20,9 @@ const Home = () => {
   return (
     <MainLayout headerType=''>
       {/* <Community /> */}
-      <IntroSwiper />
+      <div className='h-[600px]'>
+        <IntroSwiper />
+      </div>
       <GameGrid games={games} title={'게임'} />
       <GameGrid games={games} title={'다른게임'} />
     </MainLayout>

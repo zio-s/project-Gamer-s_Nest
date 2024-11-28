@@ -11,7 +11,7 @@ const Header = ({ type, onMenuClick }) => {
         <div className='w-full max-w-md '>
           <Input placeholder='Search...' />
         </div>
-        <div className='w-8 h-8 rounded-full bg-gray-700 flex-shrink-0' />
+        <button className='w-8 h-8 rounded-full bg-gray-700 flex-shrink-0' />
       </div>
     ),
     list: (

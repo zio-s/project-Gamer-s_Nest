@@ -2,6 +2,7 @@
 'use client';
 import { Image } from '@chakra-ui/react';
 import React from 'react';
+import Button from '../common/Button';
 
 const GameCard = ({ title, price, imageUrl }) => {
   return (
@@ -16,9 +17,12 @@ const GameCard = ({ title, price, imageUrl }) => {
       <div className='p-4'>
         <h2 className='text-lg font-semibold mb-2'>{title}</h2>
         <p className='text-gray-400 mb-4'>${price}</p>
-        <button className='w-full py-2 bg-purple-500 hover:bg-purple-600 rounded-lg transition-colors'>
-          Add to Cart
-        </button>
+
+        <div className='flex gap-3'>
+          <Button>커뮤니티</Button>
+          <Button>스트리밍</Button>
+          <Button>즐겨찾기</Button>
+        </div>
       </div>
     </div>
   );

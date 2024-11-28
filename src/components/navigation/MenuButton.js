@@ -11,7 +11,7 @@ const MenuButton = ({ icon: Icon, label, href }) => {
       className={`
         flex items-center w-full px-4 py-2
         text-white relative
-        group
+        group 
         ${isActive ? 'bg-purple-600' : ''}
       `}
     >
