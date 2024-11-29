@@ -10,13 +10,12 @@ import 'swiper/css/navigation';
 import GameSlider from '@/components/games/GameSlider';
 import MainLayout from '@/components/layout/MainLayout';
 import { newGames } from '@/data/newGames';
+import GameExplorer from '@/components/games/GameExplorer';
 
 export default function Community() {
   return (
     <>
-      <MainLayout>
-        <GameSlider title='인기 신규 출시' games={newGames} />
-      </MainLayout>
+      <MainLayout>{/* <GameExplorer /> */}</MainLayout>
     </>
   );
 }
