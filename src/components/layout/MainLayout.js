@@ -40,14 +40,14 @@ const MainLayout = ({ children, headerType }) => {
               <source src='/pattern/video/main-video.mp4' type='video/mp4' />
             </video>
             <div
-              className='absolute inset-0 bg-black bg-opacity-80 z-5'
+              className='absolute inset-0 bg-black bg-opacity-80 cursor-none z-0 '
               style={{
                 backgroundColor: colorMode === 'dark' ? '' : '#FFFFFF',
 
                 color: colorMode === 'dark' ? '#fff' : '#444',
               }}
             ></div>
-            <div className='relative w-full flex flex-col gap-10'>{children}</div>
+            <div className='relative w-full flex flex-col gap-10 z-5'>{children}</div>
           </main>
         </div>
       </div>
