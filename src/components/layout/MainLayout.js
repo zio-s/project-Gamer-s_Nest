@@ -29,7 +29,7 @@ const MainLayout = ({ children, headerType }) => {
         {/* Main Content */}
         <div className=' flex flex-col'>
           <Header type={headerType} onMenuClick={handleMenuClick} />
-          <main className='flex-1 p-4 '>
+          <main className='flex-1 p-8 '>
             <video
               autoPlay
               muted
@@ -47,7 +47,7 @@ const MainLayout = ({ children, headerType }) => {
                 color: colorMode === 'dark' ? '#fff' : '#444',
               }}
             ></div>
-            <div className='relative w-full flex flex-col gap-10 z-5'>{children}</div>
+            <div className='relative w-full flex flex-col gap-16 z-5'>{children}</div>
           </main>
         </div>
       </div>

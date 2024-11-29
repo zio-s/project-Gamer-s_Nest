@@ -17,7 +17,7 @@ const GameExplorer = ({ popularGames, trendingGames }) => {
   const displayedGames = activeTab === 'best' ? popularGames : trendingGames;
 
   return (
-    <div className='min-h   p-6'>
+    <div className='min-h'>
       {/* 필터 영역 */}
       <div className='flex flex-col md:flex-row justify-between items-center gap-4 mb-6'>
         <div className='flex items-center gap-4'>
