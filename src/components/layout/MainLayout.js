@@ -2,11 +2,9 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
-// import { useColorMode } from '@chakra-ui/react';
-import { ThemeToggle } from '../ThemeToggle';
 import { useColorMode } from '@chakra-ui/react';
 
-const MainLayout = ({ children, headerType }) => {
+const MainLayout = ({ children, headerType, showAside = true }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState('Games');
   const { colorMode } = useColorMode();
@@ -15,21 +13,24 @@ const MainLayout = ({ children, headerType }) => {
   };
   return (
     <div className=' min-h-screen '>
-      <div className=' grid lg:grid-cols-[260px_1fr] grid-cols-1 '>
+      <div className={`grid  grid-cols-1 ${showAside === true ? 'lg:grid-cols-[260px_1fr]' : ''} `}>
         {/* Sidebar Container */}
-        <div className='md:sticky md:top-0 lg:h-screen z-50 sidebar'>
-          <Sidebar
-            isOpen={isSidebarOpen}
-            activeMenu={activeMenu}
-            setActiveMenu={setActiveMenu}
-            onClose={() => setIsSidebarOpen(false)}
-          />
-        </div>
+
+        {showAside && (
+          <div className='md:sticky md:top-0 lg:h-screen z-50'>
+            <Sidebar isOpen={isSidebarOpen} activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
+          </div>
+        )}
 
         {/* Main Content */}
         <div className=' flex flex-col'>
-          <Header type={headerType} onMenuClick={handleMenuClick} />
-          <main className='flex-1 p-8 '>
+          <Header
+            type={headerType}
+            onMenuClick={handleMenuClick}
+            activeMenu={activeMenu}
+            setActiveMenu={setActiveMenu}
+          />
+          <main className={`flex-1 min-h-screen ${showAside ? 'md:ml-6' : ''}`}>
             <video
               autoPlay
               muted

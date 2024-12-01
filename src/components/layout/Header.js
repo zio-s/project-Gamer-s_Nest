@@ -3,9 +3,9 @@ import { useColorMode } from '@chakra-ui/react';
 import { ThemeToggle } from '../ThemeToggle';
 import Input from '../common/Input';
 import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+import DrawerMenu from '../navigation/DrawerMenu';
 
-const Header = ({ onMenuClick }) => {
+const Header = ({ onMenuClick, activeMenu = { activeMenu }, setActiveMenu = { setActiveMenu } }) => {
   const { colorMode } = useColorMode();
   const pathname = usePathname();
 
@@ -42,22 +42,7 @@ const Header = ({ onMenuClick }) => {
         return (
           <div className='flex items-center justify-between h-16'>
             {/* 로고 */}
-            <Link href='/' className='text-xl font-bold'>
-              GameStore
-            </Link>
-
-            {/* 네비게이션 */}
-            <nav className='hidden md:flex items-center gap-6'>
-              <Link href='/games' className='hover:text-blue-400 transition-colors'>
-                스토어
-              </Link>
-              <Link href='/library' className='hover:text-blue-400 transition-colors'>
-                라이브러리
-              </Link>
-              <Link href='/news' className='hover:text-blue-400 transition-colors'>
-                새소식
-              </Link>
-            </nav>
+            <DrawerMenu activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
 
             {/* 우측 아이콘들 */}
             <div className='flex items-center gap-4'>
@@ -77,9 +62,7 @@ const Header = ({ onMenuClick }) => {
       default:
         return (
           <>
-            <button className='lg:hidden' onClick={onMenuClick}>
-              <Menu className='w-6 h-6' />
-            </button>
+            <DrawerMenu activeMenu={activeMenu} setActiveMenu={setActiveMenu} className={'lg:hidden'} />
             <div className='w-full max-w-md'>
               <Input placeholder='Search...' />
             </div>
@@ -101,14 +84,13 @@ const Header = ({ onMenuClick }) => {
 
   return (
     <header
-      className={`sticky top-0 z-30 bg-gray-900/95 backdrop-blur-sm ${
-        headerType === 'default' ? 'flex items-center justify-between' : ''
+      className={`sticky top-0 z-30 px-6 bg-gray-900/95 backdrop-blur-sm ${
+        headerType === 'default' ? 'flex items-center justify-between p-6' : ''
       }`}
       style={{
         backgroundColor: colorMode === 'dark' ? 'inherit' : '#FFFFFF', //#111827
         borderRight: colorMode === 'dark' ? '1px solid #2D2D2D' : '1px solid #E2E8F0',
         color: colorMode === 'dark' ? 'gray' : '#444',
-        padding: '1rem',
       }}
     >
       {renderHeaderContent()}
