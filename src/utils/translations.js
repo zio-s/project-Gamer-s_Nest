@@ -124,3 +124,51 @@ export const translateRequirementLabel = (label) => {
   };
   return labelMap[label] || label;
 };
+
+// 리뷰 평가 번역
+export const translateRating = (rating) => {
+  const ratingMap = {
+    recommended: '추천',
+    exceptional: '매우 추천',
+    meh: '보통',
+    skip: '비추천',
+  };
+  return ratingMap[rating] || rating;
+};
+
+// 리뷰 제목 번역 (일반적인 패턴)
+export const translateReviewTitle = (title) => {
+  const titleMap = {
+    'A masterpiece': '걸작',
+    'Great game': '훌륭한 게임',
+    'Good game': '좋은 게임',
+    'Decent game': '괜찮은 게임',
+    'Average game': '평범한 게임',
+    'Poor game': '실망스러운 게임',
+    'Not recommended': '추천하지 않음',
+    'Waste of time': '시간 낭비',
+    'Must play': '필수 플레이',
+    'Worth playing': '플레이할 만함',
+    'Mixed feelings': '복잡한 심정',
+    'Needs improvement': '개선 필요',
+    'Has potential': '잠재력 있음',
+    Overrated: '과대평가됨',
+    Underrated: '과소평가됨',
+  };
+  return titleMap[title] || title;
+};
+
+// 리뷰 플랫폼 번역
+export const translateReviewPlatform = (platform) => {
+  const platformMap = {
+    PC: 'PC',
+    'PlayStation 5': 'PS5',
+    'PlayStation 4': 'PS4',
+    'Xbox One': 'Xbox One',
+    'Xbox Series S/X': 'Xbox Series',
+    'Nintendo Switch': '닌텐도 스위치',
+    iOS: 'iOS',
+    Android: '안드로이드',
+  };
+  return platformMap[platform] || platform;
+};

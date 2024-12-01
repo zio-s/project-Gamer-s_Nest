@@ -90,11 +90,14 @@ export async function fetchGameDetails(id) {
     // 스크린샷 가져오기
     const screenshotsResponse = await fetch(`${BASE_URL}/games/${id}/screenshots?key=${RAWG_API_KEY}`);
     const screenshotsData = await screenshotsResponse.json();
-
+    // 리뷰 데이터 가져오기
+    const reviewsResponse = await fetch(`${BASE_URL}/games/${id}/reviews?key=${RAWG_API_KEY}`);
+    const reviewsData = await reviewsResponse.json();
     // 게임 데이터와 스크린샷 데이터 합치기
     return {
       ...gameData,
       screenshots: screenshotsData.results,
+      reviews: reviewsData.results,
     };
   } catch (error) {
     console.error('Error fetching game details:', error);
