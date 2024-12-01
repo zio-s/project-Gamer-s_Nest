@@ -3,6 +3,8 @@ import { fetchGamesByCategory } from '@/utils/rawg';
 import { Check } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import FilterDropdown from '../common/FilterDropdown';
+import { useColorMode } from '@chakra-ui/react';
+import Link from 'next/link';
 const PLATFORM_FILTERS = [
   { label: 'PC', value: ['4'] },
   { label: 'macOS', value: ['5'] },
@@ -26,6 +28,7 @@ const RATING_FILTERS = [
 ];
 
 const GameExplorer = ({ allGames, onTabChange }) => {
+  const { colorMode } = useColorMode();
   const [activeTab, setActiveTab] = useState('popular');
   const [games, setGames] = useState([]);
   const [selectedPlatform, setSelectedPlatform] = useState('all');
@@ -114,13 +117,17 @@ const GameExplorer = ({ allGames, onTabChange }) => {
         <div className='flex items-center gap-4'>
           <button
             onClick={() => handleTabChange('popular')}
-            className={`px-4 py-2 rounded-lg ${activeTab === 'popular' ? 'bg-gray-800' : 'hover:bg-gray-800'}`}
+            className={`px-4 py-2 rounded-lg ${
+              activeTab === 'popular' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 hover:text-white '
+            }`}
           >
             인기순위
           </button>
           <button
             onClick={() => handleTabChange('trending')}
-            className={`px-4 py-2 rounded-lg ${activeTab === 'trending' ? 'bg-gray-800' : 'hover:bg-gray-800'}`}
+            className={`px-4 py-2 rounded-lg ${
+              activeTab === 'trending' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 hover:text-white'
+            }`}
           >
             베스트
           </button>
@@ -153,49 +160,52 @@ const GameExplorer = ({ allGames, onTabChange }) => {
 
       {/* 게임 목록 */}
       {isLoading ? (
-        <div className='text-center py-8'>Loading...</div>
+        <div className='text-center py-8'>잠시만 기다려주세요...</div>
       ) : (
         <>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             {Array.from({ length: 2 }).map((_, gridIndex) => (
-              <div key={gridIndex} className='bg-gray-900 rounded-lg max-w-[2569px]'>
+              <div
+                key={gridIndex}
+                className=' rounded-lg '
+                style={{
+                  backgroundColor: colorMode === 'dark' ? '#111827' : '#e5e7eb',
+                }}
+              >
                 <div className='w-full'>
                   {/* 테이블 헤더 */}
                   <div className='grid grid-cols-12 gap-4 p-4 border-b border-gray-800 text-sm font-semibold'>
                     <div className='col-span-1'>#</div>
-                    <div className='col-span-7 text-left'>콜렉션</div>
-                    <div className='col-span-2 text-right'>최저가</div>
-                    <div className='col-span-2 text-right'>거래량</div>
+                    <div className='col-span-7 text-left'>Game</div>
+                    <div className='col-span-2 text-right'>평점</div>
+                    <div className='col-span-2 text-right'>플레이어</div>
                   </div>
 
                   {/* 테이블 바디 */}
                   <div className='divide-y divide-gray-800'>
                     {filteredGames.slice(gridIndex * 5, (gridIndex + 1) * 5).map((game, index) => (
-                      <div
-                        key={game.id}
-                        className='grid grid-cols-12 gap-4 p-4 hover:bg-gray-800/50 transition-colors items-center'
-                      >
-                        <div className='col-span-1 text-sm'>{index + 1 + gridIndex * 5}</div>
-                        <div className='col-span-7'>
-                          <div className='flex items-center gap-3'>
-                            <img
-                              src={game.background_image}
-                              alt={game.name}
-                              className='w-12 h-12 rounded-lg object-cover flex-shrink-0'
-                            />
-                            <div className='flex items-center gap-1 min-w-0'>
-                              <span className='text-sm font-semibold truncate'>{game.name}</span>
-                              <Check className='w-4 h-4 text-blue-500 flex-shrink-0' />
+                      <Link href={`/games/${game.id}`} key={game.id}>
+                        <div className='grid grid-cols-12 gap-4 p-4 hover:bg-gray-800/50 transition-colors items-center'>
+                          <div className='col-span-1 text-sm'>{index + 1 + gridIndex * 5}</div>
+                          <div className='col-span-7'>
+                            <div className='flex items-center gap-3'>
+                              <img
+                                src={game.background_image}
+                                alt={game.name}
+                                className='w-12 h-12 rounded-lg object-cover flex-shrink-0'
+                              />
+                              <div className='flex items-center gap-1 min-w-0'>
+                                <span className='text-sm font-semibold truncate'>{game.name}</span>
+                                <Check className='w-4 h-4 text-blue-500 flex-shrink-0' />
+                              </div>
                             </div>
                           </div>
+                          <div className='col-span-2 text-right text-sm'>
+                            {game.metacritic ? `${game.metacritic}점` : '-'}
+                          </div>
+                          <div className='col-span-2 text-right text-sm'>{game.added?.toLocaleString()}명</div>
                         </div>
-                        <div className='col-span-2 text-right text-sm'>
-                          {game.price ? `${game.price.toLocaleString()} ETH` : 'Free'}
-                        </div>
-                        <div className='col-span-2 text-right text-sm'>
-                          {(game.ratings_count || 0).toLocaleString()} ETH
-                        </div>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 </div>

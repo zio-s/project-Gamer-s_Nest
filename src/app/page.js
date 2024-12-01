@@ -60,7 +60,7 @@ const Home = () => {
     }
   };
   return (
-    <MainLayout headerType=''>
+    <MainLayout headerType='' showAside={true}>
       <IntroSwiper />
       {isLoading ? (
         <div className='flex justify-center items-center min-h-screen'>
@@ -75,7 +75,6 @@ const Home = () => {
             onLoadMore={handleLoadMore}
           />
           <GameSlider games={allGames} title={'이달의 Best'} />
-          <GameSlider title='신규 게임' subtitle='New' games={newGames} />
           <GameSlider title='핫한 게임' subtitle='베스트 게임' games={popularGames} />
           <GameSlider games={trendingGames} title={'트렌디 게임'} />
           <GameSlider title='출시 예정' subtitle='Coming Soon' games={upcomingGames} />

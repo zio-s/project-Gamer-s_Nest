@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronDown, X } from 'lucide-react';
+import { useColorMode } from '@chakra-ui/react';
 
 const FilterDropdown = ({ label, options, value, onChange, isMulti = false }) => {
+  const { colorMode } = useColorMode();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -44,17 +46,25 @@ const FilterDropdown = ({ label, options, value, onChange, isMulti = false }) =>
     <div className='relative' ref={dropdownRef}>
       <button
         type='button'
-        className='px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-white flex items-center gap-2 transition-colors'
+        className='px-4 py-2 hover:bg-gray-700 rounded-lg  flex items-center gap-2 transition-colors'
         onClick={() => setIsOpen(!isOpen)}
+        style={{
+          backgroundColor: colorMode === 'dark' ? '#1f2937' : '#e5e7eb',
+        }}
       >
         <span>{label}</span>
         <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
-        <div className='absolute z-50 mt-2 w-56 bg-gray-800 rounded-lg shadow-lg overflow-hidden'>
+        <div
+          className='absolute z-50 mt-2 w-56 rounded-lg shadow-lg overflow-hidden'
+          style={{
+            backgroundColor: colorMode === 'dark' ? '#1f2937' : '#e5e7eb',
+          }}
+        >
           <div className='p-3 border-b border-gray-700 flex justify-between items-center'>
-            <span className='font-semibold text-white'>{label}</span>
+            <span className='font-semibold '>{label}</span>
             {value !== 'all' && (
               <button onClick={handleClear} className='text-sm text-gray-400 hover:text-white transition-colors'>
                 Clear
@@ -65,12 +75,12 @@ const FilterDropdown = ({ label, options, value, onChange, isMulti = false }) =>
             {options.map((option) => (
               <button
                 key={option.label}
-                className={`w-full px-3 py-2 text-left hover:bg-gray-700 transition-colors flex items-center justify-between ${
+                className={`w-full px-3 py-2 text-left hover:bg-gray-500 hover:text-white transition-colors flex items-center justify-between ${
                   isSelected(option.value) ? 'bg-gray-700' : ''
                 }`}
                 onClick={() => handleSelect(option.value)}
               >
-                <span className='text-white'>{option.label}</span>
+                <span className=''>{option.label}</span>
                 {isSelected(option.value) && <X className='w-4 h-4 text-gray-400' />}
               </button>
             ))}
