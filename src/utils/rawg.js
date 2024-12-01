@@ -27,23 +27,21 @@ export async function fetchGamesByCategory(category) {
   switch (category) {
     case 'popular':
       queryParams = '&ordering=-rating&metacritic=80,100';
-      size = 'page_size=10';
+      size = 'page_size=100';
       break;
     case 'free':
       queryParams = '&tags=free-to-play';
-      size = 'page_size=6';
       break;
     case 'trending':
       queryParams = '&ordering=-added&dates=2022-01-01,2025-12-31';
-      size = 'page_size=10';
+      size = 'page_size=100';
       break;
     case 'all':
       queryParams = '&ordering=-relevance'; // 전체 게임
-      size = 'page_size=6';
+      size = 'page_size=100';
       break;
     case 'new':
       queryParams = '&ordering=-released&dates=2024-01-01,2024-12-31'; // 신규 게임
-      size = 'page_size=20';
       break;
     case 'upcoming':
       queryParams = '&dates=2024-03-01,2025-12-31&ordering=released'; // 출시 예정
@@ -65,7 +63,7 @@ export async function fetchGamesByCategory(category) {
       break;
     default:
       queryParams = '&ordering=-rating';
-      size = 'page_size=15';
+      size = 'page_size=20';
   }
 
   try {

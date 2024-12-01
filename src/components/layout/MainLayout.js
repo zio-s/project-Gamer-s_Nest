@@ -40,7 +40,7 @@ const MainLayout = ({ children, headerType }) => {
               <source src='/pattern/video/main-video.mp4' type='video/mp4' />
             </video>
             <div
-              className='absolute inset-0 bg-black bg-opacity-80 cursor-none z-0 '
+              className='absolute inset-0 bg-black bg-opacity-80 z-0 '
               style={{
                 backgroundColor: colorMode === 'dark' ? '' : '#FFFFFF',
 

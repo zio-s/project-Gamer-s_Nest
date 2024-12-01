@@ -4,35 +4,10 @@ import MainLayout from '@/components/layout/MainLayout';
 import React, { useEffect, useState } from 'react';
 import IntroSwiper from '@/components/layout/IntroSwiper';
 import GameSlider from '@/components/games/GameSlider';
-import { fetchGames, fetchGamesByCategory } from '@/utils/rawg';
-import { newGames } from '@/data/newGames';
+import { fetchGamesByCategory } from '@/utils/rawg';
 import GameExplorer from '@/components/games/GameExplorer';
 
 const Home = () => {
-  // const [games, setGames] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [error, setError] = useState(null);
-
-  // useEffect(() => {
-  //   const loadGames = async () => {
-  //     try {
-  //       setIsLoading(true);
-  //       const data = await fetchGames();
-  //       console.log('Received data:', data); // 디버깅용
-
-  //       if (data && data.results) {
-  //         setGames(data.results);
-  //       }
-  //     } catch (err) {
-  //       console.error('Failed to load games:', err);
-  //       setError(err.message);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   };
-
-  //   loadGames();
-  // }, []);
   const [popularGames, setPopularGames] = useState([]);
   const [freeGames, setFreeGames] = useState([]);
   const [trendingGames, setTrendingGames] = useState([]);
@@ -40,6 +15,8 @@ const Home = () => {
   const [newGames, setNewGames] = useState([]);
   const [upcomingGames, setUpcomingGames] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     async function loadGames() {
       try {
@@ -58,7 +35,6 @@ const Home = () => {
         setTrendingGames(trending || []);
         setNewGames(newG || []);
         setUpcomingGames(upcoming || []);
-        console.log(all);
       } catch (error) {
         console.error('Error loading games:', error);
       } finally {
@@ -68,6 +44,21 @@ const Home = () => {
 
     loadGames();
   }, []);
+  // 추가 데이터 로드
+  const handleLoadMore = async (newSize) => {
+    try {
+      const additionalGames = await fetchGamesByCategory('all', newSize);
+      setAllGames((prev) => {
+        const combinedGames = [...prev, ...additionalGames];
+        // 중복 제거
+        return Array.from(new Set(combinedGames.map((game) => game.id))).map((id) =>
+          combinedGames.find((game) => game.id === id)
+        );
+      });
+    } catch (error) {
+      console.error('Error loading more games:', error);
+    }
+  };
   return (
     <MainLayout headerType=''>
       <IntroSwiper />
@@ -77,13 +68,18 @@ const Home = () => {
         </div>
       ) : (
         <>
-          <GameExplorer popularGames={popularGames} trendingGames={trendingGames} />
-          <GameGrid games={allGames} title={'이달의 Best'} />
+          <GameExplorer
+            popularGames={popularGames}
+            trendingGames={trendingGames}
+            allGames={allGames}
+            onLoadMore={handleLoadMore}
+          />
+          <GameSlider games={allGames} title={'이달의 Best'} />
           <GameSlider title='신규 게임' subtitle='New' games={newGames} />
           <GameSlider title='핫한 게임' subtitle='베스트 게임' games={popularGames} />
-          <GameGrid games={trendingGames} title={'트렌디 게임'} />
+          <GameSlider games={trendingGames} title={'트렌디 게임'} />
           <GameSlider title='출시 예정' subtitle='Coming Soon' games={upcomingGames} />
-          <GameGrid games={freeGames} title={'무료 게임'} />
+          <GameSlider games={freeGames} title={'무료 게임'} />
         </>
       )}
     </MainLayout>
