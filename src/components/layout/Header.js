@@ -1,14 +1,15 @@
-import { Menu, Filter, ChevronLeft, CircleUserRound, Search, ShoppingCart, User } from 'lucide-react';
+import { Menu, Filter, Search, ShoppingCart, User } from 'lucide-react';
 import { useColorMode } from '@chakra-ui/react';
 import { ThemeToggle } from '../ThemeToggle';
 import Input from '../common/Input';
 import { usePathname } from 'next/navigation';
 import DrawerMenu from '../navigation/DrawerMenu';
+import { useScroll } from '@/hooks/useScroll';
 
 const Header = ({ onMenuClick, activeMenu = { activeMenu }, setActiveMenu = { setActiveMenu } }) => {
   const { colorMode } = useColorMode();
   const pathname = usePathname();
-
+  const scrolled = useScroll();
   // 경로에 따른 헤더 타입 결정
   const getHeaderType = () => {
     if (pathname === '/') return 'default';
@@ -18,7 +19,25 @@ const Header = ({ onMenuClick, activeMenu = { activeMenu }, setActiveMenu = { se
   };
 
   const headerType = getHeaderType();
+  const getHeaderStyle = () => {
+    if (headerType === 'detail') {
+      return {
+        backgroundColor: scrolled
+          ? colorMode === 'dark'
+            ? 'rgba(17, 24, 39, 0.95)'
+            : 'rgba(255, 255, 255, 0.95)'
+          : 'transparent',
+        borderRight: 'none',
+        transition: 'background-color 0.3s ease',
+      };
+    }
 
+    return {
+      backgroundColor: colorMode === 'dark' ? 'inherit' : '#FFFFFF',
+      borderRight: colorMode === 'dark' ? '1px solid #2D2D2D' : '1px solid #E2E8F0',
+      color: colorMode === 'dark' ? 'gray' : '#444',
+    };
+  };
   // 헤더 내용 렌더링
   const renderHeaderContent = () => {
     switch (headerType) {
@@ -84,14 +103,10 @@ const Header = ({ onMenuClick, activeMenu = { activeMenu }, setActiveMenu = { se
 
   return (
     <header
-      className={`sticky top-0 z-30 px-6 bg-gray-900/95 backdrop-blur-sm ${
+      className={`sticky top-0 z-30 px-6 backdrop-blur-sm ${
         headerType === 'default' ? 'flex items-center justify-between p-6' : ''
-      }`}
-      style={{
-        backgroundColor: colorMode === 'dark' ? 'inherit' : '#FFFFFF', //#111827
-        borderRight: colorMode === 'dark' ? '1px solid #2D2D2D' : '1px solid #E2E8F0',
-        color: colorMode === 'dark' ? 'gray' : '#444',
-      }}
+      } ${headerType === 'detail' && !scrolled ? 'bg-transparent' : ''}`}
+      style={getHeaderStyle()}
     >
       {renderHeaderContent()}
     </header>

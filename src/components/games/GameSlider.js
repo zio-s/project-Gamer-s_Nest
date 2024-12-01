@@ -61,7 +61,12 @@ const GameSlider = ({ games, title, subtitle }) => {
                 <div className='relative group cursor-pointer'>
                   {/* Game Image */}
                   <div className='relative aspect-[4/5] rounded-lg overflow-hidden mb-3 '>
-                    <Image src={image || '/placeholder-game.jpg'} alt={title} fill className='object-cover' />
+                    <Image
+                      src={image || '/placeholder-game.jpg'}
+                      alt={title}
+                      fill
+                      className='object-cover hover:scale-105 transition-all duration-100'
+                    />
                     {/* {game.playBadge && (
                       <div className='absolute bottom-3 left-3'>
                         <Image src={game.playBadge} alt='Play' width={24} height={24} />

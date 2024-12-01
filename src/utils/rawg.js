@@ -83,9 +83,19 @@ export async function fetchGamesByCategory(category) {
 
 export async function fetchGameDetails(id) {
   try {
-    const response = await fetch(`${BASE_URL}/games/${id}?key=${RAWG_API_KEY}`);
-    const data = await response.json();
-    return data;
+    // 기본 게임 정보 가져오기
+    const gameResponse = await fetch(`${BASE_URL}/games/${id}?key=${RAWG_API_KEY}`);
+    const gameData = await gameResponse.json();
+
+    // 스크린샷 가져오기
+    const screenshotsResponse = await fetch(`${BASE_URL}/games/${id}/screenshots?key=${RAWG_API_KEY}`);
+    const screenshotsData = await screenshotsResponse.json();
+
+    // 게임 데이터와 스크린샷 데이터 합치기
+    return {
+      ...gameData,
+      screenshots: screenshotsData.results,
+    };
   } catch (error) {
     console.error('Error fetching game details:', error);
     throw error;

@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import FilterDropdown from '../common/FilterDropdown';
 import { useColorMode } from '@chakra-ui/react';
 import Link from 'next/link';
+import Image from 'next/image';
+import GameThumbnail from './GameThumbanil';
 const PLATFORM_FILTERS = [
   { label: 'PC', value: ['4'] },
   { label: 'macOS', value: ['5'] },
@@ -189,11 +191,7 @@ const GameExplorer = ({ allGames, onTabChange }) => {
                           <div className='col-span-1 text-sm'>{index + 1 + gridIndex * 5}</div>
                           <div className='col-span-7'>
                             <div className='flex items-center gap-3'>
-                              <img
-                                src={game.background_image}
-                                alt={game.name}
-                                className='w-12 h-12 rounded-lg object-cover flex-shrink-0'
-                              />
+                              <GameThumbnail game={game} />
                               <div className='flex items-center gap-1 min-w-0'>
                                 <span className='text-sm font-semibold truncate'>{game.name}</span>
                                 <Check className='w-4 h-4 text-blue-500 flex-shrink-0' />
