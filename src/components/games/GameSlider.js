@@ -7,6 +7,7 @@ import 'swiper/css/navigation';
 import Image from 'next/image';
 import { Heading } from '@chakra-ui/react';
 import { ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 
 const GameSlider = ({ games, title, subtitle }) => {
   const navigationPrevRef = React.useRef(null);
@@ -56,31 +57,33 @@ const GameSlider = ({ games, title, subtitle }) => {
         >
           {games.map(({ id, name: title, released, background_image: image, rating, platforms }) => (
             <SwiperSlide key={id} className='!w-[280px] '>
-              <div className='relative group cursor-pointer'>
-                {/* Game Image */}
-                <div className='relative aspect-[4/5] rounded-lg overflow-hidden mb-3 '>
-                  <Image src={image || '/placeholder-game.jpg'} alt={title} fill className='object-cover' />
-                  {/* {game.playBadge && (
-                    <div className='absolute bottom-3 left-3'>
-                      <Image src={game.playBadge} alt='Play' width={24} height={24} />
-                    </div>
-                  )} */}
-                </div>
+              <Link href={`/games/${id}`} className=' group bg-gray-800/50 backdrop-blur rounded-lg overflow-hidden '>
+                <div className='relative group cursor-pointer'>
+                  {/* Game Image */}
+                  <div className='relative aspect-[4/5] rounded-lg overflow-hidden mb-3 '>
+                    <Image src={image || '/placeholder-game.jpg'} alt={title} fill className='object-cover' />
+                    {/* {game.playBadge && (
+                      <div className='absolute bottom-3 left-3'>
+                        <Image src={game.playBadge} alt='Play' width={24} height={24} />
+                      </div>
+                    )} */}
+                  </div>
 
-                {/* Game Info */}
-                <div>
-                  <div className='text-sm text-gray-500 mb-1'>{subtitle}</div>
-                  <h3 className='font-medium mb-2'>{title}</h3>
+                  {/* Game Info */}
+                  <div>
+                    <div className='text-sm text-gray-500 mb-1'>{subtitle}</div>
+                    <h3 className='font-medium mb-2'>{title}</h3>
 
-                  {/* <div className='flex items-center space-x-2'>
-                    {game.discountRate && <span className='text-cyan-500'>-{game.discountRate}%</span>}
-                    {game.originalPrice && (
-                      <span className='text-gray-500 line-through'>₩{game.originalPrice.toLocaleString()}</span>
-                    )}
-                    <span className='font-medium'>₩{game.price.toLocaleString()}</span>
-                  </div> */}
+                    {/* <div className='flex items-center space-x-2'>
+                      {game.discountRate && <span className='text-cyan-500'>-{game.discountRate}%</span>}
+                      {game.originalPrice && (
+                        <span className='text-gray-500 line-through'>₩{game.originalPrice.toLocaleString()}</span>
+                      )}
+                      <span className='font-medium'>₩{game.price.toLocaleString()}</span>
+                    </div> */}
+                  </div>
                 </div>
-              </div>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>
