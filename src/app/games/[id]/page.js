@@ -106,7 +106,7 @@ export default function GameDetailPage() {
 
       {/* 메인 콘텐츠 */}
 
-      <div className='max-w-7xl mx-auto px-4 pt-20  flex flex-col gap-20'>
+      <div className='max-w-7xl mx-auto px-4 pt-20  flex flex-col gap-20 pb-20'>
         <div>
           <MediaSection game={game} />
         </div>

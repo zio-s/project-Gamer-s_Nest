@@ -1,7 +1,6 @@
 'use client';
 import '@/styles/globals.scss';
 import { Providers } from '@/components/providers';
-import { Box } from '@chakra-ui/react';
 
 export default function RootLayout({ children }) {
   return (
