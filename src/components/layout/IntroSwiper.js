@@ -39,8 +39,8 @@ const IntroSwiper = () => {
   ];
 
   return (
-    <div className='h-[650px] md:h-[500]'>
-      <div className='absolute '>
+    <div className='h-[650px] md:h-[500] px-6'>
+      <div className='absolute lg:pr-6'>
         <Swiper
           modules={[Autoplay, Pagination, Navigation]}
           spaceBetween={0}

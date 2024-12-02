@@ -18,9 +18,11 @@ export default function Sidebar({ isOpen, activeMenu, setActiveMenu, onClose }) 
       transition-transform duration-300 ease-in-out
       ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       z-40
+      
     `}
       style={{
         backgroundColor: colorMode === 'dark' ? '#1f2937' : '#FFFFFF',
+        borderRight: colorMode === 'dark' ? '1px solid #2D2D2D' : '1px solid #E5E7EB',
       }}
     >
       <div className='h-full overflow-y-auto '>

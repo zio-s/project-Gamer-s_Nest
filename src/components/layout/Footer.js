@@ -1,15 +1,27 @@
 'use client';
-import { Container } from '@chakra-ui/react';
+
+import { useColorMode } from '@chakra-ui/react';
 import React from 'react';
 
 const Footer = () => {
+  const { colorMode } = useColorMode();
   return (
-    <footer className='bg-gray-900 py-12 mt-auto'>
+    <footer
+      className='bg-gray-900 py-12 mt-auto'
+      style={{
+        backgroundColor: colorMode === 'dark' ? '#111827' : '#FFFFFF',
+        borderTop: colorMode === 'dark' ? '1px solid #2D2D2D' : '1px solid #E5E7EB',
+      }}
+    >
       <div className='max-w-7xl mx-auto px-4'>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-8'>
           {/* 회사 정보 */}
           <div>
-            <h3 className='text-lg font-semibold mb-4'>GameStore</h3>
+            <h3 className='text-lg font-semibold mb-4'>
+              <span className='bg-gradient-to-r mb-[-5px] from-purple-400 to-purple-600 bg-clip-text text-transparent'>
+                GAMER&apos;S
+              </span>
+            </h3>
             <p className='text-gray-400 text-sm'>최고의 게임을 최상의 경험으로 제공합니다.</p>
           </div>
 

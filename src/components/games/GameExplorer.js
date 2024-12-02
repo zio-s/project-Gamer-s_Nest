@@ -107,7 +107,7 @@ const GameExplorer = ({ allGames, onTabChange }) => {
   };
 
   return (
-    <div className='min-h'>
+    <div className='min-h px-6'>
       {/* 필터 상태 표시 */}
       <div className='text-sm text-gray-400 mb-4'>
         전체 {stats.total}개 중 {stats.filtered}개 표시 ({stats.platform} / {stats.genre})

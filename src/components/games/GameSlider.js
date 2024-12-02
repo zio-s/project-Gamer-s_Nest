@@ -13,9 +13,9 @@ const GameSlider = ({ games, title, subtitle }) => {
   const navigationPrevRef = React.useRef(null);
   const navigationNextRef = React.useRef(null);
   return (
-    <div className='relative w-full min-h-[500px]'>
+    <div className='relative w-full min-h-[500px] '>
       <div className='absolute top-0 left-0 w-full h-full'>
-        <div className='flex items-center justify-between mb-4'>
+        <div className='flex items-center justify-between mb-4 px-6'>
           <Heading className=' font-bold flex gap-5 items-center'>
             {title} <ChevronRight />
           </Heading>
@@ -51,14 +51,14 @@ const GameSlider = ({ games, title, subtitle }) => {
             // @ts-ignore
             swiper.params.navigation.nextEl = navigationNextRef.current;
           }}
-          spaceBetween={16}
+          spaceBetween={0}
           slidesPerView='auto'
           className='!overflow-hidden'
         >
           {games.map(({ id, name: title, released, background_image: image, rating, platforms }) => (
             <SwiperSlide key={id} className='!w-[280px] '>
               <Link href={`/games/${id}`} className=' group bg-gray-800/50 backdrop-blur rounded-lg overflow-hidden '>
-                <div className='relative group cursor-pointer'>
+                <div className='relative group cursor-pointer flex flex-col px-6 '>
                   {/* Game Image */}
                   <div className='relative aspect-[4/5] rounded-lg overflow-hidden mb-3 '>
                     <Image
