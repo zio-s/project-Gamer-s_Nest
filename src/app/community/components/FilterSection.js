@@ -1,11 +1,11 @@
+'use client';
+import { useFilter } from '@/contexts/FilterContext';
 import FilterDropdown from './FilterDropdown';
 
 const FilterSection = () => {
-  const handleFilterChange = (filterType, value) => {
-    console.log(`Filter ${filterType} changed:`, value);
-  };
+  const { filters, updateFilters } = useFilter();
 
-  const filters = {
+  const filterOptions = {
     categories: [
       { label: 'Action Games', value: 'action', count: 145 },
       { label: 'RPG', value: 'rpg', count: 89 },
@@ -21,9 +21,8 @@ const FilterSection = () => {
     ],
     sortBy: [
       { label: 'Most Recent', value: 'recent' },
-      { label: 'Most Viewed', value: 'viewed' },
-      { label: 'Most Answered', value: 'answered' },
-      { label: 'Most Voted', value: 'voted' },
+      { label: 'Most Voted', value: 'votes' },
+      { label: 'Most Answered', value: 'answers' },
     ],
   };
 
@@ -31,19 +30,22 @@ const FilterSection = () => {
     <div className='space-y-4'>
       <FilterDropdown
         title='Categories'
-        options={filters.categories}
-        onSelect={(value) => handleFilterChange('categories', value)}
+        options={filterOptions.categories}
+        selected={filters.categories}
+        onSelect={(value) => updateFilters('categories', value)}
         isMulti
       />
       <FilterDropdown
         title='Time Period'
-        options={filters.timePeriod}
-        onSelect={(value) => handleFilterChange('timePeriod', value)}
+        options={filterOptions.timePeriod}
+        selected={filters.timePeriod}
+        onSelect={(value) => updateFilters('timePeriod', value)}
       />
       <FilterDropdown
         title='Sort By'
-        options={filters.sortBy}
-        onSelect={(value) => handleFilterChange('sortBy', value)}
+        options={filterOptions.sortBy}
+        selected={filters.sortBy}
+        onSelect={(value) => updateFilters('sortBy', value)}
       />
     </div>
   );
