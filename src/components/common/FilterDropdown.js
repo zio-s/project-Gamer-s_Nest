@@ -58,9 +58,10 @@ const FilterDropdown = ({ label, options, value, onChange, isMulti = false }) =>
 
       {isOpen && (
         <div
-          className='absolute z-50 mt-2 w-56 rounded-lg shadow-lg overflow-hidden'
+          className='absolute z-50 mt-2 w-56 rounded-lg shadow-lg overflow-hidden left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-0'
           style={{
             backgroundColor: colorMode === 'dark' ? '#1f2937' : '#e5e7eb',
+            maxWidth: 'calc(100vw - 2rem)',
           }}
         >
           <div className='p-3 border-b border-gray-700 flex justify-between items-center'>
