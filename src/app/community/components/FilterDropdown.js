@@ -1,23 +1,44 @@
 'use client';
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { useGameCommunity } from '@/contexts/FilterContext';
 
-const FilterDropdown = ({ title, options, onSelect, isMulti = false }) => {
+const FilterDropdown = ({ title, filterType, options }) => {
+  const { filters, updateFilters } = useGameCommunity();
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(isMulti ? [] : '');
+
+  // filters 객체의 안전한 접근을 위한 기본값 설정
+  const currentCategories = filters.categories || [];
+  const currentSortBy = filters.sortBy || 'recent';
+  const currentTimePeriod = filters.timePeriod || '';
 
   const handleSelect = (option) => {
-    if (isMulti) {
-      const newSelected = selected.includes(option)
-        ? selected.filter((item) => item !== option)
-        : [...selected, option];
-      setSelected(newSelected);
-      onSelect(newSelected);
+    if (filterType === 'categories') {
+      // 카테고리는 다중 선택 가능
+      const newCategories = currentCategories.includes(option)
+        ? currentCategories.filter((cat) => cat !== option)
+        : [...currentCategories, option];
+      updateFilters('categories', newCategories);
     } else {
-      setSelected(option);
-      onSelect(option);
+      // 다른 필터들은 단일 선택
+      updateFilters(filterType, option);
       setIsOpen(false);
     }
+  };
+
+  // 현재 선택된 값(들) 표시를 위한 헬퍼 함수
+  const getDisplayValue = () => {
+    if (filterType === 'categories' && currentCategories.length > 0) {
+      return `${title} (${currentCategories.length})`;
+    }
+    const selectedOption = options.find((opt) =>
+      filterType === 'sortBy'
+        ? currentSortBy === opt.value
+        : filterType === 'timePeriod'
+        ? currentTimePeriod === opt.value
+        : false
+    );
+    return selectedOption ? selectedOption.label : title;
   };
 
   return (
@@ -27,7 +48,7 @@ const FilterDropdown = ({ title, options, onSelect, isMulti = false }) => {
         className='w-full flex items-center justify-between px-4 py-2 bg-[#2d2d3a] 
                    text-gray-300 rounded-lg border border-gray-600 hover:border-purple-500'
       >
-        <span>{title}</span>
+        <span>{getDisplayValue()}</span>
         <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
@@ -44,10 +65,10 @@ const FilterDropdown = ({ title, options, onSelect, isMulti = false }) => {
                 className='px-4 py-2 hover:bg-[#3d3d4a] cursor-pointer text-gray-300
                          flex items-center gap-2'
               >
-                {isMulti && (
+                {filterType === 'categories' && (
                   <input
                     type='checkbox'
-                    checked={selected.includes(option.value)}
+                    checked={currentCategories.includes(option.value)}
                     readOnly
                     className='rounded border-gray-600 bg-[#1a1b1e]'
                   />

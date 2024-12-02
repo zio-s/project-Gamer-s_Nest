@@ -1,133 +1,90 @@
-'use client';
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import debounce from 'lodash/debounce';
-import { fetchGames } from '@/utils/rawg';
+import React, { createContext, useContext, useState, useCallback } from 'react';
+import { mockQuestions, categories, tags, statuses } from '@/data/MockCommunityData';
+import { fetchGameDetails } from '@/utils/rawg';
 
-const FilterContext = createContext();
-const STORAGE_KEY = 'community-filters';
-const ITEMS_PER_PAGE = 10;
+const GameCommunityContext = createContext();
 
-export const useFilter = () => {
-  const context = useContext(FilterContext);
-  if (!context) {
-    throw new Error('useFilter must be used within a FilterProvider');
-  }
-  return context;
-};
-
-export const FilterProvider = ({ children }) => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  // Initial state from URL or localStorage
-  const getInitialState = () => {
-    // Try to get from localStorage first
-    const stored = typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null;
-    if (stored) {
-      return JSON.parse(stored);
-    }
-
-    // Otherwise, get from URL or use defaults
-    return {
-      categories: searchParams.get('categories')?.split(',').filter(Boolean) || [],
-      timePeriod: searchParams.get('time') || '',
-      sortBy: searchParams.get('sort') || 'recent',
-      search: searchParams.get('q') || '',
-      page: parseInt(searchParams.get('page') || '1', 10),
-    };
-  };
-
-  const [filters, setFilters] = useState(getInitialState);
-  const [questions, setQuestions] = useState([]);
+export const GameCommunityProvider = ({ children }) => {
+  const [posts, setPosts] = useState(mockQuestions);
+  const [filteredPosts, setFilteredPosts] = useState(mockQuestions);
   const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
+  const [filters, setFilters] = useState({
+    categories: [],
+    timePeriod: 'all',
+    sortBy: 'recent',
+    searchQuery: '',
+  });
 
-  // Save filters to localStorage
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(filters));
-  }, [filters]);
+  const updateFilters = useCallback((type, value) => {
+    setFilters((prev) => {
+      const newFilters = { ...prev, [type]: value };
 
-  // Update URL with filters
-  const updateURL = useCallback(
-    debounce((newFilters) => {
-      const params = new URLSearchParams();
-      if (newFilters.categories.length) params.set('categories', newFilters.categories.join(','));
-      if (newFilters.timePeriod) params.set('time', newFilters.timePeriod);
-      if (newFilters.sortBy) params.set('sort', newFilters.sortBy);
-      if (newFilters.search) params.set('q', newFilters.search);
-      if (newFilters.page > 1) params.set('page', newFilters.page.toString());
+      // 필터 적용 로직
+      let result = [...mockQuestions];
 
-      // replace 옵션을 사용하여 history 스택에 추가하지 않고 현재 URL만 업데이트
-      router.push(`?${params.toString()}`, { scroll: false });
-    }, 300),
-    [router]
-  );
-
-  // Filter and fetch questions
-  const fetchQuestions = useCallback(async () => {
-    setLoading(true);
-    try {
-      const data = await fetchGames(filters);
-      setQuestions((prev) => (filters.page === 1 ? data.questions : [...prev, ...data.questions]));
-      setHasMore(data.hasMore);
-    } catch (error) {
-      console.error('Failed to fetch questions:', error);
-    } finally {
-      setLoading(false);
-    }
-  }, [filters]);
-
-  useEffect(() => {
-    fetchQuestions();
-  }, [fetchQuestions]);
-
-  const updateFilters = useCallback(
-    (type, value) => {
-      if (type === 'reset') {
-        const defaultFilters = {
-          categories: [],
-          timePeriod: '',
-          sortBy: 'recent',
-          search: '',
-          page: 1,
-        };
-        setFilters(defaultFilters);
-        updateURL(defaultFilters);
-        return;
+      // 카테고리 필터
+      if (newFilters.categories.length > 0) {
+        result = result.filter((post) => newFilters.categories.includes(post.category));
       }
 
-      setFilters((prev) => {
-        const newFilters = {
-          ...prev,
-          [type]: value,
-          page: type === 'page' ? value : 1, // Reset page when other filters change
-        };
-        updateURL(newFilters);
-        return newFilters;
-      });
-    },
-    [updateURL]
-  );
+      // 검색어 필터
+      if (newFilters.searchQuery) {
+        const query = newFilters.searchQuery.toLowerCase();
+        result = result.filter(
+          (post) => post.title.toLowerCase().includes(query) || post.content.toLowerCase().includes(query)
+        );
+      }
 
-  const loadMore = useCallback(() => {
-    if (!loading && hasMore) {
-      updateFilters('page', filters.page + 1);
-    }
-  }, [loading, hasMore, filters.page, updateFilters]);
+      // 정렬
+      result.sort((a, b) => {
+        switch (newFilters.sortBy) {
+          case 'votes':
+            return b.votes - a.votes;
+          case 'answers':
+            return b.answers - a.answers;
+          default: // recent
+            return new Date(b.createdAt) - new Date(a.createdAt);
+        }
+      });
+
+      setFilteredPosts(result);
+      return newFilters;
+    });
+  }, []);
+
+  const resetFilters = useCallback(() => {
+    setFilters({
+      categories: [],
+      timePeriod: 'all',
+      sortBy: 'recent',
+      searchQuery: '',
+    });
+    setFilteredPosts(mockQuestions);
+  }, []);
 
   return (
-    <FilterContext.Provider
+    <GameCommunityContext.Provider
       value={{
-        filters,
-        updateFilters,
-        questions,
+        posts: filteredPosts,
         loading,
-        hasMore,
-        loadMore,
+        filters,
+        categories,
+        tags,
+        statuses,
+        updateFilters,
+        resetFilters,
+        fetchGameDetails,
       }}
     >
       {children}
-    </FilterContext.Provider>
+    </GameCommunityContext.Provider>
   );
+};
+
+export const useGameCommunity = () => {
+  const context = useContext(GameCommunityContext);
+  if (!context) {
+    throw new Error('useGameCommunity must be used within a GameCommunityProvider');
+  }
+  return context;
 };

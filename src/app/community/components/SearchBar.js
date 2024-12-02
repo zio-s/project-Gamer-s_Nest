@@ -1,27 +1,24 @@
 'use client';
-import { useFilter } from '@/contexts/FilterContext';
+import { useGameCommunity } from '@/contexts/FilterContext';
 import { Search } from 'lucide-react';
-import debounce from 'lodash/debounce';
 
-const SearchBar = () => {
-  const { filters, updateFilters } = useFilter();
+export default function SearchBar() {
+  const { updateFilters } = useGameCommunity();
 
-  const handleSearch = debounce((value) => {
-    updateFilters('search', value);
-  }, 300);
+  const handleSearch = (e) => {
+    updateFilters('searchQuery', e.target.value);
+  };
 
   return (
     <div className='relative'>
+      <Search className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400' />
       <input
         type='text'
-        placeholder='Search questions...'
-        defaultValue={filters.search}
-        onChange={(e) => handleSearch(e.target.value)}
-        className='w-full px-4 py-2 pl-10 rounded-lg bg-[#2d2d3a] text-gray-300'
+        placeholder='Search discussions...'
+        onChange={handleSearch}
+        className='w-full pl-10 pr-4 py-2 bg-[#2d2d3a] border border-gray-600 rounded-lg
+                 text-white placeholder-gray-400 focus:outline-none focus:border-purple-500'
       />
-      <Search className='absolute left-3 top-2.5 w-5 h-5 text-gray-500' />
     </div>
   );
-};
-
-export default SearchBar;
+}

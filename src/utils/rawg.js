@@ -24,6 +24,7 @@ export const fetchGames = async (filters) => {
       page: filters.page,
       search: filters.search,
       ordering: filters.sortBy === 'recent' ? '-released' : '-rating',
+      // genres: filters.categories.join(','), // 카테고리 필터 추가
     });
 
     const response = await fetch(`${BASE_URL}/games?${params}`);

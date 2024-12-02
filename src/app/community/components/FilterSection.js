@@ -1,18 +1,17 @@
 'use client';
-import { useFilter } from '@/contexts/FilterContext';
+
+import { useGameCommunity } from '@/contexts/FilterContext';
 import FilterDropdown from './FilterDropdown';
 
-const FilterSection = () => {
-  const { filters, updateFilters } = useFilter();
+export default function FilterSection() {
+  const { categories, tags, statuses } = useGameCommunity();
 
   const filterOptions = {
-    categories: [
-      { label: 'Action Games', value: 'action', count: 145 },
-      { label: 'RPG', value: 'rpg', count: 89 },
-      { label: 'Strategy', value: 'strategy', count: 67 },
-      { label: 'Sports', value: 'sports', count: 45 },
-      { label: 'Indies', value: 'indies', count: 234 },
-    ],
+    categories: categories.map((cat) => ({
+      label: cat.label,
+      value: cat.value,
+      count: cat.count,
+    })),
     timePeriod: [
       { label: 'Today', value: 'today', count: 24 },
       { label: 'This Week', value: 'week', count: 145 },
@@ -28,27 +27,9 @@ const FilterSection = () => {
 
   return (
     <div className='space-y-4'>
-      <FilterDropdown
-        title='Categories'
-        options={filterOptions.categories}
-        selected={filters.categories}
-        onSelect={(value) => updateFilters('categories', value)}
-        isMulti
-      />
-      <FilterDropdown
-        title='Time Period'
-        options={filterOptions.timePeriod}
-        selected={filters.timePeriod}
-        onSelect={(value) => updateFilters('timePeriod', value)}
-      />
-      <FilterDropdown
-        title='Sort By'
-        options={filterOptions.sortBy}
-        selected={filters.sortBy}
-        onSelect={(value) => updateFilters('sortBy', value)}
-      />
+      <FilterDropdown title='Categories' filterType='categories' options={filterOptions.categories} />
+      <FilterDropdown title='Time Period' filterType='timePeriod' options={filterOptions.timePeriod} />
+      <FilterDropdown title='Sort By' filterType='sortBy' options={filterOptions.sortBy} />
     </div>
   );
-};
-
-export default FilterSection;
+}
