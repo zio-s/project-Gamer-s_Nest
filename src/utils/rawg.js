@@ -2,20 +2,59 @@
 const RAWG_API_KEY = process.env.NEXT_PUBLIC_RAWG_API_KEY;
 const BASE_URL = 'https://api.rawg.io/api';
 
-export async function fetchGames(page = 1, pageSize = 20) {
+// export async function fetchGames(page = 1, pageSize = 20) {
+//   try {
+//     const response = await fetch(
+//       `${BASE_URL}/games?key=${RAWG_API_KEY}&page=${page}&page_size=${pageSize}&ordering=-rating`
+//     );
+//     const data = await response.json();
+
+//     return data;
+//   } catch (error) {
+//     console.error('Error fetching games:', error);
+//     throw error;
+//   }
+// }
+const ITEMS_PER_PAGE = 10;
+export const fetchGames = async (filters) => {
   try {
-    const response = await fetch(
-      `${BASE_URL}/games?key=${RAWG_API_KEY}&page=${page}&page_size=${pageSize}&ordering=-rating`
-    );
+    const params = new URLSearchParams({
+      key: RAWG_API_KEY,
+      page_size: ITEMS_PER_PAGE,
+      page: filters.page,
+      search: filters.search,
+      ordering: filters.sortBy === 'recent' ? '-released' : '-rating',
+    });
+
+    const response = await fetch(`${BASE_URL}/games?${params}`);
     const data = await response.json();
 
-    return data;
-  } catch (error) {
-    console.error('Error fetching games:', error);
-    throw error;
-  }
-}
+    // RAWG 데이터를 커뮤니티 형식으로 변환
+    const questions = data.results.map((game) => ({
+      id: game.id,
+      title: game.name,
+      preview: game.description_raw?.slice(0, 200) || '',
+      category: game.genres[0]?.name.toLowerCase() || 'uncategorized',
+      votes: Math.floor(game.rating * 20), // 5점 만점을 100점 만점으로 변환
+      views: game.ratings_count,
+      answers: Math.floor(Math.random() * 20), // 임시 데이터
+      tags: game.tags.slice(0, 3).map((tag) => tag.name),
+      createdAt: game.released,
+      username: 'RAWG User',
+      userAvatar: game.background_image,
+      gameImage: game.background_image,
+      platforms: game.platforms.map((p) => p.platform.name),
+    }));
 
+    return {
+      questions,
+      hasMore: data.next !== null,
+    };
+  } catch (error) {
+    console.error('Failed to fetch RAWG data:', error);
+    return { questions: [], hasMore: false };
+  }
+};
 export async function fetchGamesByCategory(category) {
   if (!RAWG_API_KEY) {
     console.error('RAWG API key is missing');
