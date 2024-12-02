@@ -65,6 +65,7 @@ const GameSlider = ({ games, title, subtitle }) => {
                       src={image || '/placeholder-game.jpg'}
                       alt={title}
                       fill
+                      sizes='100'
                       className='object-cover hover:scale-105 transition-all duration-100'
                     />
                     {/* {game.playBadge && (

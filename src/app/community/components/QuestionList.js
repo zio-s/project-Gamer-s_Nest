@@ -30,7 +30,6 @@ const QuestionList = () => {
     },
     [loading, hasMore, loadMore]
   );
-
   return (
     <main className='flex-1'>
       <div className='space-y-4'>

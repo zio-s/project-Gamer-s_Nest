@@ -15,7 +15,7 @@ const CommunityContent = () => {
         <SearchBar />
         <div className='flex gap-6 mt-6'>
           <aside className='w-64 flex-shrink-0'>
-            <div className='sticky top-20 bg-[#2d2d3a] rounded-lg shadow-lg shadow-black/20 p-4'>
+            <div className='sticky top-36 bg-[#2d2d3a] rounded-lg shadow-lg shadow-black/20 p-4'>
               <div className='flex items-center justify-between mb-4'>
                 <h2 className='font-bold text-white'>Filters</h2>
                 <button
@@ -61,7 +61,7 @@ export default function CommunityPage() {
       </div>
 
       <nav
-        className={`sticky top-0 z-30 border-b border-[#2d2d3a] bg-[#1a1b1e] ${
+        className={`sticky top-16 z-30 border-b border-[#2d2d3a] bg-[#1a1b1e] ${
           scrolled ? 'shadow-lg shadow-black/30' : ''
         }`}
       >
@@ -91,28 +91,6 @@ export default function CommunityPage() {
       </nav>
 
       <FilterProvider>
-        {/* <div className='bg-[#1a1b1e] min-h-screen'>
-          <div className='max-w-7xl mx-auto px-4 py-6'>
-            <SearchBar />
-            <div className='flex gap-6 mt-6'>
-              <aside className='w-64 flex-shrink-0'>
-                <div className='sticky top-20 bg-[#2d2d3a] rounded-lg shadow-lg shadow-black/20 p-4'>
-                  <div className='flex items-center justify-between mb-4'>
-                    <h2 className='font-bold text-white'>Filters</h2>
-                    <button
-                      onClick={() => updateFilters('reset')}
-                      className='text-sm text-purple-400 hover:text-purple-300'
-                    >
-                      Reset
-                    </button>
-                  </div>
-                  <FilterSection />
-                </div>
-              </aside>
-              <QuestionList />
-            </div>
-          </div>
-        </div> */}
         <CommunityContent />
       </FilterProvider>
     </div>
