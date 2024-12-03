@@ -40,7 +40,7 @@ const IntroSwiper = () => {
 
   return (
     <div className='h-[650px] md:h-[500] px-6'>
-      <div className='absolute lg:pr-6'>
+      <div className='absolute pr-6'>
         <Swiper
           modules={[Autoplay, Pagination, Navigation]}
           spaceBetween={0}
@@ -93,8 +93,8 @@ const IntroSwiper = () => {
                   </div>
                 </div>
 
-                <div className='relative flex items-center justify-center  aspect-auto'>
-                  <Image src={slide.image} width={1400} height={700} alt={'title'} className='object-center'></Image>
+                <div className='relative flex    aspect-auto object-top'>
+                  <Image src={slide.image} width={1400} height={700} alt={'title'} className=''></Image>
                 </div>
               </div>
             </SwiperSlide>

@@ -17,17 +17,17 @@ const CommunityNavigation = ({ scrolled }) => {
 
   return (
     <nav
-      className={`sticky top-16 z-30 border-b border-[#2d2d3a] bg-[#1a1b1e] ${
+      className={`sticky top-16 z-30 border-b border-[#2d2d3a] bg-[#1a1b1e]  ${
         scrolled ? 'shadow-lg shadow-black/30' : ''
       }`}
     >
       <div className='max-w-7xl mx-auto px-4'>
-        <div className='flex items-center h-14 -mb-px'>
+        <div className='flex items-center h-14 -mb-px overflow-x-scroll md:overflow-hidden'>
           {tabs.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               onClick={() => setActiveTab(id)}
-              className={`flex items-center px-4 h-full border-b-2 text-sm font-medium ${
+              className={`flex items-center flex-shrink-0 px-4 h-full border-b-2 text-sm font-medium ${
                 activeTab === id
                   ? 'border-purple-500 text-purple-400'
                   : 'border-transparent text-gray-400 hover:text-gray-200 hover:border-gray-600'

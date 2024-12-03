@@ -11,7 +11,7 @@ const QuestionCard = ({ question }) => {
 
   return (
     <div className='bg-[#2d2d3a] rounded-lg shadow-lg p-4'>
-      <div className='flex gap-4'>
+      <div className='flex gap-4 cursor-pointer'>
         <Image
           src={question.gameImage || defaultImage}
           alt={question.title || 'Game image'}

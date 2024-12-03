@@ -99,20 +99,9 @@ const GameExplorer = ({ allGames, onTabChange }) => {
   };
 
   const filteredGames = getFilteredGames();
-  const stats = {
-    total: games.length,
-    filtered: filteredGames.length,
-    platform: PLATFORM_FILTERS.find((p) => p.value === selectedPlatform)?.label || '전체',
-    genre: GENRE_FILTERS.find((g) => g.value === selectedGenre)?.label || '전체',
-  };
 
   return (
     <div className='min-h px-6'>
-      {/* 필터 상태 표시 */}
-      <div className='text-sm text-gray-400 mb-4'>
-        전체 {stats.total}개 중 {stats.filtered}개 표시 ({stats.platform} / {stats.genre})
-      </div>
-
       {/* 필터 영역 */}
       <div className='flex flex-col md:flex-row justify-between items-center gap-4 mb-6'>
         {/* 탭 버튼 */}
@@ -169,14 +158,14 @@ const GameExplorer = ({ allGames, onTabChange }) => {
             {Array.from({ length: 2 }).map((_, gridIndex) => (
               <div
                 key={gridIndex}
-                className=' rounded-lg '
+                className='rounded-lg'
                 style={{
                   backgroundColor: colorMode === 'dark' ? '#111827' : '#e5e7eb',
                 }}
               >
                 <div className='w-full'>
                   {/* 테이블 헤더 */}
-                  <div className='grid grid-cols-12 gap-4 p-4 border-b border-gray-800 text-sm font-semibold'>
+                  <div className='grid grid-cols-12 gap-2 sm:gap-4 p-4 border-b border-gray-800 text-sm font-semibold'>
                     <div className='col-span-1'>#</div>
                     <div className='col-span-7 text-left'>Game</div>
                     <div className='col-span-2 text-right'>평점</div>
@@ -187,12 +176,12 @@ const GameExplorer = ({ allGames, onTabChange }) => {
                   <div className='divide-y divide-gray-800'>
                     {filteredGames.slice(gridIndex * 5, (gridIndex + 1) * 5).map((game, index) => (
                       <Link href={`/games/${game.id}`} key={game.id}>
-                        <div className='grid grid-cols-12 gap-4 p-4 hover:bg-gray-800/50 transition-colors items-center'>
+                        <div className='grid grid-cols-12 gap-2 sm:gap-4 p-4 hover:bg-gray-800/50 transition-colors items-center'>
                           <div className='col-span-1 text-sm'>{index + 1 + gridIndex * 5}</div>
                           <div className='col-span-7'>
-                            <div className='flex items-center gap-3'>
+                            <div className='flex items-center gap-2 sm:gap-3 min-w-0'>
                               <GameThumbnail game={game} />
-                              <div className='flex items-center gap-1 min-w-0'>
+                              <div className='flex items-center gap-1 min-w-0 flex-1'>
                                 <span className='text-sm font-semibold truncate'>{game.name}</span>
                                 <Check className='w-4 h-4 text-blue-500 flex-shrink-0' />
                               </div>

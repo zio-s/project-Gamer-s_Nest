@@ -7,6 +7,7 @@ import ScreenshotsContent from './tabcontent/ScreenshotsContent';
 import NewestContent from './tabcontent/NewestContent';
 import TrendingContent from './tabcontent/TrendingContent';
 import TeamRecruitContent from './tabcontent/TeamRecruitContent';
+import ResponsiveSidebar from './ResponsiveSidebar';
 
 const CommunityContent = () => {
   const { activeTab, posts, loading } = useGameCommunity();
