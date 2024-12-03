@@ -17,7 +17,7 @@ const DiscussionsContent = () => {
           <aside className='w-64 flex-shrink-0'>
             <div className='sticky top-36 bg-[#2d2d3a] rounded-lg shadow-lg shadow-black/20 p-4'>
               <div className='flex items-center justify-between mb-4'>
-                <h2 className='font-bold text-white'>Filters</h2>
+                <h2 className='font-bold text-white'>필터</h2>
                 <ResetButton resetFilters={resetFilters} />
               </div>
               <FilterSection />

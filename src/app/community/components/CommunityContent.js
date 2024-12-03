@@ -14,7 +14,7 @@ const CommunityContent = () => {
   const renderContent = () => {
     switch (activeTab) {
       case 'discussions':
-        return <DiscussionsContent />;
+        return <DiscussionsContent posts={posts} loading={loading} />;
       case 'screenshots':
         return <ScreenshotsContent />;
       case 'team-recruit':
@@ -25,7 +25,7 @@ const CommunityContent = () => {
       case 'trending':
         return <TrendingContent />;
       default:
-        return <DiscussionsContent />;
+        return <DiscussionsContent posts={posts} loading={loading} />;
     }
   };
 

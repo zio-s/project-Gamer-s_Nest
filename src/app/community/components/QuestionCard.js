@@ -5,27 +5,9 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 const QuestionCard = ({ question }) => {
-  // const { fetchPostGameDetails } = useGameCommunity();
-  const [gameImage, setGameImage] = useState('https://via.placeholder.com/500');
+  const { mockQuestions } = useGameCommunity();
+
   const defaultImage = 'https://via.placeholder.com/500';
-
-  // useEffect(() => {
-  //   const loadGameImage = async () => {
-  //     if (question.gameId) {
-  //       try {
-  //         const gameDetails = await fetchPostGameDetails(question.gameId);
-  //         if (gameDetails?.background_image) {
-  //           setGameImage(gameDetails.background_image);
-  //         }
-  //       } catch (error) {
-  //         console.error('Failed to load game image:', error);
-  //         setGameImage(defaultImage);
-  //       }
-  //     }
-  //   };
-
-  //   loadGameImage();
-  // }, [question.gameId]);
 
   return (
     <div className='bg-[#2d2d3a] rounded-lg shadow-lg p-4'>

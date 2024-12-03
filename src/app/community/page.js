@@ -18,7 +18,7 @@ export default function CommunityPage() {
   }, []);
 
   return (
-    <GameCommunityProvider>
+    <GameCommunityProvider gameId='your-game-id'>
       <div className='bg-[#1a1b1e] min-h-screen'>
         <div id='hero' className='relative bg-[#7e3af2] text-white py-16'>
           <div className='max-w-7xl mx-auto px-4'>
