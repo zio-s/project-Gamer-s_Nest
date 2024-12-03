@@ -3,15 +3,11 @@
 import { useGameCommunity } from '@/contexts/FilterContext';
 import FilterDropdown from './FilterDropdown';
 
-export default function FilterSection() {
-  const { categories, tags, statuses } = useGameCommunity();
+const FilterSection = () => {
+  const { categories, updateFilters } = useGameCommunity();
 
   const filterOptions = {
-    categories: categories.map((cat) => ({
-      label: cat.label,
-      value: cat.value,
-      count: cat.count,
-    })),
+    categories: categories, // 목업 데이터에서 정의된 categories 사용
     timePeriod: [
       { label: 'Today', value: 'today', count: 24 },
       { label: 'This Week', value: 'week', count: 145 },
@@ -32,4 +28,6 @@ export default function FilterSection() {
       <FilterDropdown title='Sort By' filterType='sortBy' options={filterOptions.sortBy} />
     </div>
   );
-}
+};
+
+export default FilterSection;

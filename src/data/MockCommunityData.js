@@ -1,8 +1,8 @@
-// mockData/communityData.js
-
 export const mockQuestions = [
+  // 기존 데이터
   {
     id: 1,
+    gameId: 3498, // GTA V
     title: "Baldur's Gate 3에서 가장 효율적인 멀티클래스 조합이 뭔가요?",
     preview:
       '현재 팔라딘으로 플레이 중인데, 멀티클래스를 고민하고 있습니다. 워록이나 소서러와의 조합을 생각 중인데 어떤 것이 좋을까요?',
@@ -19,90 +19,115 @@ export const mockQuestions = [
     userAvatar: '/api/placeholder/24/24',
     status: 'answered',
   },
+
+  // 추가 데이터
   {
-    id: 2,
-    title: '엘든 링 말리케스의 검 패리 타이밍',
-    preview: '말리케스 검 패리 타이밍이 너무 어려워요. 팁 좀 공유해주세요.',
+    id: 7,
+    gameId: 41494, // Cyberpunk 2077
+    title: '사이버펑크 2077 팬텀 리버티 DLC 구매할만 한가요?',
+    preview: '패치 2.0 이후 본편은 재미있게 했는데, DLC는 어떤가요?',
     content:
-      '말리케스와 대결할 때 검 패리 타이밍을 못 잡겠어요. 특히 연속 공격할 때 두 번째 공격을 어떻게 막아야 할지 모르겠습니다. 영상에서 보면 쉬워 보이는데 실전에서는 너무 어렵네요. 패리 성공하신 분들 팁 좀 주세요.',
-    category: 'action',
-    subcategory: 'elden-ring',
-    votes: 38,
-    views: 203,
-    answers: 12,
-    tags: ['elden-ring', 'boss-fight', 'parry', 'tips'],
-    createdAt: '2024-03-02T10:15:00.000Z',
-    username: 'SoulsMaster',
+      '본편을 100시간 정도 플레이했고 정말 재미있었습니다. 패치 2.0의 변경사항들도 굉장히 마음에 들었는데, DLC도 그만한 가치가 있을까요? 특히 새로운 사이버웨어와 미션의 퀄리티가 궁금합니다.',
+    category: 'rpg',
+    subcategory: 'cyberpunk',
+    votes: 89,
+    views: 342,
+    answers: 15,
+    tags: ['cyberpunk-2077', 'phantom-liberty', 'dlc', 'review'],
+    createdAt: '2024-03-04T11:20:00.000Z',
+    username: 'NightCity_V',
     userAvatar: '/api/placeholder/24/24',
     status: 'hot',
   },
   {
-    id: 3,
-    title: '스타필드 최적화 설정 공유',
-    preview: 'RTX 3070으로 플레이 중인데 프레임이 많이 불안정합니다. 최적화 설정 공유 부탁드립니다.',
+    id: 8,
+    gameId: 22511, // Elden Ring
+    title: '엘든링 DLC 섀도우 오브 더 어드트리 보스 공략',
+    preview: '메시머가 너무 어려워요. 특히 2페이즈에서 계속 막히네요.',
     content:
-      'CPU: Ryzen 7 5800X\nGPU: RTX 3070\nRAM: 32GB\n\n위 사양으로 플레이 중인데 도시에서 프레임이 많이 떨어집니다. DLSS는 퀄리티로 설정했고, 셰도우는 중간으로 낮췄는데도 불안정하네요. 비슷한 사양으로 안정적으로 플레이하시는 분들 설정 좀 공유해주세요.',
-    category: 'tech',
-    subcategory: 'performance',
-    votes: 56,
-    views: 445,
-    answers: 8,
-    tags: ['starfield', 'optimization', 'performance', 'nvidia'],
-    createdAt: '2024-03-02T15:45:00.000Z',
-    username: 'TechGamer',
-    userAvatar: '/api/placeholder/24/24',
-    status: 'solved',
-  },
-  {
-    id: 4,
-    title: '롤 14.5 패치 원거리 챔프 티어',
-    preview: '14.5 패치 후 원거리 챔피언 티어가 어떻게 바뀌었나요?',
-    content:
-      '14.5 패치 이후로 원거리 챔피언들 티어가 많이 바뀐 것 같은데, 현재 메타에서 좋은 원거리 챔피언 추천해주세요. 특히 진과 케이틀린 너프 이후 대체할 만한 챔피언이 궁금합니다.',
-    category: 'moba',
-    subcategory: 'lol',
-    votes: 29,
-    views: 312,
-    answers: 15,
-    tags: ['league-of-legends', 'patch-14.5', 'adc', 'tier-list'],
-    createdAt: '2024-03-03T09:20:00.000Z',
-    username: 'ADCMain',
-    userAvatar: '/api/placeholder/24/24',
-    status: 'discussion',
-  },
-  {
-    id: 5,
-    title: '디아블로 4 시즌 3 바바리안 빌드',
-    preview: '시즌 3에서 바바리안으로 쾌속 레벨링하는 빌드 추천해주세요.',
-    content:
-      '시즌 3 시작하면서 바바리안으로 시작하려고 합니다. 초반에 빠르게 레벨링 할 수 있는 빌드 추천해주세요. 주요 스킬과 장비 우선순위도 알려주시면 감사하겠습니다.',
-    category: 'arpg',
-    subcategory: 'diablo',
-    votes: 45,
-    views: 280,
-    answers: 6,
-    tags: ['diablo-4', 'barbarian', 'build', 'season-3'],
-    createdAt: '2024-03-03T11:30:00.000Z',
-    username: 'HoradrimUser',
+      '레벨 150, 힘/신앙 빌드로 플레이 중입니다. 1페이즈는 어떻게 깼는데 2페이즈에서 광역 공격을 피하기가 너무 어렵네요. 룬레벨을 더 올려야 할까요? 아니면 빌드를 수정해야 할까요?',
+    category: 'action',
+    subcategory: 'elden-ring',
+    votes: 156,
+    views: 890,
+    answers: 23,
+    tags: ['elden-ring', 'dlc', 'boss-guide', 'build'],
+    createdAt: '2024-03-04T15:45:00.000Z',
+    username: 'TarnishedOne',
     userAvatar: '/api/placeholder/24/24',
     status: 'trending',
   },
   {
-    id: 6,
-    title: '팔월드 모드 추천',
-    preview: '팔월드 재미있게 즐길 수 있는 모드 추천해주세요.',
+    id: 9,
+    gameId: 3191, // Portal 2
+    title: '포탈2 co-op 퍼즐 해결 도움 필요해요',
+    preview: '챔버 6의 마지막 퍼즐을 도저히 못 풀겠어요.',
     content:
-      '팔월드를 50시간 정도 플레이했는데 이제 좀 지루해져서 모드를 설치해보려고 합니다. 게임성을 개선하면서 밸런스도 해치지 않는 모드 추천 부탁드립니다. 특히 건설이나 자동화 관련 모드에 관심이 있습니다.',
-    category: 'survival',
-    subcategory: 'palworld',
-    votes: 33,
-    views: 178,
-    answers: 9,
-    tags: ['palworld', 'mods', 'recommendation'],
-    createdAt: '2024-03-03T14:45:00.000Z',
-    username: 'PalTamer',
+      '친구와 co-op을 하고 있는데 챔버 6 마지막 퍼즐에서 막혔습니다. 두 개의 포탈을 동시에 사용해야 하는 것 같은데, 타이밍을 어떻게 맞춰야 할지 모르겠어요. 힌트만 살짝 부탁드립니다!',
+    category: 'puzzle',
+    subcategory: 'portal',
+    votes: 34,
+    views: 167,
+    answers: 8,
+    tags: ['portal-2', 'co-op', 'puzzle', 'help'],
+    createdAt: '2024-03-04T16:30:00.000Z',
+    username: 'PortalMaster',
     userAvatar: '/api/placeholder/24/24',
-    status: 'new',
+    status: 'solved',
+  },
+  {
+    id: 10,
+    gameId: 2551, // Dark Souls III
+    title: '다크소울3 최적의 PVP 레벨대가 어떻게 되나요?',
+    preview: 'PVP를 처음 시작하려고 하는데 추천 레벨대를 알고 싶습니다.',
+    content:
+      '다크소울3를 처음 깨고 PVP를 시작하려고 합니다. 현재 레벨 95인데 더 올려야 할까요? 주로 어느 지역에서 매칭이 잘 되나요? 빌드는 품질형으로 가고 있습니다.',
+    category: 'action',
+    subcategory: 'dark-souls',
+    votes: 67,
+    views: 445,
+    answers: 19,
+    tags: ['dark-souls-3', 'pvp', 'build', 'meta'],
+    createdAt: '2024-03-04T17:15:00.000Z',
+    username: 'Ashen_One',
+    userAvatar: '/api/placeholder/24/24',
+    status: 'discussion',
+  },
+  {
+    id: 11,
+    gameId: 41494, // Cyberpunk 2077
+    title: '사이버펑크 2077 스텔스 빌드 추천',
+    preview: '해킹/스텔스 위주로 플레이하고 싶은데 어떻게 빌드를 짜야 할까요?',
+    content:
+      '새로운 캐릭터로 시작하려고 하는데, 이번에는 총이나 근접무기 대신 해킹과 스텔스 위주로 해보려고 합니다. 어떤 특성과 사이버웨어를 선택해야 할까요? 초반에 특히 힘든 것 같아서 레벨링 팁도 부탁드립니다.',
+    category: 'rpg',
+    subcategory: 'cyberpunk',
+    votes: 122,
+    views: 567,
+    answers: 12,
+    tags: ['cyberpunk-2077', 'build', 'stealth', 'netrunner'],
+    createdAt: '2024-03-04T18:00:00.000Z',
+    username: 'NetRunner2077',
+    userAvatar: '/api/placeholder/24/24',
+    status: 'trending',
+  },
+  {
+    id: 12,
+    gameId: 3328, // The Witcher 3
+    title: '위쳐3 뉴게임플러스 특화 빌드',
+    preview: '뉴게임플러스에서 데스마치 난이도로 도전하려고 합니다. 추천 빌드 있을까요?',
+    content:
+      '일반 플레이는 막 깼고, 이제 뉴게임플러스를 데스마치 난이도로 도전하려고 합니다. 알케미 빌드가 좋다고 하던데, 구체적으로 어떤 특성과 장비를 갖춰야 할까요? 초반부터 엔딩까지 전체적인 빌드 발전 방향을 알고 싶습니다.',
+    category: 'rpg',
+    subcategory: 'witcher',
+    votes: 234,
+    views: 876,
+    answers: 34,
+    tags: ['witcher-3', 'build', 'new-game-plus', 'death-march'],
+    createdAt: '2024-03-04T19:30:00.000Z',
+    username: 'Geralt_of_Rivia',
+    userAvatar: '/api/placeholder/24/24',
+    status: 'hot',
   },
 ];
 
@@ -113,58 +138,29 @@ export const categories = [
   { label: 'FPS', value: 'fps', count: 145 },
   { label: 'MOBA', value: 'moba', count: 123 },
   { label: 'Survival', value: 'survival', count: 87 },
-  { label: 'Technical', value: 'tech', count: 67 },
-  { label: 'News', value: 'news', count: 45 },
+  { label: 'Puzzle', value: 'puzzle', count: 45 },
+  { label: 'Sports', value: 'sports', count: 67 },
+  { label: 'Racing', value: 'racing', count: 34 },
+  { label: 'Simulation', value: 'simulation', count: 56 },
 ];
 
 export const tags = [
-  { label: '팁과 가이드', value: 'tips-guides', count: 567 },
-  { label: '버그 리포트', value: 'bug-report', count: 234 },
+  { label: '게임 공략', value: 'guides', count: 678 },
   { label: '빌드 공유', value: 'builds', count: 345 },
-  { label: '패치노트', value: 'patch-notes', count: 123 },
+  { label: '팁과 노하우', value: 'tips', count: 567 },
+  { label: '버그 리포트', value: 'bug-report', count: 234 },
   { label: '토론', value: 'discussion', count: 789 },
-  { label: '질문', value: 'question', count: 456 },
-  { label: '공략', value: 'guides', count: 678 },
-  { label: '리뷰', value: 'review', count: 234 },
+  { label: 'DLC/패치', value: 'dlc-patch', count: 123 },
+  { label: 'PVP', value: 'pvp', count: 234 },
+  { label: '공략집', value: 'walkthrough', count: 456 },
+  { label: '밸런스', value: 'balance', count: 345 },
+  { label: '커스터마이징', value: 'customization', count: 178 },
 ];
 
 export const statuses = [
-  { label: '답변 완료', value: 'solved', count: 345 },
-  { label: '진행 중', value: 'discussion', count: 234 },
+  { label: '해결됨', value: 'solved', count: 345 },
+  { label: '토론중', value: 'discussion', count: 234 },
   { label: '인기글', value: 'hot', count: 56 },
-  { label: 'New', value: 'new', count: 89 },
+  { label: '최신글', value: 'new', count: 89 },
   { label: '추천글', value: 'trending', count: 45 },
-];
-
-// 유저 활동 관련 목업 데이터
-export const userActivities = [
-  {
-    id: 1,
-    type: 'question',
-    title: '질문을 작성했습니다.',
-    link: '/community/question/1',
-    createdAt: '2024-03-03T16:30:00.000Z',
-  },
-  {
-    id: 2,
-    type: 'answer',
-    title: '답변을 작성했습니다.',
-    link: '/community/question/2',
-    createdAt: '2024-03-03T16:35:00.000Z',
-  },
-  {
-    id: 3,
-    type: 'comment',
-    title: '댓글을 작성했습니다.',
-    link: '/community/question/3',
-    createdAt: '2024-03-03T16:40:00.000Z',
-  },
-];
-
-// 추천 태그 (사용자 관심사 기반)
-export const recommendedTags = [
-  { label: '롤', value: 'lol', count: 1234 },
-  { label: '엘든링', value: 'elden-ring', count: 567 },
-  { label: '디아블로4', value: 'diablo-4', count: 890 },
-  { label: '배틀그라운드', value: 'battlegrounds', count: 456 },
 ];

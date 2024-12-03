@@ -1,3 +1,6 @@
+// contexts/FilterContext.js
+'use client';
+
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import { mockQuestions, categories, tags, statuses } from '@/data/MockCommunityData';
 import { fetchGameDetails } from '@/utils/rawg';
@@ -8,6 +11,7 @@ export const GameCommunityProvider = ({ children }) => {
   const [posts, setPosts] = useState(mockQuestions);
   const [filteredPosts, setFilteredPosts] = useState(mockQuestions);
   const [loading, setLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState('discussions');
   const [filters, setFilters] = useState({
     categories: [],
     timePeriod: 'all',
@@ -18,16 +22,12 @@ export const GameCommunityProvider = ({ children }) => {
   const updateFilters = useCallback((type, value) => {
     setFilters((prev) => {
       const newFilters = { ...prev, [type]: value };
-
-      // 필터 적용 로직
       let result = [...mockQuestions];
 
-      // 카테고리 필터
       if (newFilters.categories.length > 0) {
         result = result.filter((post) => newFilters.categories.includes(post.category));
       }
 
-      // 검색어 필터
       if (newFilters.searchQuery) {
         const query = newFilters.searchQuery.toLowerCase();
         result = result.filter(
@@ -35,14 +35,13 @@ export const GameCommunityProvider = ({ children }) => {
         );
       }
 
-      // 정렬
       result.sort((a, b) => {
         switch (newFilters.sortBy) {
           case 'votes':
             return b.votes - a.votes;
           case 'answers':
             return b.answers - a.answers;
-          default: // recent
+          default:
             return new Date(b.createdAt) - new Date(a.createdAt);
         }
       });
@@ -74,6 +73,8 @@ export const GameCommunityProvider = ({ children }) => {
         updateFilters,
         resetFilters,
         fetchGameDetails,
+        activeTab,
+        setActiveTab,
       }}
     >
       {children}
