@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { MessageCircle, Star, ThumbsUp } from 'lucide-react';
 import { translateRating, translateReviewPlatform, translateReviewTitle } from '@/utils/translations';
+import Image from 'next/image';
 
 export function ReviewsSection({ game }) {
   const [expandedReviews, setExpandedReviews] = useState([]);
@@ -59,7 +60,13 @@ export function ReviewsSection({ game }) {
             <div className='flex items-start justify-between mb-4'>
               <div className='flex items-start gap-4'>
                 {review.user?.avatar ? (
-                  <img src={review.user.avatar} alt={review.user.username} className='w-12 h-12 rounded-full' />
+                  <Image
+                    src={review.user.avatar}
+                    alt={review.user.username}
+                    width={48} // w-12는 48px와 동일
+                    height={48} // h-12는 48px와 동일
+                    className='rounded-full'
+                  />
                 ) : (
                   <div className='w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center'>
                     <span className='text-xl font-bold'>{review.user?.username?.[0]?.toUpperCase()}</span>

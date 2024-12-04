@@ -27,11 +27,13 @@ export const GameCommunityProvider = ({ children }) => {
   });
 
   // 각 탭별 원본 데이터
-  const originalData = {
-    discussions: mockQuestions,
-    'team-recruit': mockTeamRecruits,
-  };
-
+  const originalData = useMemo(
+    () => ({
+      discussions: mockQuestions,
+      'team-recruit': mockTeamRecruits,
+    }),
+    []
+  );
   // 필터링된 데이터 계산
   const filteredPosts = useMemo(() => {
     let result = [...(originalData[activeTab] || [])];
@@ -84,7 +86,8 @@ export const GameCommunityProvider = ({ children }) => {
     });
 
     return result;
-  }, [activeTab, filters, originalData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab, filters]);
 
   // 현재 탭에 따른 정렬 옵션
   const getSortOptions = () => {

@@ -4,6 +4,7 @@ import { useGameCommunity } from '@/contexts/FilterContext';
 import FilterSection from '../FilterSection';
 import ResetButton from '../ResetButton';
 import SearchBar from '../SearchBar';
+import Image from 'next/image';
 
 const TeamRecruitContent = () => {
   const { posts, resetFilters } = useGameCommunity();
@@ -29,7 +30,13 @@ const TeamRecruitContent = () => {
             {posts.map((post) => (
               <div key={post.id} className='bg-[#2d2d3a] rounded-lg overflow-hidden cursor-pointer'>
                 <div className='relative h-40 overflow-hidden'>
-                  <img src={post.game_image} alt={post.game_title} className='w-full h-full object-cover' />
+                  <Image
+                    src={post.game_image}
+                    alt={post.game_title}
+                    width={1000} // 적절한 크기로 조정
+                    height={500} // 적절한 크기로 조정
+                    className='w-full h-full object-cover'
+                  />
                   <div className='absolute inset-0 bg-gradient-to-t from-[#2d2d3a] to-transparent' />
                   <div className='absolute bottom-0 left-0 right-0 p-4'>
                     <div className='text-xs text-purple-300 mb-1'>{post.game_title}</div>
