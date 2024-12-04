@@ -59,7 +59,21 @@ const GameExplorer = ({ allGames, onTabChange }) => {
 
   // 초기 데이터 로드
   useEffect(() => {
-    handleTabChange('popular');
+    const initializeGames = async () => {
+      setIsLoading(true);
+      try {
+        const popularGames = await fetchGamesByCategory('popular');
+        if (popularGames && popularGames.length > 0) {
+          setGames(popularGames);
+        }
+      } catch (error) {
+        console.error('Error initializing games:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    initializeGames();
   }, []);
 
   // 필터링 로직

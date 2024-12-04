@@ -12,6 +12,12 @@ import Link from 'next/link';
 const GameSlider = ({ games, title, subtitle }) => {
   const navigationPrevRef = React.useRef(null);
   const navigationNextRef = React.useRef(null);
+
+  // 이미지 에러 처리를 위한 함수
+  const handleImageError = (e) => {
+    e.currentTarget.src = '/placeholder-game.jpg';
+  };
+
   return (
     <div className='relative w-full min-h-[500px] '>
       <div className='absolute top-0 left-0 w-full h-full'>
@@ -46,9 +52,7 @@ const GameSlider = ({ games, title, subtitle }) => {
             nextEl: navigationNextRef.current,
           }}
           onBeforeInit={(swiper) => {
-            // @ts-ignore
             swiper.params.navigation.prevEl = navigationPrevRef.current;
-            // @ts-ignore
             swiper.params.navigation.nextEl = navigationNextRef.current;
           }}
           spaceBetween={0}
@@ -57,36 +61,28 @@ const GameSlider = ({ games, title, subtitle }) => {
         >
           {games.map(({ id, name: title, released, background_image: image, rating, platforms }) => (
             <SwiperSlide key={id} className='!w-[280px] '>
-              <Link href={`/games/${id}`} className=' group bg-gray-800/50 backdrop-blur rounded-lg overflow-hidden '>
-                <div className='relative group cursor-pointer flex flex-col px-6 '>
+              <Link href={`/games/${id}`} className='group bg-gray-800/50 backdrop-blur rounded-lg overflow-hidden'>
+                <div className='relative group cursor-pointer flex flex-col px-6'>
                   {/* Game Image */}
-                  <div className='relative aspect-[4/5] rounded-lg overflow-hidden mb-3 '>
+                  <div className='relative aspect-[4/5] rounded-lg overflow-hidden mb-3'>
                     <Image
                       src={image || '/placeholder-game.jpg'}
                       alt={title}
                       fill
-                      sizes='100'
-                      className='object-cover hover:scale-105 transition-all duration-100'
+                      sizes='(max-width: 280px) 100vw, 280px'
+                      className='object-cover transition-all duration-300 group-hover:scale-105'
+                      loading='lazy'
+                      quality={75}
+                      onError={handleImageError}
+                      blurDataURL='/placeholder-game.jpg'
+                      placeholder='blur'
                     />
-                    {/* {game.playBadge && (
-                      <div className='absolute bottom-3 left-3'>
-                        <Image src={game.playBadge} alt='Play' width={24} height={24} />
-                      </div>
-                    )} */}
                   </div>
 
                   {/* Game Info */}
                   <div>
                     <div className='text-sm text-gray-500 mb-1'>{subtitle}</div>
-                    <h3 className='font-medium mb-2'>{title}</h3>
-
-                    {/* <div className='flex items-center space-x-2'>
-                      {game.discountRate && <span className='text-cyan-500'>-{game.discountRate}%</span>}
-                      {game.originalPrice && (
-                        <span className='text-gray-500 line-through'>₩{game.originalPrice.toLocaleString()}</span>
-                      )}
-                      <span className='font-medium'>₩{game.price.toLocaleString()}</span>
-                    </div> */}
+                    <h3 className='font-medium mb-2 line-clamp-2'>{title}</h3>
                   </div>
                 </div>
               </Link>
@@ -97,7 +93,5 @@ const GameSlider = ({ games, title, subtitle }) => {
     </div>
   );
 };
-
-// 사용 예시:
 
 export default GameSlider;
