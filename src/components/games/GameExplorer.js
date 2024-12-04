@@ -116,9 +116,7 @@ const GameExplorer = ({ allGames, onTabChange }) => {
 
   return (
     <div className='min-h px-6'>
-      {/* 필터 영역 */}
       <div className='flex flex-col md:flex-row justify-between items-center gap-4 mb-6'>
-        {/* 탭 버튼 */}
         <div className='flex items-center gap-4'>
           <button
             onClick={() => handleTabChange('popular')}
@@ -163,7 +161,6 @@ const GameExplorer = ({ allGames, onTabChange }) => {
         </div>
       </div>
 
-      {/* 게임 목록 */}
       {isLoading ? (
         <div className='text-center py-8'>잠시만 기다려주세요...</div>
       ) : (
@@ -181,9 +178,9 @@ const GameExplorer = ({ allGames, onTabChange }) => {
                   {/* 테이블 헤더 */}
                   <div className='grid grid-cols-12 gap-2 sm:gap-4 p-4 border-b border-gray-800 text-sm font-semibold'>
                     <div className='col-span-1'>#</div>
-                    <div className='col-span-7 text-left'>Game</div>
-                    <div className='col-span-2 text-right'>평점</div>
-                    <div className='col-span-2 text-right'>플레이어</div>
+                    <div className='col-span-5 text-left'>Game</div>
+                    <div className='col-span-3 text-right'>평점</div>
+                    <div className='col-span-3 text-right'>플레이어</div>
                   </div>
 
                   {/* 테이블 바디 */}
@@ -192,19 +189,18 @@ const GameExplorer = ({ allGames, onTabChange }) => {
                       <Link href={`/games/${game.id}`} key={game.id}>
                         <div className='grid grid-cols-12 gap-2 sm:gap-4 p-4 hover:bg-gray-800/50 transition-colors items-center'>
                           <div className='col-span-1 text-sm'>{index + 1 + gridIndex * 5}</div>
-                          <div className='col-span-7'>
+                          <div className='col-span-5'>
                             <div className='flex items-center gap-2 sm:gap-3 min-w-0'>
                               <GameThumbnail game={game} />
-                              <div className='flex items-center gap-1 min-w-0 flex-1'>
+                              <div className='flex items-center gap-1 min-w-0 '>
                                 <span className='text-sm font-semibold truncate'>{game.name}</span>
-                                <Check className='w-4 h-4 text-blue-500 flex-shrink-0' />
                               </div>
                             </div>
                           </div>
-                          <div className='col-span-2 text-right text-sm'>
+                          <div className='col-span-3 text-right text-sm'>
                             {game.metacritic ? `${game.metacritic}점` : '-'}
                           </div>
-                          <div className='col-span-2 text-right text-sm'>{game.added?.toLocaleString()}명</div>
+                          <div className='col-span-3 text-right text-sm'>{game.added?.toLocaleString()}명</div>
                         </div>
                       </Link>
                     ))}
