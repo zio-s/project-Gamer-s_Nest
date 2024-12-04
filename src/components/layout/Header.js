@@ -1,3 +1,4 @@
+'use client';
 import { Menu, Filter, Search, ShoppingCart, User } from 'lucide-react';
 import { useColorMode } from '@chakra-ui/react';
 import { ThemeToggle } from '../ThemeToggle';
