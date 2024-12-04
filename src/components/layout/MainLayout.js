@@ -24,7 +24,14 @@ const MainLayout = ({ children, headerType, showAside = true }) => {
         )}
 
         <div className='fixed inset-0 -z-10'>
-          <video autoPlay muted loop className='w-full h-full object-cover' poster='/pattern/video/main-mo.png'>
+          <video
+            autoPlay
+            playsInline
+            muted
+            loop
+            className='w-full h-full object-cover'
+            poster='/pattern/video/main-mo.png'
+          >
             <source src='/pattern/video/main-video.mp4' type='video/mp4' />
           </video>
           <div
