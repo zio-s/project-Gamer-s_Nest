@@ -7,6 +7,7 @@ const MenuButton = ({ icon: Icon, label, href }) => {
   const pathname = usePathname();
   const isActive = pathname === href;
   const { colorMode } = useColorMode();
+
   return (
     <Link
       style={{
