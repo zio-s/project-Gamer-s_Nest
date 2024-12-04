@@ -1,0 +1,88 @@
+.swiper-pagination {
+  position: absolute;
+
+  display: flex;
+  // flex-direction: column;
+  gap: 15px;
+  left: 0 !important;
+  bottom: 0px !important;
+  // transform: translateX(-50%) !important;
+  width: auto !important;
+}
+
+.pagination-bullet {
+  width: 30px !important;
+  height: 30px !important;
+  background: transparent !important;
+  opacity: 1 !important;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.bullet-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bullet-content span {
+  color: #a885f7;
+  font-size: 14px;
+  position: absolute;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.pagination-bullet svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.progress-ring {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 2;
+}
+
+.progress-ring-fill {
+  fill: none;
+  stroke: #a885f7;
+  stroke-width: 2;
+  stroke-dasharray: 201;
+  stroke-dashoffset: 201;
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.swiper-pagination-bullet-active .progress-ring {
+  fill: rgba(255, 255, 255, 0.1);
+}
+.swiper-pagination-bullet-active .bullet-content span {
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active .progress-ring-fill {
+  animation: progress 5s linear;
+  stroke-width: 4;
+}
+
+@keyframes progress {
+  from {
+    stroke-dashoffset: 201;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* hover 효과 */
+.pagination-bullet:hover .bullet-content span {
+  opacity: 1;
+}
+
+.pagination-bullet:hover .progress-ring {
+  stroke: rgba(255, 255, 255, 0.4);
+}

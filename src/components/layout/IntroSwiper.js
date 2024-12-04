@@ -1,48 +1,54 @@
 'use client';
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-// Swiper 스타일 임포트
+import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 import Image from 'next/image';
 import Button from '../common/Button';
+import { fetchGamesByCategory } from '@/utils/rawg';
 
 const IntroSwiper = () => {
-  // 슬라이더에 표시될 데이터
-  const introSlides = [
-    {
-      id: 1,
-      title: '사이버펑크',
-      subtitle: '2077',
-      category: 'xbox pc',
-      description:
-        '사이버펑크의 세계로 뛰어드십시오. 사이버펑크 2077의 오리지널 스토리라인과 흥미진진한 스파이 스릴러 확장팩 팬텀 리버티에서부터 수상 경력에 빛나는 애니메이션 시리즈 사이버펑크: 엣지러너에 이르기까지, 이 치명적인 거대 도시 나이트 시티에는 수많은 이야기가 여러분을 기다리고 있습니다.',
-      rating: 4,
-      price: '199.99',
-      image: '/pattern/main/swiper-1.jpg',
-      badge: '신제품',
-    },
-    {
-      id: 2,
-      title: '사이버펑크',
-      subtitle: '팬텀 리버티',
-      category: 'xbox pc',
-      description:
-        '팬텀 리버티는 사이버펑크 2077의 새로운 첩보 스릴러 어드벤처입니다. 사이버웨어로 강화된 용병 V가 되어 위험한 첩보 임무와 NUSA 대통령 구출 작전에 뛰어드세요. 도그타운의 위험 구역에서 짓밟힌 충성심과 비열한 정치적 음모로 얽힌 그물을 풀어내기 위해 동맹과 힘을 합쳐야 합니다. 당신은 살아남을 수 있습니까?',
-      rating: 5,
-      price: '89.99',
-      image: '/pattern/main/swiper-2.jpg',
-      badge: '베스트셀러',
-    },
-    // 추가 슬라이드...
-  ];
+  const [games, setGames] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchGames = async () => {
+      try {
+        // 인기 게임들을 가져옵니다
+        const popularGames = await fetchGamesByCategory('popular');
+        // 필요한 데이터만 추출하여 가공
+        const processedGames = popularGames.slice(0, 5).map((game) => ({
+          id: game.id,
+          title: game.name,
+          subtitle: game.released ? new Date(game.released).getFullYear() : '',
+          category: game.parent_platforms?.map((p) => p.platform.name).join(' ') || '',
+          description: game.description_raw || '',
+          rating: Math.round(game.rating || 0),
+          image: game.background_image,
+          metacritic: game.metacritic,
+          genres: game.genres?.map((g) => g.name).join(', '),
+        }));
+        setGames(processedGames);
+      } catch (error) {
+        console.error('Error fetching games:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchGames();
+  }, []);
+
+  if (isLoading) {
+    return <div className='h-[650px] flex items-center justify-center'>Loading...</div>;
+  }
 
   return (
     <div className='h-[650px] md:h-[500] px-6'>
       <div className='absolute pr-6'>
         <Swiper
-          modules={[Autoplay, Pagination, Navigation]}
+          modules={[Autoplay, Pagination]}
           spaceBetween={0}
           slidesPerView={'auto'}
           loop
@@ -53,48 +59,70 @@ const IntroSwiper = () => {
           pagination={{
             clickable: true,
             type: 'bullets',
+            renderBullet: (index, className) => {
+              return `<div class="${className} pagination-bullet">
+          <div class="bullet-content">
+            <svg viewBox="0 0 70 70">
+              <circle class="progress-ring" cx="35" cy="35" r="32" />
+              <circle class="progress-ring-fill" cx="35" cy="35" r="32" />
+            </svg>
+            <span>${index + 1}</span>
+          </div>
+        </div>`;
+            },
           }}
-          // navigation={true}
-          className='!w-full h-[600px] md:h-[500px] backdrop-filter-none'
+          className='!w-full h-[650px] md:h-[500px] backdrop-filter-none'
         >
-          {introSlides.map((slide) => (
-            <SwiperSlide key={slide.id}>
+          {games.map((game) => (
+            <SwiperSlide key={game.id}>
               <div className='grid grid-cols-1 md:grid-cols-2 h-full gap-5'>
                 <div className='flex flex-col justify-center space-y-6'>
-                  {/* 별점 */}
-                  <div className='flex gap-1'>
-                    {[...Array(5)].map((_, i) => (
-                      <span
-                        aria-hidden='true'
-                        key={i}
-                        className={i < slide.rating ? 'text-yellow-400' : 'text-gray-400'}
-                      >
-                        ★
-                      </span>
-                    ))}
+                  <div className='flex items-center gap-4'>
+                    <div className='flex gap-1'>
+                      {[...Array(5)].map((_, i) => (
+                        <span
+                          aria-hidden='true'
+                          key={i}
+                          className={i < game.rating ? 'text-yellow-400' : 'text-gray-400'}
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                    {game.metacritic && (
+                      <span className='bg-green-600 px-2 py-1 rounded text-sm'>{game.metacritic}</span>
+                    )}
                   </div>
 
-                  {/* 제목 & 부제목 */}
                   <div className='space-y-2'>
-                    <h1 className='text-4xl font-bold'>{slide.title}</h1>
-                    <p className='text-base lg:text-xl '>{slide.subtitle}</p>
+                    <h1 className='text-4xl font-bold'>{game.title}</h1>
+                    <p className='text-base lg:text-xl'>{game.subtitle}</p>
                     <p className='text-base lg:text-xl'>
-                      <span className='text-purple-500'>{slide.category}</span>
+                      <span className='text-purple-500'>{game.category}</span>
                     </p>
+                    <p className='text-sm text-gray-400'>{game.genres}</p>
                   </div>
 
                   {/* 설명 */}
-                  <p className='text-gray-400 max-w-lg'>{slide.description}</p>
+                  <p className='text-gray-400 max-w-lg line-clamp-3'>{game.description}</p>
 
-                  {/* 버튼 그룹 */}
+                  {/* 버튼 */}
                   <div className='flex gap-4 lg:flex-row'>
-                    <Button>자세히보기</Button>
+                    <Button href={`/games/${game.id}`}>자세히보기</Button>
                     <Button>스트리머</Button>
                   </div>
                 </div>
 
-                <div className='relative flex    aspect-auto object-top'>
-                  <Image src={slide.image} width={1400} height={700} alt={'title'} className=''></Image>
+                <div className='relative flex aspect-auto object-top'>
+                  <Image
+                    src={game.image}
+                    alt={game.title}
+                    width={1400}
+                    height={700}
+                    className='rounded-lg object-cover'
+                    priority={true}
+                    quality={90}
+                  />
                 </div>
               </div>
             </SwiperSlide>
