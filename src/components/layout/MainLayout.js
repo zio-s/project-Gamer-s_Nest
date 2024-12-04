@@ -37,7 +37,7 @@ const MainLayout = ({ children, headerType, showAside = true }) => {
           <div
             className='absolute inset-0'
             style={{
-              backgroundColor: colorMode === 'dark' ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)',
+              backgroundColor: colorMode === 'dark' ? 'rgba(0, 0, 0, 0.9)' : 'rgba(255, 255, 255, 0.8)',
             }}
           />
         </div>
