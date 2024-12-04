@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import Image from 'next/image';
 import { Heading } from '@chakra-ui/react';
-import { ChevronRight } from 'lucide-react';
+import { ArrowRight, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
 const GameSlider = ({ games, title, subtitle }) => {
@@ -59,7 +59,7 @@ const GameSlider = ({ games, title, subtitle }) => {
           slidesPerView='auto'
           className='!overflow-hidden'
         >
-          {games.map(({ id, name: title, released, background_image: image, rating, platforms }) => (
+          {games.map(({ id, name: title, background_image: image }) => (
             <SwiperSlide key={id} className='!w-[280px] '>
               <Link href={`/games/${id}`} className='group bg-gray-800/50 backdrop-blur rounded-lg overflow-hidden'>
                 <div className='relative group cursor-pointer flex flex-col px-6'>
@@ -77,6 +77,12 @@ const GameSlider = ({ games, title, subtitle }) => {
                       blurDataURL='/placeholder-game.jpg'
                       placeholder='blur'
                     />
+                    <div className='absolute bottom-0 left-0 right-0 bg-gradient-to-t  from-primary/90 via-primary/40 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300'>
+                      <div className='flex items-center justify-center space-x-2 p-4 bg-gradient-to-t from-primary/80 to-primary/40 dark:from-primary-dark/80 dark:to-primary-dark/40 hover:from-primary dark:hover:from-primary-dark '>
+                        <span className='text-sm font-medium text-white'>상세보기</span>
+                        <ArrowRight className='w-4 h-4 text-white' />
+                      </div>
+                    </div>
                   </div>
 
                   {/* Game Info */}
