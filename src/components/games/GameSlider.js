@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import Image from 'next/image';
 import { Heading } from '@chakra-ui/react';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { ArrowRight, ChevronRight, MessageCircle, Star } from 'lucide-react';
 import Link from 'next/link';
 
 const GameSlider = ({ games, title, subtitle }) => {
@@ -17,7 +17,7 @@ const GameSlider = ({ games, title, subtitle }) => {
   const handleImageError = (e) => {
     e.currentTarget.src = '/placeholder-game.jpg';
   };
-
+  console.log(games);
   return (
     <div className='relative w-full min-h-[500px] '>
       <div className='absolute top-0 left-0 w-full h-full'>
@@ -59,11 +59,10 @@ const GameSlider = ({ games, title, subtitle }) => {
           slidesPerView='auto'
           className='!overflow-hidden'
         >
-          {games.map(({ id, name: title, background_image: image }) => (
+          {games.map(({ id, name: title, background_image: image, rating, reviews_count: review }) => (
             <SwiperSlide key={id} className='!w-[280px] '>
               <Link href={`/games/${id}`} className='group bg-gray-800/50 backdrop-blur rounded-lg overflow-hidden'>
                 <div className='relative group cursor-pointer flex flex-col px-6'>
-                  {/* Game Image */}
                   <div className='relative aspect-[4/5] rounded-lg overflow-hidden mb-3'>
                     <Image
                       src={image || '/placeholder-game.jpg'}
@@ -85,10 +84,19 @@ const GameSlider = ({ games, title, subtitle }) => {
                     </div>
                   </div>
 
-                  {/* Game Info */}
                   <div>
                     <div className='text-sm text-gray-500 mb-1'>{subtitle}</div>
-                    <h3 className='font-medium mb-2 line-clamp-2'>{title}</h3>
+                    <h3 className='font-medium  line-clamp-2'>{title}</h3>
+                    <div className='flex gap-4'>
+                      <span className='flex gap-1.5 text-sm items-center'>
+                        <Star className='text-yellow-300 fill-current w-3' />
+                        {rating}
+                      </span>
+                      <span className='flex gap-1.5'>
+                        <MessageCircle className='w-3' />
+                        {review}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </Link>

@@ -2,19 +2,6 @@
 const RAWG_API_KEY = process.env.NEXT_PUBLIC_RAWG_API_KEY;
 const BASE_URL = 'https://api.rawg.io/api';
 
-// export async function fetchGames(page = 1, pageSize = 20) {
-//   try {
-//     const response = await fetch(
-//       `${BASE_URL}/games?key=${RAWG_API_KEY}&page=${page}&page_size=${pageSize}&ordering=-rating`
-//     );
-//     const data = await response.json();
-
-//     return data;
-//   } catch (error) {
-//     console.error('Error fetching games:', error);
-//     throw error;
-//   }
-// }
 const ITEMS_PER_PAGE = 10;
 export const fetchGames = async (filters) => {
   try {
@@ -145,13 +132,28 @@ export async function fetchGameDetails(id) {
   }
 }
 
-export async function searchGames(searchTerm) {
+export async function searchGames({ page = 1, pageSize = 20, searchTerm = '' }) {
   try {
-    const response = await fetch(`${BASE_URL}/games?key=${RAWG_API_KEY}&search=${searchTerm}&page_size=10`);
+    const searchParams = new URLSearchParams({
+      key: RAWG_API_KEY,
+      page: page.toString(),
+      page_size: pageSize.toString(),
+    });
+
+    // 검색어가 있으면 search 파라미터 추가, 없으면 정렬 기준 추가
+    if (searchTerm) {
+      searchParams.append('search', searchTerm);
+      searchParams.append('search_precise', 'true');
+    } else {
+      searchParams.append('ordering', '-rating');
+    }
+
+    const response = await fetch(`${BASE_URL}/games?${searchParams.toString()}`);
     const data = await response.json();
-    return data.results;
+
+    return data;
   } catch (error) {
-    console.error('Error searching games:', error);
+    console.error('Error fetching games:', error);
     throw error;
   }
 }

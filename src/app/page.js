@@ -74,11 +74,11 @@ const Home = () => {
             allGames={allGames}
             onLoadMore={handleLoadMore}
           />
-          <GameSlider games={allGames} title={'이달의 Best'} />
-          <GameSlider title='핫한 게임' subtitle='베스트 게임' games={popularGames} />
-          <GameSlider games={trendingGames} title={'트렌디 게임'} />
+          <GameSlider games={allGames} title={'이달의 Best'} subtitle={'Best'} />
+          <GameSlider title='핫한 게임' subtitle='User Pick' games={popularGames} />
+          <GameSlider games={trendingGames} title={'트렌디 게임'} subtitle={'지금뜨는 게임'} />
           <GameSlider title='출시 예정' subtitle='Coming Soon' games={upcomingGames} />
-          <GameSlider games={freeGames} title={'무료 게임'} />
+          <GameSlider games={freeGames} title={'무료 게임'} subtitle={'free'} />
         </>
       )}
     </MainLayout>

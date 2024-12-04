@@ -6,6 +6,7 @@ import Input from '../common/Input';
 import { usePathname } from 'next/navigation';
 import DrawerMenu from '../navigation/DrawerMenu';
 import { useScroll } from '@/hooks/useScroll';
+import HeaderSearch from '../common/HeaderSearch';
 
 const Header = ({ onMenuClick, activeMenu = { activeMenu }, setActiveMenu = { setActiveMenu } }) => {
   const { colorMode } = useColorMode();
@@ -69,30 +70,9 @@ const Header = ({ onMenuClick, activeMenu = { activeMenu }, setActiveMenu = { se
         return (
           <>
             <div className='flex items-center justify-between h-16'>
-              <DrawerMenu activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
-
               {/* <h1 className='text-xl font-bold mb-2'>Games List</h1> */}
-              {/* <div className='flex items-center space-x-2'>
-                <input
-                  type='search'
-                  placeholder='Search games...'
-                  className='flex-1 px-4 py-2 bg-gray-800 rounded-lg'
-                />
-                <button className='p-2 bg-gray-800 rounded-lg'>
-                  <Filter className='w-5 h-5' />
-                </button>
-              </div> */}
-              <div className='flex items-center gap-4'>
-                <button className='p-2 hover:bg-gray-800 rounded-full'>
-                  <Search className='w-5 h-5' />
-                </button>
-                <button className='p-2 hover:bg-gray-800 rounded-full'>
-                  <ShoppingCart className='w-5 h-5' />
-                </button>
-                <button className='p-2 hover:bg-gray-800 rounded-full'>
-                  <User className='w-5 h-5' />
-                </button>
-              </div>
+              <DrawerMenu activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
+              <HeaderSearch />
             </div>
           </>
         );
@@ -100,41 +80,15 @@ const Header = ({ onMenuClick, activeMenu = { activeMenu }, setActiveMenu = { se
       case 'detail':
         return (
           <div className='flex items-center justify-between h-16'>
-            {/* 로고 */}
             <DrawerMenu activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
-
-            {/* 우측 아이콘들 */}
-            <div className='flex items-center gap-4'>
-              <button className='p-2 hover:bg-gray-800 rounded-full'>
-                <Search className='w-5 h-5' />
-              </button>
-              <button className='p-2 hover:bg-gray-800 rounded-full'>
-                <ShoppingCart className='w-5 h-5' />
-              </button>
-              <button className='p-2 hover:bg-gray-800 rounded-full'>
-                <User className='w-5 h-5' />
-              </button>
-            </div>
+            <HeaderSearch />
           </div>
         );
       case 'community':
         return (
           <div className='flex items-center justify-between h-16 '>
-            {/* 로고 */}
             <DrawerMenu activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
-
-            {/* 우측 아이콘들 */}
-            <div className='flex items-center gap-4'>
-              <button className='p-2 hover:bg-gray-800 rounded-full'>
-                <Search className='w-5 h-5' />
-              </button>
-              <button className='p-2 hover:bg-gray-800 rounded-full'>
-                <ShoppingCart className='w-5 h-5' />
-              </button>
-              <button className='p-2 hover:bg-gray-800 rounded-full'>
-                <User className='w-5 h-5' />
-              </button>
-            </div>
+            <HeaderSearch />
           </div>
         );
 

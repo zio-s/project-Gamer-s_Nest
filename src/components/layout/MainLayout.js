@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import { useColorMode } from '@chakra-ui/react';
@@ -9,9 +9,21 @@ const MainLayout = ({ children, headerType, showAside = true }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState('Games');
   const { colorMode } = useColorMode();
+  const [scrollProgress, setScrollProgress] = useState(0);
   const handleMenuClick = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+  useEffect(() => {
+    const handleScroll = () => {
+      // 스크롤 진행도를 0~1 사이의 값으로 계산
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = Math.min(window.scrollY / (scrollHeight * 0.3), 1); // 30% 스크롤까지 효과 적용
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   return (
     <div className=' min-h-screen '>
       <div className={`grid  grid-cols-1 ${showAside === true ? 'lg:grid-cols-[260px_1fr]' : ''} `}>
@@ -35,9 +47,16 @@ const MainLayout = ({ children, headerType, showAside = true }) => {
             <source src='/pattern/video/main-video.mp4' type='video/mp4' />
           </video>
           <div
-            className='absolute inset-0'
+            className='absolute inset-0 transition-opacity duration-300'
             style={{
-              backgroundColor: colorMode === 'dark' ? 'rgba(0, 0, 0, 0.9)' : 'rgba(255, 255, 255, 0.8)',
+              background:
+                colorMode === 'dark'
+                  ? `linear-gradient(to bottom, rgba(0, 0, 0, ${0.6 + scrollProgress * 0.4}), rgba(0, 0, 0, ${
+                      0.8 + scrollProgress * 0.2
+                    }))`
+                  : `linear-gradient(to bottom, rgba(255, 255, 255, ${
+                      0.6 + scrollProgress * 0.4
+                    }), rgba(255, 255, 255, ${0.8 + scrollProgress * 0.2}))`,
             }}
           />
         </div>

@@ -179,7 +179,7 @@ const GameExplorer = ({ allGames, onTabChange }) => {
                   <div className='grid grid-cols-12 gap-2 sm:gap-4 p-4 border-b border-gray-800 text-sm font-semibold'>
                     <div className='col-span-1'>#</div>
                     <div className='col-span-5 text-left'>Game</div>
-                    <div className='col-span-3 text-right'>평점</div>
+                    <div className='col-span-3 text-right'>메타크리틱</div>
                     <div className='col-span-3 text-right'>플레이어</div>
                   </div>
 

@@ -100,11 +100,11 @@ const IntroSwiper = () => {
                     <p className='text-base lg:text-xl'>
                       <span className='text-purple-500'>{game.category}</span>
                     </p>
-                    <p className='text-sm text-gray-400'>{game.genres}</p>
+                    <p className='text-sm '>{game.genres}</p>
                   </div>
 
                   {/* 설명 */}
-                  <p className='text-gray-400 max-w-lg line-clamp-3'>{game.description}</p>
+                  <p className=' max-w-lg line-clamp-3'>{game.description}</p>
 
                   {/* 버튼 */}
                   <div className='flex gap-4 lg:flex-row'>
