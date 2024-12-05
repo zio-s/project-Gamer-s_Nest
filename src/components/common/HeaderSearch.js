@@ -26,6 +26,16 @@ const HeaderSearch = () => {
       setIsSearchOpen(false);
     }
   };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (inputRef.current && !inputRef.current.contains(event.target)) {
+        setIsSearchOpen(false);
+      }
+    };
+
+    document.addEventListener('scroll', handleClickOutside);
+    return () => document.removeEventListener('scroll', handleClickOutside);
+  }, []);
   return (
     <div className='flex items-center gap-4'>
       <div className='relative flex items-center'>
