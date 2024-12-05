@@ -91,6 +91,13 @@ const Header = ({ onMenuClick, activeMenu = { activeMenu }, setActiveMenu = { se
             <HeaderSearch />
           </div>
         );
+      case 'games':
+        return (
+          <div className='flex items-center justify-between h-16 '>
+            <DrawerMenu activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
+            <HeaderSearch />
+          </div>
+        );
 
       default:
         return (
@@ -104,7 +111,7 @@ const Header = ({ onMenuClick, activeMenu = { activeMenu }, setActiveMenu = { se
                 onClick={() => {
                   alert('기능 구현중입니다...');
                 }}
-                className='p-2 hover:bg-gray-800 rounded-full'
+                className='p-2 hover:bg-gray-800 hover:text-white rounded-full'
               >
                 <User className='w-5 h-5' />
               </button>

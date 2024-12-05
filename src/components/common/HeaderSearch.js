@@ -64,11 +64,11 @@ const HeaderSearch = () => {
           <Search className='w-5 h-5' />
         </button>
       </div>
-      <button className='p-2 hover:bg-gray-800 rounded-full'>
+      <button className='p-2 hover:bg-gray-800 hover:text-white rounded-full'>
         <ShoppingCart className='w-5 h-5' />
       </button>
-      <button className='p-2 hover:bg-gray-800 rounded-full'>
-        <User className='w-5 h-5' />
+      <button className='p-2 hover:bg-gray-800  rounded-full'>
+        <User className='w-5 h-5 ' />
       </button>
     </div>
   );
