@@ -6,7 +6,9 @@ const layout = ({ children }) => {
   return (
     <Providers>
       {/* <Headers /> */}
-      <MainLayout showAside={false}>{children}</MainLayout>
+      <MainLayout showAside={false} videoOff>
+        {children}
+      </MainLayout>
     </Providers>
   );
 };
