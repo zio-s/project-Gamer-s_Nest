@@ -57,30 +57,36 @@ Gamer's-Nest는 게이머들이 모여 커뮤니티를 형성하고 다양한 �
 
 ### **홈페이지**
 
-<video controls width="600">
-  <source src="https://raw.githubusercontent.com/user-attachments/assets/8c00be73-a39a-481e-94c5-2003632eb9104" type="video/mp4">
+<video src='https://github.com/user-attachments/assets/8c00be73-a39a-481e-94c5-2003632eb910' controls autoplay width="600">
 </video>
-
 
 ### **다크 모드**
 
-![Team Recruitment](https://via.placeholder.com/800x400)
+<video src='https://github.com/user-attachments/assets/08dc033a-7467-4541-a778-2b40d02b0a4f' controls autoplay width="600">
+</video>
 
 ### **커뮤니티 게시판 **
 
-![Team Recruitment](https://via.placeholder.com/800x400)
+<video src='https://github.com/user-attachments/assets/160370f7-f8e5-44cf-96ff-f39940585cfa' controls autoplay width="600">
+</video>
 
 ### **상세 페이지**
 
-![Team Recruitment](https://via.placeholder.com/800x400)
+<video src='https://github.com/user-attachments/assets/fc7f70cc-295f-434e-9ce7-17abbd55ae28' controls autoplay width="600">
+</video>
 
 ### **전체 게임 페이지**
 
-![Team Recruitment](https://via.placeholder.com/800x400)
+<video src='https://github.com/user-attachments/assets/9c797767-ded6-4790-b458-271740f91337' controls autoplay width="600">
+</video>
 
 ### **반응형**
 
-## ![Homepage](https://via.placeholder.com/800x400)
+<video src='https://github.com/user-attachments/assets/c4cbe53a-b9bf-423f-a788-bb898a11e26b' controls autoplay width="600">
+</video>
+
+<video src='https://github.com/user-attachments/assets/759f89fa-465b-49f4-aa5a-723fcc1601b2' controls autoplay width="600">
+</video>
 
 ## 🚀 Usage
 
