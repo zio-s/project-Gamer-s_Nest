@@ -88,7 +88,14 @@ Gamer's-Nest는 게이머들이 모여 커뮤니티를 형성하고 다양한 �
 <video src='https://github.com/user-attachments/assets/759f89fa-465b-49f4-aa5a-723fcc1601b2' controls autoplay width="600">
 </video>
 
+<div style="display: flex; gap: 10px; margin-top: 30px">
+  <img width='600' src='https://github.com/user-attachments/assets/b52d820d-8c19-4d3f-86d2-f21a24ad9a59'>
+
+<img width='600' src='https://github.com/user-attachments/assets/c0b64f88-5378-4acb-a5ba-eac21c93cc29'>
+</div>
 ## 🚀 Usage
+
+---
 
 - **회원가입/로그인**: 계정을 생성하고 커뮤니티에 참여합니다.
 - **게임 검색**: 게임을 검색하고 정보를 볼 수 있습니다..
