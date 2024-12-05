@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 
 import CommunityContent from './components/CommunityContent';
 import { GameCommunityProvider } from '@/contexts/FilterContext';
@@ -26,22 +26,24 @@ export default function CommunityPage() {
       <div className='bg-[#1a1b1e]  min-h-screen'>
         <div
           className={`max-w-7xl mx-auto px-4 transition-all duration-300 
-    ${scrolledForMove ? 'opacity-0 invisible' : 'opacity-100 visible'}`}
+                    ${scrolledForMove ? 'opacity-0 invisible' : 'opacity-100 visible'}`}
         >
           <h2 className='text-3xl font-bold pt-4'>게임 커뮤니티</h2>
         </div>
 
         <div
           className={`fixed left-0 right-0 z-50 bg-[#1a1b1e]/95 backdrop-blur-sm 
-    transition-all duration-300 border-b border-gray-800
-    ${scrolledForMove ? 'top-0 translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
+                    transition-all duration-300 border-b border-gray-800
+                    ${scrolledForMove ? 'top-0 translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
         >
           <div className=' px-4'>
             <div className='py-4 flex items-center'>
               <DrawerMenu />
               <div className='flex-1 flex items-center justify-between'>
                 <h2 className='text-2xl font-bold text-white'>게임 커뮤니티</h2>
-                <HeaderSearch />
+                <Suspense fallback={<div>Loading...</div>}>
+                  <HeaderSearch />
+                </Suspense>
               </div>
             </div>
           </div>

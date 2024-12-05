@@ -1,5 +1,5 @@
 'use client';
-import GameGrid from '@/components/games/GameGrid';
+
 import MainLayout from '@/components/layout/MainLayout';
 import React, { useEffect, useState } from 'react';
 import IntroSwiper from '@/components/layout/IntroSwiper';
