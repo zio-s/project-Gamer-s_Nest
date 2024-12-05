@@ -58,9 +58,9 @@ Gamer's-Nest는 게이머들이 모여 커뮤니티를 형성하고 다양한 �
 ### **홈페이지**
 
 <video controls width="600">
-  <source src="https://github.com/user-attachments/assets/8c00be73-a39a-481e-94c5-2003632eb9104" type="video/mp4">
-
+  <source src="https://raw.githubusercontent.com/user-attachments/assets/8c00be73-a39a-481e-94c5-2003632eb9104" type="video/mp4">
 </video>
+
 
 ### **다크 모드**
 
