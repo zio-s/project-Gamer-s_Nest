@@ -17,7 +17,7 @@ export const menuItems = [
   { icon: Users, label: 'Community', href: '/community' },
   { icon: Heart, label: 'Favorites', href: '//' },
   { icon: MessageCircle, label: 'Messages', href: '//' },
-  { icon: Gamepad, label: 'Games', href: '/games/3498' },
+  { icon: Gamepad, label: 'Games', href: '/games/' },
   { icon: Radio, label: 'Streams', href: '//' },
   { icon: Trophy, label: 'Achievements', href: '//' },
   { icon: Bookmark, label: 'Saved Posts', href: '//' },
