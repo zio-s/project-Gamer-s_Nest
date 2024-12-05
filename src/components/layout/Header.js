@@ -117,7 +117,7 @@ const Header = ({ onMenuClick, activeMenu = { activeMenu }, setActiveMenu = { se
 
   return (
     <header
-      className={`sticky top-0 z-30 px-6 backdrop-blur-sm ${
+      className={`sticky top-0 z-50 px-6 backdrop-blur-sm ${
         headerType === 'default' ? 'flex items-center justify-between p-6' : ''
       } ${headerType === 'detail' && !scrolled ? 'bg-transparent' : ''}
       `}
