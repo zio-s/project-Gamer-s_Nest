@@ -4,14 +4,18 @@ import React, { useState } from 'react';
 import CommunityContent from './components/CommunityContent';
 import { GameCommunityProvider } from '@/contexts/FilterContext';
 import CommunityNavigation from './components/tabcontent/CommunityNavigation';
+import DrawerMenu from '@/components/navigation/DrawerMenu';
+import HeaderSearch from '@/components/common/HeaderSearch';
 
 export default function CommunityPage() {
   const [scrolled, setScrolled] = useState(false);
+  const [scrolledForMove, setScrolledForMove] = useState(false);
 
   React.useEffect(() => {
     const handleScroll = () => {
       const heroHeight = document.getElementById('hero')?.offsetHeight || 0;
       setScrolled(window.scrollY > heroHeight - 60);
+      setScrolledForMove(window.scrollY > heroHeight - 60);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -19,9 +23,28 @@ export default function CommunityPage() {
 
   return (
     <GameCommunityProvider>
-      <div className='bg-[#1a1b1e] min-h-screen'>
-        <div className='max-w-7xl mx-auto sticky top-3 z-50 px-4'>
-          <h2 className=' text-4xl font-bold z-50'>게임 커뮤니티</h2>
+      <div className='bg-[#1a1b1e]  min-h-screen'>
+        <div
+          className={`max-w-7xl mx-auto px-4 transition-all duration-300 
+    ${scrolledForMove ? 'opacity-0 invisible' : 'opacity-100 visible'}`}
+        >
+          <h2 className='text-3xl font-bold pt-4'>게임 커뮤니티</h2>
+        </div>
+
+        <div
+          className={`fixed left-0 right-0 z-50 bg-[#1a1b1e]/95 backdrop-blur-sm 
+    transition-all duration-300 border-b border-gray-800
+    ${scrolledForMove ? 'top-0 translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
+        >
+          <div className=' px-4'>
+            <div className='py-4 flex items-center'>
+              <DrawerMenu />
+              <div className='flex-1 flex items-center justify-between'>
+                <h2 className='text-2xl font-bold text-white'>게임 커뮤니티</h2>
+                <HeaderSearch />
+              </div>
+            </div>
+          </div>
         </div>
         <div id='hero' className='  text-white py-6'>
           <div className='max-w-7xl mx-auto px-4'>
@@ -32,9 +55,7 @@ export default function CommunityPage() {
             </div>
           </div>
         </div>
-
         <CommunityNavigation scrolled={scrolled} />
-
         <CommunityContent />
       </div>
     </GameCommunityProvider>
