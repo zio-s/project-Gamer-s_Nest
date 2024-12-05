@@ -11,6 +11,7 @@ import { MediaSection } from './components/MediaSection';
 import { EditionsSection } from './components/EditionsSection';
 import { ReviewsSection } from './components/ReviewsSection';
 import { SystemRequirements } from './components/SystemRequirements';
+import DetailNav from './components/DetailNav';
 
 export default function GameDetailPage() {
   const { id } = useParams();
@@ -77,7 +78,7 @@ export default function GameDetailPage() {
       </Box>
 
       {/* 내비게이션 */}
-      <nav className='bg-gray-800 sticky top-16 z-40'>
+      {/* <nav className='bg-gray-800 sticky top-16 z-40'>
         <div className='max-w-7xl mx-auto px-4'>
           <ul className='flex gap-8 text-sm'>
             <li className='py-4'>
@@ -102,22 +103,23 @@ export default function GameDetailPage() {
             </li>
           </ul>
         </div>
-      </nav>
+      </nav> */}
+      <DetailNav />
 
       {/* 메인 콘텐츠 */}
 
       <div className='max-w-7xl mx-auto px-4 pt-20  flex flex-col gap-20 pb-20'>
         <div>
-          <MediaSection game={game} />
-        </div>
-        <div>
           <OverviewSection game={game} />
         </div>
         <div>
-          <EditionsSection game={game} />
+          <MediaSection game={game} />
         </div>
         <div>
           <ReviewsSection game={game} />
+        </div>
+        <div>
+          <EditionsSection game={game} />
         </div>
         <div>
           <SystemRequirements game={game} />

@@ -29,7 +29,7 @@ export function SystemRequirements({ game }) {
   if (!minimumReqs && !recommendedReqs) return null;
 
   return (
-    <div className=''>
+    <div id='system'>
       <h3 className='text-xl font-bold mb-4'>시스템 요구사항</h3>
 
       <div className='grid md:grid-cols-2 gap-6'>

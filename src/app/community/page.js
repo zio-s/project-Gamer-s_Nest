@@ -40,7 +40,7 @@ export default function CommunityPage() {
             <div className='py-4 flex items-center'>
               <DrawerMenu />
               <div className='flex-1 flex items-center justify-between'>
-                <h2 className='text-2xl font-bold text-white'>게임 커뮤니티</h2>
+                <h2 className='text-xl font-bold text-white'>게임 커뮤니티</h2>
                 <Suspense fallback={<div>Loading...</div>}>
                   <HeaderSearch />
                 </Suspense>

@@ -1,12 +1,13 @@
 import { translateESRB, translateGenre, translateTag } from '@/utils/translations';
 
 export const OverviewSection = ({ game }) => {
-  console.log(game);
   return (
-    <div className='space-y-8 flex flex-col gap-10'>
+    <div id='overview' className='space-y-8 flex flex-col gap-10'>
       <div>
         <h2 className='text-2xl font-bold mb-4'>게임 개요</h2>
-        <p className='text-gray-300'>{game?.description_raw}</p>
+        <div className=' w-full bg-slate-800 rounded-lg p-6'>
+          <p className='text-gray-300'>{game?.description_raw}</p>
+        </div>
       </div>
 
       <div>

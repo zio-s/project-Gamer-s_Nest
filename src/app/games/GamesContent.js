@@ -55,7 +55,7 @@ export default function GamesContent() {
 
   return (
     <div className='container mx-auto px-4 py-8'>
-      <h1 className='text-3xl font-bold mb-8'>{search ? `Search Results: ${search}` : 'Popular Games'}</h1>
+      <h1 className='text-3xl font-bold mb-8'>{search ? `Search Results: ${search}` : '전체 게임'}</h1>
 
       {error && <div className='text-red-500 text-center mb-4'>{error}</div>}
 

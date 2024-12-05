@@ -21,7 +21,7 @@ const DrawerMenu = ({ className }) => {
       <Button
         onClick={onOpen}
         variant='ghost'
-        className={`p-2 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white rounded-lg  ${className}`}
+        className={`p-2  dark:hover:bg-gray-800 dark:hover:text-white rounded-lg  ${className}`}
         aria-label='Open Menu'
       >
         <Menu className='h-6 w-6' />
