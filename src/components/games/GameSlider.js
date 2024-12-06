@@ -15,9 +15,9 @@ const GameSlider = ({ games, title, subtitle }) => {
 
   // 이미지 에러 처리를 위한 함수
   const handleImageError = (e) => {
-    e.currentTarget.src = '/placeholder-game.jpg';
+    e.currentTarget.src = '/pattern/placeholder-game.png';
   };
-  console.log(games);
+
   return (
     <div className='relative w-full min-h-[500px] '>
       <div className='absolute top-0 left-0 w-full h-full'>
@@ -65,7 +65,7 @@ const GameSlider = ({ games, title, subtitle }) => {
                 <div className='relative group cursor-pointer flex flex-col px-6'>
                   <div className='relative aspect-[4/5] rounded-lg overflow-hidden mb-3'>
                     <Image
-                      src={image || '/placeholder-game.jpg'}
+                      src={image || '/pattern/placeholder-game.png'}
                       alt={title}
                       fill
                       sizes='(max-width: 280px) 100vw, 280px'
@@ -73,7 +73,7 @@ const GameSlider = ({ games, title, subtitle }) => {
                       loading='lazy'
                       quality={75}
                       onError={handleImageError}
-                      blurDataURL='/placeholder-game.jpg'
+                      blurDataURL='public/pattern/placeholder-game.png'
                       placeholder='blur'
                     />
                     <div className='absolute bottom-0 left-0 right-0 bg-gradient-to-t  from-primary/90 via-primary/40 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300'>

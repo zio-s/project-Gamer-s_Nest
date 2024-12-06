@@ -21,7 +21,7 @@ const GameCard = ({ id, name: title, released, background_image: image, rating, 
     >
       <div className='relative aspect-video'>
         <Image
-          src={image || '/placeholder-game.jpg'}
+          src={image || '/pattern/placeholder-game.png'}
           alt={title}
           className='w-full h-full object-cover transition-transform hover:scale-105'
         />

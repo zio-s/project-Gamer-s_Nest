@@ -14,7 +14,7 @@ const GameThumbnail = memo(({ game }) => {
     >
       <div className='w-12 h-12 relative flex-shrink-0'>
         <Image
-          src={imageError ? '/placeholder.png' : game.background_image}
+          src={imageError ? '/pattern/placeholder-game.png' : game.background_image}
           alt={game.name}
           fill
           className='rounded-lg object-cover'
@@ -22,7 +22,7 @@ const GameThumbnail = memo(({ game }) => {
           loading='eager'
           onError={() => setImageError(true)}
           quality={75}
-          blurDataURL='/placeholder.png'
+          blurDataURL='/pattern/placeholder-game.png'
           placeholder='blur'
         />
       </div>
