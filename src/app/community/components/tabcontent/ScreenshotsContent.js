@@ -69,13 +69,13 @@ const ScreenshotsContent = () => {
           <div key={screenshot.id} className='bg-[#2d2d3a] rounded-lg overflow-hidden'>
             <div className='aspect-video relative cursor-pointer group' onClick={() => handleImageClick(index)}>
               <Image
-                src={screenshot.imageUrl}
+                src={screenshot.imageUrl || '/pattern/placeholder-game.png'}
                 alt={screenshot.title}
                 width={400} // 적절한 크기로 조정
                 height={300} // 적절한 크기로 조정
                 className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-105'
               />
-              <div className='absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300' />
+              <div className='absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 group-hover:scale-105k7m transition-opacity duration-300' />
             </div>
 
             <div className='p-4'>

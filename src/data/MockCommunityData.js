@@ -386,7 +386,7 @@ export const mockScreenshots = [
     id: 10,
     title: 'Epic Multiplayer Teamwork',
     description: 'Our squad pulled off the perfect strategy to win this match!',
-    imageUrl: 'https://media.rawg.io/media/screenshots/437/437ad0efe43adccd7a59d8a5f8e50562.jpg',
+    imageUrl: '',
     author: 'TeamPlayer',
     likes: 320,
     createdAt: '2024-03-10T22:25:50Z',
