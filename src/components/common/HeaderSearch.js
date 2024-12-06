@@ -40,7 +40,12 @@ const HeaderSearch = () => {
     <div className='flex items-center gap-4'>
       <div className='relative flex items-center'>
         <form onSubmit={handleSearch}>
+          <label htmlFor='search' className='blind'>
+            검색
+          </label>
           <input
+            id='search'
+            name='search'
             ref={inputRef}
             type='text'
             value={searchTerm}

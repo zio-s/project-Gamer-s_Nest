@@ -18,7 +18,12 @@ const SearchInput = ({ className = '', ...props }) => {
 
   return (
     <form onSubmit={handleSearch} className='w-full'>
+      <label htmlFor='search' className='blind'>
+        검색
+      </label>
       <input
+        id='search'
+        name='search'
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder='게임 검색...'

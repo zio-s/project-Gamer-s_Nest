@@ -27,7 +27,6 @@ const MainLayout = ({ children, headerType, showAside = true, videoOff }) => {
   return (
     <div className=' min-h-screen '>
       <div className={`grid  grid-cols-1 ${showAside === true ? 'lg:grid-cols-[260px_1fr]' : ''} `}>
-        {/* Sidebar Container */}
 
         {showAside && (
           <div className='md:sticky md:top-0 lg:h-screen z-50'>

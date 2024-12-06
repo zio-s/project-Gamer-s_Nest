@@ -90,12 +90,19 @@ const FilterDropdown = ({ title, filterType, options }) => {
                           flex items-center gap-2 transition-colors duration-150'
               >
                 {isMultiSelect && (
-                  <input
-                    type='checkbox'
-                    checked={getCurrentValue().includes(option.value)}
-                    readOnly
-                    className='rounded border-gray-600 bg-[#1a1b1e]'
-                  />
+                  <form>
+                    <label htmlFor='search' className='blind'>
+                      필터
+                    </label>
+                    <input
+                      id='filter'
+                      name='filter'
+                      type='checkbox'
+                      checked={getCurrentValue().includes(option.value)}
+                      readOnly
+                      className='rounded border-gray-600 bg-[#1a1b1e]'
+                    />
+                  </form>
                 )}
                 <span className='flex-1'>{option.label}</span>
               </div>
