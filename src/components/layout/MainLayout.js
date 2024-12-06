@@ -27,7 +27,6 @@ const MainLayout = ({ children, headerType, showAside = true, videoOff }) => {
   return (
     <div className=' min-h-screen '>
       <div className={`grid  grid-cols-1 ${showAside === true ? 'lg:grid-cols-[260px_1fr]' : ''} `}>
-
         {showAside && (
           <div className='md:sticky md:top-0 lg:h-screen z-50'>
             <Sidebar isOpen={isSidebarOpen} activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
@@ -72,8 +71,8 @@ const MainLayout = ({ children, headerType, showAside = true, videoOff }) => {
             activeMenu={activeMenu}
             setActiveMenu={setActiveMenu}
           />
-          <main className={`flex-1 min-h-screen ${showAside ? '' : ''}`}>
-            <div className='relative w-full flex flex-col gap-16 z-5'>{children}</div>
+          <main className={`flex-1 min-h-screen  ${showAside ? '' : ''}`}>
+            <div className='relative w-full flex flex-col gap-16 z-5 '>{children}</div>
           </main>
         </div>
       </div>

@@ -19,9 +19,10 @@ const GameThumbnail = memo(({ game }) => {
           fill
           className='rounded-lg object-cover'
           sizes='48px'
-          loading='eager'
+          loading='lazy'
+          priority={false}
           onError={() => setImageError(true)}
-          quality={75}
+          quality={85}
           blurDataURL='/pattern/placeholder-game.png'
           placeholder='blur'
         />
@@ -40,7 +41,7 @@ const GameThumbnail = memo(({ game }) => {
                     className='rounded absolute top-0 left-0 w-full h-full object-cover'
                     sizes='150px'
                     loading='lazy'
-                    quality={60}
+                    quality={70}
                   />
                 </div>
               ))}

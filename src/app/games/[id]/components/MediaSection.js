@@ -43,6 +43,7 @@ export function MediaSection({ game }) {
               src={screenshot.image}
               alt='게임 스크린샷'
               fill
+              sizes='200px'
               className='object-cover rounded-lg transition-transform duration-300 group-hover:scale-105'
             />
             {/* Hover Overlay */}

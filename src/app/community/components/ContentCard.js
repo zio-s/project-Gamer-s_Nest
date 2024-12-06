@@ -27,6 +27,7 @@ const ContentCard = ({
             src={image || defaultImage}
             alt={title || 'Content image'}
             fill
+            sizes='200px'
             className='object-cover rounded-lg'
             onError={(e) => {
               e.currentTarget.src = defaultImage;

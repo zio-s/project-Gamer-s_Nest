@@ -45,8 +45,8 @@ const IntroSwiper = () => {
   }
 
   return (
-    <div className='h-[650px] md:h-[500] px-6'>
-      <div className='absolute pr-6'>
+    <div className='h-[650px] md:h-[500] '>
+      <div className='absolute'>
         <Swiper
           modules={[Autoplay, Pagination]}
           spaceBetween={0}
@@ -113,15 +113,17 @@ const IntroSwiper = () => {
                   </div>
                 </div>
 
-                <div className='relative flex aspect-auto object-top'>
+                <div className='relative w-full aspect-video'>
                   <Image
                     src={game.image}
                     alt={game.title}
-                    width={1400}
-                    height={700}
+                    fill
                     className='rounded-lg object-cover'
+                    sizes='(max-width: 640px) 100vw, 
+           (max-width: 1024px) 90vw, 
+           1400px'
                     priority={true}
-                    quality={90}
+                    quality={85}
                   />
                 </div>
               </div>

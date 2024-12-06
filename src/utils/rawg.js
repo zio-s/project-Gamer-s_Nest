@@ -59,6 +59,9 @@ export async function fetchGamesByCategory(category) {
     case 'free':
       queryParams = '&tags=free-to-play';
       break;
+    case 'genres':
+      queryParams = '&genres';
+      break;
     case 'trending':
       queryParams = '&ordering=-added&dates=2022-01-01,2025-12-31';
       size = 'page_size=100';
@@ -90,7 +93,7 @@ export async function fetchGamesByCategory(category) {
       break;
     default:
       queryParams = '&ordering=-rating';
-      size = 'page_size=20';
+      size = 'page_size=30';
   }
 
   try {

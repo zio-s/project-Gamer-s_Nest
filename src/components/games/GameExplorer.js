@@ -115,7 +115,7 @@ const GameExplorer = ({ allGames, onTabChange }) => {
   const filteredGames = getFilteredGames();
 
   return (
-    <div className='min-h px-6'>
+    <div className='min-h '>
       <div className='flex flex-col md:flex-row justify-between items-center gap-4 mb-6'>
         <div className='flex items-center gap-4'>
           <button
@@ -165,49 +165,49 @@ const GameExplorer = ({ allGames, onTabChange }) => {
         <div className='text-center py-8'>잠시만 기다려주세요...</div>
       ) : (
         <>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-            {Array.from({ length: 2 }).map((_, gridIndex) => (
-              <div
-                key={gridIndex}
-                className='rounded-lg'
-                style={{
-                  backgroundColor: colorMode === 'dark' ? '#111827' : '#e5e7eb',
-                }}
-              >
-                <div className='w-full'>
-                  {/* 테이블 헤더 */}
-                  <div className='grid grid-cols-12 gap-2 sm:gap-4 p-4 border-b border-gray-800 text-sm font-semibold'>
-                    <div className='col-span-1'>#</div>
-                    <div className='col-span-5 text-left'>Game</div>
-                    <div className='col-span-3 text-right'>메타크리틱</div>
-                    <div className='col-span-3 text-right'>플레이어</div>
-                  </div>
+          <div>
+            <div
+              className='rounded-lg mb-6'
+              style={{
+                backgroundColor: colorMode === 'dark' ? '#111827' : '#e5e7eb',
+              }}
+            >
+              {/* 헤더 */}
+              <div className='grid grid-cols-9 gap-2 sm:gap-4 p-4 border-b border-gray-800 text-sm font-semibold'>
+                <div className='col-span-1 pl-3 text-left'>#</div>
+                <div className='col-span-6 md:col-span-7 text-right'>메타크리틱</div>
+                <div className='col-span-2 md:col-span-1 text-right'>플레이어</div>
+              </div>
 
-                  {/* 테이블 바디 */}
-                  <div className='divide-y divide-gray-800'>
-                    {filteredGames.slice(gridIndex * 5, (gridIndex + 1) * 5).map((game, index) => (
-                      <Link href={`/games/${game.id}`} key={game.id}>
-                        <div className='grid grid-cols-12 gap-2 sm:gap-4 p-4 hover:bg-gray-800/50 transition-colors items-center'>
-                          <div className='col-span-1 text-sm'>{index + 1 + gridIndex * 5}</div>
-                          <div className='col-span-5'>
-                            <div className='flex items-center gap-2 sm:gap-3 min-w-0'>
-                              <GameThumbnail game={game} />
-                              <div className='flex items-center gap-1 min-w-0 '>
-                                <span className='text-sm font-semibold truncate'>{game.name}</span>
+              {/* 데이터 그리드 */}
+              <div className='grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-gray-800'>
+                {Array.from({ length: 2 }).map((_, gridIndex) => (
+                  <div key={gridIndex} className='w-full'>
+                    <div className='divide-y divide-gray-800'>
+                      {filteredGames.slice(gridIndex * 5, (gridIndex + 1) * 5).map((game, index) => (
+                        <Link href={`/games/${game.id}`} key={game.id}>
+                          <div className='grid grid-cols-12 gap-2 sm:gap-4 p-4 hover:bg-gray-800/50 transition-colors items-center'>
+                            <div className='col-span-1 text-sm text-center'>{index + 1 + gridIndex * 5}</div>
+                            <div className='col-span-5'>
+                              <div className='flex items-center gap-2 sm:gap-3 min-w-0'>
+                                <GameThumbnail game={game} />
+                                <div className='flex items-center gap-1 min-w-0'>
+                                  <span className='text-sm font-semibold truncate'>{game.name}</span>
+                                </div>
                               </div>
                             </div>
+                            <div className='col-span-3 text-right text-sm'>
+                              {game.metacritic ? `${game.metacritic}점` : '-'}
+                            </div>
+                            <div className='col-span-3 text-right text-sm'>{game.added?.toLocaleString()}명</div>
                           </div>
-                          <div className='col-span-3 text-right text-sm'>
-                            {game.metacritic ? `${game.metacritic}점` : '-'}
-                          </div>
-                          <div className='col-span-3 text-right text-sm'>{game.added?.toLocaleString()}명</div>
-                        </div>
-                      </Link>
-                    ))}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </>
       )}
