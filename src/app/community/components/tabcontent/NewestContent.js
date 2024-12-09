@@ -226,29 +226,47 @@ const dummyPosts = [
   },
 ];
 const PostCard = ({ post }) => (
-  <div className='bg-[#333348] rounded-lg p-4 hover:bg-[#3d3d4a] transition-colors cursor-pointer'>
-    <div className='flex justify-between items-start mb-2'>
-      <h3 className='text-white font-medium text-lg'>{post.title}</h3>
-      <div className='flex gap-2 text-sm text-gray-400'>
+  <div className='bg-[#333348] rounded-lg p-3 md:p-4 hover:bg-[#3d3d4a] transition-colors cursor-pointer'>
+    {/* 상단 섹션: 제목과 태그 */}
+    <div className='flex flex-col gap-2 mb-3 md:mb-2 md:flex-row md:justify-between md:items-start'>
+      <h3 className='text-white font-medium text-base md:text-lg line-clamp-1 md:max-w-[60%]'>{post.title}</h3>
+      <div className='flex flex-wrap gap-1 md:gap-2'>
         {post.tags.map((tag) => (
-          <span key={tag} className='bg-[#1a1b1e] px-2 py-1 rounded-full'>
+          <span
+            key={tag}
+            className='inline-block bg-[#1a1b1e] px-2 py-0.5 rounded-full text-xs md:text-sm text-gray-400'
+          >
             {tag}
           </span>
         ))}
       </div>
     </div>
-    <div className='flex justify-between items-center text-sm'>
-      <div className='flex items-center gap-2 text-gray-400'>
+
+    {/* 하단 섹션: 메타 정보 */}
+    <div className='flex flex-col gap-2 md:flex-row md:justify-between md:items-center text-xs md:text-sm text-gray-400'>
+      {/* 작성자 정보 */}
+      <div className='flex flex-wrap items-center gap-1.5 md:gap-2'>
         <span>{post.author}</span>
         <span>•</span>
         <span>{post.createdAt}</span>
         <span>•</span>
         <span>{post.category}</span>
       </div>
-      <div className='flex items-center gap-4 text-gray-400'>
-        <span>👍 {post.likes.toLocaleString()}</span>
-        <span>💬 {post.comments.toLocaleString()}</span>
-        <span>👁 {post.views.toLocaleString()}</span>
+
+      {/* 통계 정보 */}
+      <div className='flex items-center gap-3 md:gap-4'>
+        <span className='flex items-center gap-1'>
+          <span>👍</span>
+          <span>{post.likes.toLocaleString()}</span>
+        </span>
+        <span className='flex items-center gap-1'>
+          <span>💬</span>
+          <span>{post.comments.toLocaleString()}</span>
+        </span>
+        <span className='flex items-center gap-1'>
+          <span>👁</span>
+          <span>{post.views.toLocaleString()}</span>
+        </span>
       </div>
     </div>
   </div>
