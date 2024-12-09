@@ -124,10 +124,10 @@ const IntroSwiper = () => {
                         </div>
                       </div>
 
-                      <div className='space-y-2 slide-content slide-content-delay-2'>
-                        <h1 className='text-2xl lg:text-3xl xl:text-4xl font-bold'>{game.title}</h1>
-                        <p className='text-base lg:text-lg xl:text-xl'>{game.subtitle}</p>
-                        <p className='text-base lg:text-lg xl:text-xl'>
+                      <div className='space-y-2 slide-content slide-content-delay-2 text-white'>
+                        <h1 className='text-2xl lg:text-3xl xl:text-4xl font-bold text-white'>{game.title}</h1>
+                        <p className='text-base lg:text-lg xl:text-xl text-white'>{game.subtitle}</p>
+                        <p className='text-base lg:text-lg xl:text-xl text-white'>
                           <span className='text-purple-500'>{game.category}</span>
                         </p>
                         <p className='text-sm lg:text-base'>{game.genres}</p>

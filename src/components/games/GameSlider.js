@@ -17,10 +17,10 @@ const GameSlider = ({ games, title, subtitle }) => {
     <div className='relative w-full min-h-[450px] '>
       <div className='absolute top-0 left-0 w-full h-full'>
         <div className='flex items-center justify-between mb-4'>
-          <Heading className=' font-bold flex gap-5 items-center'>
+          <Heading size={{ base: 'xl', md: 'lg' }} className=' font-bold flex gap-5 items-center'>
             {title} <ChevronRight />
           </Heading>
-          <div className='flex gap-2'>
+          <div className='hidden md:flex gap-2'>
             <button
               ref={navigationPrevRef}
               className='w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
