@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import Button from '../common/Button';
 import { fetchGamesByCategory } from '@/utils/rawg';
+import Link from 'next/link';
 
 const IntroSwiper = () => {
   const [games, setGames] = useState([]);
@@ -137,7 +138,9 @@ const IntroSwiper = () => {
                       </div>
 
                       <div className='flex gap-4 lg:flex-row slide-content slide-content-delay-3'>
-                        <Button href={`/games/${game.id}`}>자세히보기</Button>
+                        <Link href={`/games/${game.id}`}>
+                          <Button>자세히보기</Button>
+                        </Link>
                         <Button>스트리머</Button>
                       </div>
                     </div>
