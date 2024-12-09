@@ -1,12 +1,10 @@
 .swiper-pagination {
   position: absolute;
-
   display: flex;
-  // flex-direction: column;
   gap: 15px;
-  left: 0 !important;
-  bottom: 0px !important;
-  // transform: translateX(-50%) !important;
+  bottom: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
   width: auto !important;
 }
 
@@ -51,7 +49,7 @@
 .progress-ring-fill {
   fill: none;
   stroke: #a885f7;
-  stroke-width: 2;
+  stroke-width: 3;
   stroke-dasharray: 201;
   stroke-dashoffset: 201;
   transition: stroke-dashoffset 0.3s ease;
@@ -85,4 +83,39 @@
 
 .pagination-bullet:hover .progress-ring {
   stroke: rgba(255, 255, 255, 0.4);
+}
+
+/////
+///
+///
+///
+///
+.slide-content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease-out;
+
+  &.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  // 딜레이 클래스들
+  &-delay-1 {
+    transition-delay: 0.2s;
+  }
+
+  &-delay-2 {
+    transition-delay: 0.4s;
+  }
+
+  &-delay-3 {
+    transition-delay: 0.6s;
+  }
+}
+
+// 활성화된 슬라이드의 콘텐츠
+.swiper-slide-active .slide-content {
+  opacity: 1;
+  transform: translateY(0);
 }

@@ -1,23 +1,20 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import Image from 'next/image';
 import Button from '../common/Button';
 import { fetchGamesByCategory } from '@/utils/rawg';
 
 const IntroSwiper = () => {
   const [games, setGames] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [activeIndex, setActiveIndex] = useState(0);
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        // 인기 게임들을 가져옵니다
         const popularGames = await fetchGamesByCategory('popular');
-        // 필요한 데이터만 추출하여 가공
         const processedGames = popularGames.slice(0, 5).map((game) => ({
           id: game.id,
           title: game.name,
@@ -28,6 +25,7 @@ const IntroSwiper = () => {
           image: game.background_image,
           metacritic: game.metacritic,
           genres: game.genres?.map((g) => g.name).join(', '),
+          clip: game.clip?.clip || null, // 클립 URL 추가
         }));
         setGames(processedGames);
       } catch (error) {
@@ -39,14 +37,13 @@ const IntroSwiper = () => {
 
     fetchGames();
   }, []);
-
   if (isLoading) {
     return <div className='h-[650px] flex items-center justify-center'>Loading...</div>;
   }
 
   return (
-    <div className='h-[650px] md:h-[500] '>
-      <div className='absolute'>
+    <div className='relative w-full -top-[85px] h-[600px] '>
+      <div className='w-full h-full absolute inset-0'>
         <Swiper
           modules={[Autoplay, Pagination]}
           spaceBetween={0}
@@ -71,60 +68,79 @@ const IntroSwiper = () => {
         </div>`;
             },
           }}
-          className='!w-full h-[650px] md:h-[500px] backdrop-filter-none'
+          onSlideChange={(swiper) => {
+            setActiveIndex(swiper.realIndex);
+          }}
+          className='!w-full !max-w-full h-full !overflow-hidden'
         >
-          {games.map((game) => (
-            <SwiperSlide key={game.id}>
-              <div className='grid grid-cols-1 md:grid-cols-2 h-full gap-5'>
-                <div className='flex flex-col justify-center space-y-6'>
-                  <div className='flex items-center gap-4'>
-                    <div className='flex gap-1'>
-                      {[...Array(5)].map((_, i) => (
-                        <span
-                          aria-hidden='true'
-                          key={i}
-                          className={i < game.rating ? 'text-yellow-400' : 'text-gray-400'}
-                        >
-                          ★
-                        </span>
-                      ))}
+          {games.map((game, index) => (
+            <SwiperSlide key={game.id} className='!w-full'>
+              <div className='w-full min-h-[600px] flex items-center'>
+                {/* 컨텐츠 영역에 패딩 및 최대 너비 제한 추가 */}
+                <div className='flex h-full gap-5 items-center w-full px-4 lg:px-8 xl:px-10'>
+                  <div className='flex flex-col justify-center gap-6 z-10 w-full max-w-3xl'>
+                    <div className='slide-content slide-content-delay-1'>
+                      <div className='flex items-center gap-4'>
+                        <div className='flex gap-1'>
+                          {[...Array(5)].map((_, i) => (
+                            <span
+                              aria-hidden='true'
+                              key={i}
+                              className={i < game.rating ? 'text-yellow-400' : 'text-gray-400'}
+                            >
+                              ★
+                            </span>
+                          ))}
+                        </div>
+                        {game.metacritic && (
+                          <span className='bg-green-600 px-2 py-1 rounded text-sm'>{game.metacritic}</span>
+                        )}
+                      </div>
                     </div>
-                    {game.metacritic && (
-                      <span className='bg-green-600 px-2 py-1 rounded text-sm'>{game.metacritic}</span>
+
+                    <div className='space-y-2 slide-content slide-content-delay-2'>
+                      <h1 className='text-2xl lg:text-3xl xl:text-4xl font-bold'>{game.title}</h1>
+                      <p className='text-base lg:text-lg xl:text-xl'>{game.subtitle}</p>
+                      <p className='text-base lg:text-lg xl:text-xl'>
+                        <span className='text-purple-500'>{game.category}</span>
+                      </p>
+                      <p className='text-sm lg:text-base'>{game.genres}</p>
+                    </div>
+
+                    <div className='slide-content slide-content-delay-2'>
+                      <p className='max-w-lg line-clamp-3 text-sm lg:text-base'>{game.description}</p>
+                    </div>
+
+                    <div className='flex gap-4 lg:flex-row slide-content slide-content-delay-3'>
+                      <Button href={`/games/${game.id}`}>자세히보기</Button>
+                      <Button>스트리머</Button>
+                    </div>
+                  </div>
+
+                  <div className='absolute inset-0 -z-10'>
+                    {game.clip ? (
+                      <video
+                        key={game.id}
+                        autoPlay
+                        playsInline
+                        muted
+                        loop
+                        className={`w-full h-full object-cover transition-opacity duration-500 ${
+                          index === activeIndex ? 'opacity-100' : 'opacity-0'
+                        }`}
+                      >
+                        <source src={game.clip} type='video/mp4' />
+                      </video>
+                    ) : (
+                      <div
+                        className={`w-full h-full bg-cover bg-center transition-opacity duration-500 ${
+                          index === activeIndex ? 'opacity-100' : 'opacity-0'
+                        }`}
+                        style={{ backgroundImage: `url(${game.image})` }}
+                      />
                     )}
+                    <div className='absolute inset-0 bg-black/40' />
                   </div>
-
-                  <div className='space-y-2'>
-                    <h1 className='text-4xl font-bold'>{game.title}</h1>
-                    <p className='text-base lg:text-xl'>{game.subtitle}</p>
-                    <p className='text-base lg:text-xl'>
-                      <span className='text-purple-500'>{game.category}</span>
-                    </p>
-                    <p className='text-sm '>{game.genres}</p>
-                  </div>
-
-                  {/* 설명 */}
-                  <p className=' max-w-lg line-clamp-3'>{game.description}</p>
-
-                  {/* 버튼 */}
-                  <div className='flex gap-4 lg:flex-row'>
-                    <Button href={`/games/${game.id}`}>자세히보기</Button>
-                    <Button>스트리머</Button>
-                  </div>
-                </div>
-
-                <div className='relative w-full aspect-video'>
-                  <Image
-                    src={game.image}
-                    alt={game.title}
-                    fill
-                    className='rounded-lg object-cover'
-                    sizes='(max-width: 640px) 100vw, 
-           (max-width: 1024px) 90vw, 
-           1400px'
-                    priority={true}
-                    quality={85}
-                  />
                 </div>
               </div>
             </SwiperSlide>

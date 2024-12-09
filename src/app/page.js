@@ -71,8 +71,8 @@ const Home = () => {
   };
   return (
     <MainLayout headerType='' showAside={true}>
+      <IntroSwiper />
       <div className='px-4 md:px-6 lg:px-10'>
-        <IntroSwiper />
         {isLoading ? (
           <div className='flex justify-center items-center min-h-screen'>
             <div>Loading...</div>

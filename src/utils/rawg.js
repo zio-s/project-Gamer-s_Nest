@@ -53,7 +53,7 @@ export async function fetchGamesByCategory(category) {
   let size = '';
   switch (category) {
     case 'popular':
-      queryParams = '&ordering=-rating&metacritic=80,100';
+      queryParams = '&ordering=-rating&metacritic=80,100&clips=true';
       size = 'page_size=100';
       break;
     case 'free':

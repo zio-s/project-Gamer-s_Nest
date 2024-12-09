@@ -5,7 +5,7 @@ import Header from './Header';
 import { useColorMode } from '@chakra-ui/react';
 import Footer from './Footer';
 
-const MainLayout = ({ children, headerType, showAside = true, videoOff }) => {
+const MainLayout = ({ children, headerType, showAside = true }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState('Games');
   const { colorMode } = useColorMode();
@@ -33,36 +33,6 @@ const MainLayout = ({ children, headerType, showAside = true, videoOff }) => {
           </div>
         )}
 
-        {videoOff ? (
-          <></>
-        ) : (
-          <div className='fixed inset-0 -z-10'>
-            <video
-              autoPlay
-              playsInline
-              muted
-              loop
-              className='w-full h-full object-cover'
-              poster='/pattern/video/main-mo.png'
-            >
-              <source src='/pattern/video/main-video.mp4' type='video/mp4' />
-            </video>
-            <div
-              className='absolute inset-0 transition-opacity duration-300'
-              style={{
-                background:
-                  colorMode === 'dark'
-                    ? `linear-gradient(to bottom, rgba(0, 0, 0, ${0.6 + scrollProgress * 0.4}), rgba(0, 0, 0, ${
-                        0.8 + scrollProgress * 0.2
-                      }))`
-                    : `linear-gradient(to bottom, rgba(255, 255, 255, ${
-                        0.6 + scrollProgress * 0.4
-                      }), rgba(255, 255, 255, ${0.8 + scrollProgress * 0.2}))`,
-              }}
-            />
-          </div>
-        )}
-
         {/* Main Content */}
         <div className=' flex flex-col '>
           <Header
@@ -72,7 +42,7 @@ const MainLayout = ({ children, headerType, showAside = true, videoOff }) => {
             setActiveMenu={setActiveMenu}
           />
           <main className={`flex-1 min-h-screen  ${showAside ? '' : ''}`}>
-            <div className='relative w-full flex flex-col gap-16 z-5 '>{children}</div>
+            <div className='relative w-full flex flex-col gap-0 z-5 '>{children}</div>
           </main>
         </div>
       </div>
