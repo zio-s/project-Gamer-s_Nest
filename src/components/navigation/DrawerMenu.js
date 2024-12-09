@@ -33,7 +33,7 @@ const DrawerMenu = ({ className }) => {
           <DrawerCloseButton />
           <DrawerHeader className='border-b'>
             <div className='flex justify-center items-center ml-[-15px]'>
-              <Image src='/pattern/logo2.png' width={75} height={75} priority={true} alt='logo' />
+              <Image src='/pattern/logo2.png' width={75} height={75} priority alt='logo' />
               <h1 className='text-xl flex flex-col font-bold text-left ml-[-10px]'>
                 <span className='bg-gradient-to-r mb-[-5px] from-purple-400 to-purple-600 bg-clip-text text-transparent'>
                   GAMER&apos;S
