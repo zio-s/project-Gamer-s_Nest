@@ -7,6 +7,7 @@ import GameSlider from '@/components/games/GameSlider';
 import { fetchGamesByCategory } from '@/utils/rawg';
 import GameExplorer from '@/components/games/GameExplorer';
 import GameGenre from '@/components/games/GameGenre';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 const Home = () => {
   const [popularGames, setPopularGames] = useState([]);
@@ -19,8 +20,22 @@ const Home = () => {
   const [indieGames, setIndieGames] = useState([]);
   const [upcomingGames, setUpcomingGames] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [loading, setLoading] = useState(true);
+  const [introGames, setIntroGames] = useState([]);
 
+  const processGamesForIntro = (games) => {
+    return games.slice(0, 5).map((game) => ({
+      id: game.id,
+      title: game.name,
+      subtitle: game.released ? new Date(game.released).getFullYear() : '',
+      category: game.parent_platforms?.map((p) => p.platform.name).join(' ') || '',
+      description: game.description_raw || '',
+      rating: Math.round(game.rating || 0),
+      image: game.background_image,
+      metacritic: game.metacritic,
+      genres: game.genres?.map((g) => g.name).join(', '),
+      clip: game.clip?.clip || null,
+    }));
+  };
   useEffect(() => {
     async function loadGames() {
       try {
@@ -36,6 +51,8 @@ const Home = () => {
           fetchGamesByCategory('action'),
           fetchGamesByCategory('indie'),
         ]);
+        const processedIntroGames = processGamesForIntro(popular);
+        setIntroGames(processedIntroGames);
         setAllGames(all || []);
         setPopularGames(popular || []);
         setFreeGames(free || []);
@@ -69,9 +86,13 @@ const Home = () => {
       console.error('Error loading more games:', error);
     }
   };
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <MainLayout headerType='' showAside={true}>
-      <IntroSwiper />
+      <IntroSwiper games={introGames} />
       <div className='px-4 md:px-6 lg:px-10 '>
         {isLoading ? (
           <div className='flex justify-center items-center min-h-screen'>

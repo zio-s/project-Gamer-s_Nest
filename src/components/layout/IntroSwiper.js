@@ -8,38 +8,10 @@ import Button from '../common/Button';
 import { fetchGamesByCategory } from '@/utils/rawg';
 import Link from 'next/link';
 
-const IntroSwiper = () => {
-  const [games, setGames] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+const IntroSwiper = ({ games }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  useEffect(() => {
-    const fetchGames = async () => {
-      try {
-        const popularGames = await fetchGamesByCategory('popular');
-        const processedGames = popularGames.slice(0, 5).map((game) => ({
-          id: game.id,
-          title: game.name,
-          subtitle: game.released ? new Date(game.released).getFullYear() : '',
-          category: game.parent_platforms?.map((p) => p.platform.name).join(' ') || '',
-          description: game.description_raw || '',
-          rating: Math.round(game.rating || 0),
-          image: game.background_image,
-          metacritic: game.metacritic,
-          genres: game.genres?.map((g) => g.name).join(', '),
-          clip: game.clip?.clip || null, // 클립 URL 추가
-        }));
-        setGames(processedGames);
-      } catch (error) {
-        console.error('Error fetching games:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchGames();
-  }, []);
-  if (isLoading) {
-    return <div className='h-[650px] flex items-center justify-center'>Loading...</div>;
+  if (!games || games.length === 0) {
+    return null;
   }
 
   return (
