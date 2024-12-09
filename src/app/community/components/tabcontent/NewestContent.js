@@ -227,7 +227,6 @@ const dummyPosts = [
 ];
 const PostCard = ({ post }) => (
   <div className='bg-[#333348] rounded-lg p-3 md:p-4 hover:bg-[#3d3d4a] transition-colors cursor-pointer'>
-    {/* 상단 섹션: 제목과 태그 */}
     <div className='flex flex-col gap-2 mb-3 md:mb-2 md:flex-row md:justify-between md:items-start'>
       <h3 className='text-white font-medium text-base md:text-lg line-clamp-1 md:max-w-[60%]'>{post.title}</h3>
       <div className='flex flex-wrap gap-1 md:gap-2'>
@@ -242,9 +241,7 @@ const PostCard = ({ post }) => (
       </div>
     </div>
 
-    {/* 하단 섹션: 메타 정보 */}
     <div className='flex flex-col gap-2 md:flex-row md:justify-between md:items-center text-xs md:text-sm text-gray-400'>
-      {/* 작성자 정보 */}
       <div className='flex flex-wrap items-center gap-1.5 md:gap-2'>
         <span>{post.author}</span>
         <span>•</span>
@@ -253,7 +250,6 @@ const PostCard = ({ post }) => (
         <span>{post.category}</span>
       </div>
 
-      {/* 통계 정보 */}
       <div className='flex items-center gap-3 md:gap-4'>
         <span className='flex items-center gap-1'>
           <span>👍</span>
