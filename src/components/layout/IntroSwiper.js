@@ -43,7 +43,7 @@ const IntroSwiper = () => {
   }
 
   return (
-    <div className='relative w-full -top-[85px] h-[600px] lg:h-[600px] overflow-hidden '>
+    <div className='relative w-full -top-[85px] h-[750px] lg:h-[800px]'>
       <div className='w-full h-full absolute inset-0 '>
         <Swiper
           modules={[Autoplay, Pagination]}
@@ -100,7 +100,11 @@ const IntroSwiper = () => {
                         style={{ backgroundImage: `url(${game.image})` }}
                       />
                     )}
-                    <div className='absolute inset-0 bg-black/40' />
+                    <div className='absolute inset-0 bg-gradient-to-b from-[#1e1e1e]/50 via-[#1e1e1e]/20 to-[#1e1e1e]/90' />
+                    {/* 아래에서 위로 가는 그라데이션 */}
+                    <div className='absolute inset-0 bg-gradient-to-t from-[#1e1e1e]/90 via-transparent to-[#1e1e1e]/30' />
+                    {/* 전체적인 어두운 오버레이 */}
+                    <div className='absolute inset-0 bg-[#1e1e1e]/20' />
                   </div>
 
                   <div className='relative h-full px-4 lg:px-8 xl:px-10 flex items-center'>
