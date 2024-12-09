@@ -42,7 +42,7 @@ const IntroSwiper = () => {
   }
 
   return (
-    <div className='relative w-full -top-[85px] h-[600px] '>
+    <div className='relative w-full -top-[85px] h-[600px] lg:h-[600px] overflow-hidden'>
       <div className='w-full h-full absolute inset-0'>
         <Swiper
           modules={[Autoplay, Pagination]}
@@ -75,48 +75,8 @@ const IntroSwiper = () => {
         >
           {games.map((game, index) => (
             <SwiperSlide key={game.id} className='!w-full'>
-              <div className='w-full min-h-[600px] flex items-center'>
-                {/* 컨텐츠 영역에 패딩 및 최대 너비 제한 추가 */}
+              <div className='relative w-full h-full'>
                 <div className='flex h-full gap-5 items-center w-full px-4 lg:px-8 xl:px-10'>
-                  <div className='flex flex-col justify-center gap-6 z-10 w-full max-w-3xl'>
-                    <div className='slide-content slide-content-delay-1'>
-                      <div className='flex items-center gap-4'>
-                        <div className='flex gap-1'>
-                          {[...Array(5)].map((_, i) => (
-                            <span
-                              aria-hidden='true'
-                              key={i}
-                              className={i < game.rating ? 'text-yellow-400' : 'text-gray-400'}
-                            >
-                              ★
-                            </span>
-                          ))}
-                        </div>
-                        {game.metacritic && (
-                          <span className='bg-green-600 px-2 py-1 rounded text-sm'>{game.metacritic}</span>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className='space-y-2 slide-content slide-content-delay-2'>
-                      <h1 className='text-2xl lg:text-3xl xl:text-4xl font-bold'>{game.title}</h1>
-                      <p className='text-base lg:text-lg xl:text-xl'>{game.subtitle}</p>
-                      <p className='text-base lg:text-lg xl:text-xl'>
-                        <span className='text-purple-500'>{game.category}</span>
-                      </p>
-                      <p className='text-sm lg:text-base'>{game.genres}</p>
-                    </div>
-
-                    <div className='slide-content slide-content-delay-2'>
-                      <p className='max-w-lg line-clamp-3 text-sm lg:text-base'>{game.description}</p>
-                    </div>
-
-                    <div className='flex gap-4 lg:flex-row slide-content slide-content-delay-3'>
-                      <Button href={`/games/${game.id}`}>자세히보기</Button>
-                      <Button>스트리머</Button>
-                    </div>
-                  </div>
-
                   <div className='absolute inset-0 -z-10'>
                     {game.clip ? (
                       <video
@@ -125,7 +85,7 @@ const IntroSwiper = () => {
                         playsInline
                         muted
                         loop
-                        className={`w-full h-full object-cover transition-opacity duration-500 ${
+                        className={`w-full h-full object-cover transition-opacity duration-500 absolute left-0 top-0 ${
                           index === activeIndex ? 'opacity-100' : 'opacity-0'
                         }`}
                       >
@@ -133,13 +93,54 @@ const IntroSwiper = () => {
                       </video>
                     ) : (
                       <div
-                        className={`w-full h-full bg-cover bg-center transition-opacity duration-500 ${
+                        className={`w-full h-full bg-cover bg-center absolute inset-0 transition-opacity duration-500 ${
                           index === activeIndex ? 'opacity-100' : 'opacity-0'
                         }`}
                         style={{ backgroundImage: `url(${game.image})` }}
                       />
                     )}
                     <div className='absolute inset-0 bg-black/40' />
+                  </div>
+
+                  <div className='relative h-full px-4 lg:px-8 xl:px-10 flex items-center'>
+                    <div className='flex flex-col justify-center gap-6 z-10 w-full max-w-3xl'>
+                      <div className='slide-content slide-content-delay-1'>
+                        <div className='flex items-center gap-4'>
+                          <div className='flex gap-1'>
+                            {[...Array(5)].map((_, i) => (
+                              <span
+                                aria-hidden='true'
+                                key={i}
+                                className={i < game.rating ? 'text-yellow-400' : 'text-gray-400'}
+                              >
+                                ★
+                              </span>
+                            ))}
+                          </div>
+                          {game.metacritic && (
+                            <span className='bg-green-600 px-2 py-1 rounded text-sm'>{game.metacritic}</span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className='space-y-2 slide-content slide-content-delay-2'>
+                        <h1 className='text-2xl lg:text-3xl xl:text-4xl font-bold'>{game.title}</h1>
+                        <p className='text-base lg:text-lg xl:text-xl'>{game.subtitle}</p>
+                        <p className='text-base lg:text-lg xl:text-xl'>
+                          <span className='text-purple-500'>{game.category}</span>
+                        </p>
+                        <p className='text-sm lg:text-base'>{game.genres}</p>
+                      </div>
+
+                      <div className='slide-content slide-content-delay-2'>
+                        <p className='max-w-lg line-clamp-3 text-sm lg:text-base'>{game.description}</p>
+                      </div>
+
+                      <div className='flex gap-4 lg:flex-row slide-content slide-content-delay-3'>
+                        <Button href={`/games/${game.id}`}>자세히보기</Button>
+                        <Button>스트리머</Button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
