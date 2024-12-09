@@ -17,7 +17,7 @@ const GameSlider = ({ games, title, subtitle }) => {
     <div className='relative w-full min-h-[450px] '>
       <div className='absolute top-0 left-0 w-full h-full'>
         <div className='flex items-center justify-between mb-4'>
-          <Heading size={{ base: 'xl', md: 'lg' }} className=' font-bold flex gap-5 items-center'>
+          <Heading size={{ base: 'xl', md: 'lg' }} className=' font-bold flex gap-5 items-center '>
             {title} <ChevronRight />
           </Heading>
           <div className='hidden md:flex gap-2'>

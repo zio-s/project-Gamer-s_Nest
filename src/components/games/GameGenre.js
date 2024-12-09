@@ -6,7 +6,7 @@ const GameGenre = ({ genreGames, title }) => {
   return (
     <section className='w-full min-h-[690px] '>
       <div className='flex items-center mb-6'>
-        <Heading>{title}</Heading>
+        <Heading size={{ base: 'xl', md: 'lg' }}>{title}</Heading>
         <ChevronRight className='w-5 h-5 text-white/60 ml-2' />
       </div>
 
