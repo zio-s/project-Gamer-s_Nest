@@ -7,8 +7,10 @@ import 'swiper/css/pagination';
 import Button from '../common/Button';
 import { fetchGamesByCategory } from '@/utils/rawg';
 import Link from 'next/link';
+import { useColorMode } from '@chakra-ui/react';
 
 const IntroSwiper = ({ games }) => {
+  const { colorMode } = useColorMode();
   const [activeIndex, setActiveIndex] = useState(0);
   if (!games || games.length === 0) {
     return null;
@@ -51,32 +53,32 @@ const IntroSwiper = ({ games }) => {
               <div className='relative w-full h-full'>
                 <div className='flex h-full gap-5 items-center w-full px-4 lg:px-8 xl:px-10'>
                   <div className='absolute inset-0 -z-10'>
-                    {game.clip ? (
-                      <video
-                        key={game.id}
-                        autoPlay
-                        playsInline
-                        muted
-                        loop
-                        className={`w-full h-full object-cover transition-opacity duration-500 absolute left-0 top-0 ${
-                          index === activeIndex ? 'opacity-100' : 'opacity-0'
-                        }`}
-                      >
-                        <source src={game.clip} type='video/mp4' />
-                      </video>
-                    ) : (
+                    <div className='relative w-full h-full [mask-image:linear-gradient(to_bottom,black_75%,transparent_97%)]'>
+                      {game.clip ? (
+                        <video
+                          key={game.id}
+                          autoPlay
+                          playsInline
+                          muted
+                          loop
+                          className={`w-full h-full object-cover transition-opacity duration-500 absolute left-0 top-0 ${
+                            index === activeIndex ? 'opacity-100' : 'opacity-0'
+                          }`}
+                        >
+                          <source src={game.clip} type='video/mp4' />
+                        </video>
+                      ) : (
+                        <div
+                          className={`w-full h-full bg-cover bg-center absolute inset-0 transition-opacity duration-500  ${
+                            index === activeIndex ? 'opacity-100' : 'opacity-0'
+                          }`}
+                          style={{ backgroundImage: `url(${game.image})` }}
+                        />
+                      )}
                       <div
-                        className={`w-full h-full bg-cover bg-center absolute inset-0 transition-opacity duration-500 ${
-                          index === activeIndex ? 'opacity-100' : 'opacity-0'
-                        }`}
-                        style={{ backgroundImage: `url(${game.image})` }}
+                        className={`absolute inset-0 ${colorMode === 'dark' ? 'bg-[#171923]/30' : 'bg-[#171923]/40'}`}
                       />
-                    )}
-                    <div className='absolute inset-0 bg-gradient-to-b from-[#1e1e1e]/50 via-[#1e1e1e]/20 to-[#1e1e1e]/90' />
-                    {/* 아래에서 위로 가는 그라데이션 */}
-                    <div className='absolute inset-0 bg-gradient-to-t from-[#1e1e1e]/90 via-transparent to-[#1e1e1e]/30' />
-                    {/* 전체적인 어두운 오버레이 */}
-                    <div className='absolute inset-0 bg-[#1e1e1e]/20' />
+                    </div>
                   </div>
 
                   <div className='relative h-full px-4 lg:px-8 xl:px-10 flex items-center'>
