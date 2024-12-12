@@ -134,20 +134,35 @@ const GameExplorer = ({ allGames, onTabChange }) => {
       <div className='fixed inset-0 z-50'>
         <div className='absolute inset-0 bg-black/60' onClick={onClose} />
         <div
-          className='absolute bottom-0 left-0 right-0 bg-gray-900 rounded-t-2xl max-h-[80vh] overflow-y-auto'
+          className='absolute bottom-0 left-0 right-0 rounded-t-2xl max-h-[80vh] overflow-y-auto'
           style={{
+            backgroundColor: colorMode === 'dark' ? '#1f2937' : '#fff',
             transform: 'translateY(0)',
             transition: 'transform 0.3s ease-out',
           }}
         >
-          <div className='sticky top-0 flex items-center justify-between p-4 border-b border-gray-800 bg-gray-900'>
+          <div
+            className='sticky top-0 flex items-center justify-between p-4 border-b'
+            style={{
+              backgroundColor: colorMode === 'dark' ? '#1f2937' : '#fff',
+              borderColor: colorMode === 'dark' ? '#374151' : '#e5e7eb',
+            }}
+          >
             <h2 className='text-lg font-semibold'>필터</h2>
-            <button onClick={onClose} className='p-1 hover:bg-gray-800 rounded-lg transition-colors'>
+            <button
+              onClick={onClose}
+              className='p-1 rounded-lg transition-colors'
+              style={{
+                backgroundColor: colorMode === 'dark' ? '#1f2937' : '#fff',
+                ':hover': {
+                  backgroundColor: colorMode === 'dark' ? '#374151' : '#f3f4f6',
+                },
+              }}
+            >
               <X className='w-5 h-5' />
             </button>
           </div>
           <div className='p-4 space-y-6'>
-            {/* 플랫폼 필터 */}
             <div>
               <h3 className='font-medium mb-3'>플랫폼</h3>
               <div className='flex flex-wrap gap-2'>
@@ -158,9 +173,25 @@ const GameExplorer = ({ allGames, onTabChange }) => {
                       setSelectedPlatform(option.value);
                       if (option.value === 'all') onClose();
                     }}
-                    className={`px-3 py-2 rounded-lg text-sm ${
-                      selectedPlatform === option.value ? 'bg-gray-700 text-white' : 'bg-gray-800'
-                    }`}
+                    className={`px-3 py-2 rounded-lg text-sm`}
+                    style={{
+                      backgroundColor:
+                        selectedPlatform === option.value
+                          ? colorMode === 'dark'
+                            ? '#374151'
+                            : '#e5e7eb'
+                          : colorMode === 'dark'
+                          ? '#1f2937'
+                          : '#f3f4f6',
+                      color:
+                        selectedPlatform === option.value
+                          ? colorMode === 'dark'
+                            ? '#fff'
+                            : '#000'
+                          : colorMode === 'dark'
+                          ? '#9ca3af'
+                          : '#4b5563',
+                    }}
                   >
                     {option.label}
                   </button>
@@ -168,7 +199,6 @@ const GameExplorer = ({ allGames, onTabChange }) => {
               </div>
             </div>
 
-            {/* 장르 필터 */}
             <div>
               <h3 className='font-medium mb-3'>장르</h3>
               <div className='flex flex-wrap gap-2'>
@@ -179,9 +209,25 @@ const GameExplorer = ({ allGames, onTabChange }) => {
                       setSelectedGenre(option.value);
                       if (option.value === 'all') onClose();
                     }}
-                    className={`px-3 py-2 rounded-lg text-sm ${
-                      selectedGenre === option.value ? 'bg-gray-700 text-white' : 'bg-gray-800'
-                    }`}
+                    className={`px-3 py-2 rounded-lg text-sm`}
+                    style={{
+                      backgroundColor:
+                        selectedGenre === option.value
+                          ? colorMode === 'dark'
+                            ? '#374151'
+                            : '#e5e7eb'
+                          : colorMode === 'dark'
+                          ? '#1f2937'
+                          : '#f3f4f6',
+                      color:
+                        selectedGenre === option.value
+                          ? colorMode === 'dark'
+                            ? '#fff'
+                            : '#000'
+                          : colorMode === 'dark'
+                          ? '#9ca3af'
+                          : '#4b5563',
+                    }}
                   >
                     {option.label}
                   </button>
@@ -189,7 +235,6 @@ const GameExplorer = ({ allGames, onTabChange }) => {
               </div>
             </div>
 
-            {/* 정렬 필터 */}
             <div>
               <h3 className='font-medium mb-3'>정렬</h3>
               <div className='flex flex-wrap gap-2'>
@@ -200,9 +245,25 @@ const GameExplorer = ({ allGames, onTabChange }) => {
                       setSelectedRating(option.value);
                       if (option.value === 'none') onClose();
                     }}
-                    className={`px-3 py-2 rounded-lg text-sm ${
-                      selectedRating === option.value ? 'bg-gray-700 text-white' : 'bg-gray-800'
-                    }`}
+                    className={`px-3 py-2 rounded-lg text-sm`}
+                    style={{
+                      backgroundColor:
+                        selectedRating === option.value
+                          ? colorMode === 'dark'
+                            ? '#374151'
+                            : '#e5e7eb'
+                          : colorMode === 'dark'
+                          ? '#1f2937'
+                          : '#f3f4f6',
+                      color:
+                        selectedRating === option.value
+                          ? colorMode === 'dark'
+                            ? '#fff'
+                            : '#000'
+                          : colorMode === 'dark'
+                          ? '#9ca3af'
+                          : '#4b5563',
+                    }}
                   >
                     {option.label}
                   </button>
@@ -237,7 +298,7 @@ const GameExplorer = ({ allGames, onTabChange }) => {
             </button>
 
             {/* 모바일 필터 버튼 */}
-            <button className='md:hidden p-2 rounded-lg bg-gray-800' onClick={() => setIsMobileFilterOpen(true)}>
+            <button className='md:hidden p-2 rounded-lg' onClick={() => setIsMobileFilterOpen(true)}>
               <Filter className='w-5 h-5' />
             </button>
           </div>

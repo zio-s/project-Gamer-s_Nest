@@ -18,7 +18,7 @@ const GameThumbnail = memo(({ game }) => {
           alt={game.name}
           fill
           className='rounded-lg object-cover'
-          sizes='48px'
+          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
           loading='lazy'
           priority={false}
           onError={() => setImageError(true)}
