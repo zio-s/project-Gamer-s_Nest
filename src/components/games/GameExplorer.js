@@ -1,12 +1,13 @@
 'use client';
 import { fetchGamesByCategory } from '@/utils/rawg';
-import { Check } from 'lucide-react';
+import { Check, Filter, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import FilterDropdown from '../common/FilterDropdown';
+import FilterDropdown, { FilterSection } from '../common/FilterDropdown';
 import { useColorMode } from '@chakra-ui/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import GameThumbnail from './GameThumbanil';
+
 const PLATFORM_FILTERS = [
   { label: 'PC', value: ['4'] },
   { label: 'macOS', value: ['5'] },
@@ -37,6 +38,7 @@ const GameExplorer = ({ allGames, onTabChange }) => {
   const [selectedGenre, setSelectedGenre] = useState('all');
   const [selectedRating, setSelectedRating] = useState('-rating');
   const [isLoading, setIsLoading] = useState(false);
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
   // 탭 변경시 새로운 데이터 로드
   const handleTabChange = async (tab) => {
@@ -114,51 +116,159 @@ const GameExplorer = ({ allGames, onTabChange }) => {
 
   const filteredGames = getFilteredGames();
 
+  const MobileFilterModal = ({ isOpen, onClose }) => {
+    useEffect(() => {
+      if (isOpen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'unset';
+      }
+      return () => {
+        document.body.style.overflow = 'unset';
+      };
+    }, [isOpen]);
+
+    if (!isOpen) return null;
+
+    return (
+      <div className='fixed inset-0 z-50'>
+        <div className='absolute inset-0 bg-black/60' onClick={onClose} />
+        <div
+          className='absolute bottom-0 left-0 right-0 bg-gray-900 rounded-t-2xl max-h-[80vh] overflow-y-auto'
+          style={{
+            transform: 'translateY(0)',
+            transition: 'transform 0.3s ease-out',
+          }}
+        >
+          <div className='sticky top-0 flex items-center justify-between p-4 border-b border-gray-800 bg-gray-900'>
+            <h2 className='text-lg font-semibold'>필터</h2>
+            <button onClick={onClose} className='p-1 hover:bg-gray-800 rounded-lg transition-colors'>
+              <X className='w-5 h-5' />
+            </button>
+          </div>
+          <div className='p-4 space-y-6'>
+            {/* 플랫폼 필터 */}
+            <div>
+              <h3 className='font-medium mb-3'>플랫폼</h3>
+              <div className='flex flex-wrap gap-2'>
+                {[{ label: '전체 플랫폼', value: 'all' }, ...PLATFORM_FILTERS].map((option) => (
+                  <button
+                    key={option.label}
+                    onClick={() => {
+                      setSelectedPlatform(option.value);
+                      if (option.value === 'all') onClose();
+                    }}
+                    className={`px-3 py-2 rounded-lg text-sm ${
+                      selectedPlatform === option.value ? 'bg-gray-700 text-white' : 'bg-gray-800'
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* 장르 필터 */}
+            <div>
+              <h3 className='font-medium mb-3'>장르</h3>
+              <div className='flex flex-wrap gap-2'>
+                {[{ label: '전체 장르', value: 'all' }, ...GENRE_FILTERS].map((option) => (
+                  <button
+                    key={option.label}
+                    onClick={() => {
+                      setSelectedGenre(option.value);
+                      if (option.value === 'all') onClose();
+                    }}
+                    className={`px-3 py-2 rounded-lg text-sm ${
+                      selectedGenre === option.value ? 'bg-gray-700 text-white' : 'bg-gray-800'
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* 정렬 필터 */}
+            <div>
+              <h3 className='font-medium mb-3'>정렬</h3>
+              <div className='flex flex-wrap gap-2'>
+                {[{ label: '정렬 기준', value: 'none' }, ...RATING_FILTERS].map((option) => (
+                  <button
+                    key={option.label}
+                    onClick={() => {
+                      setSelectedRating(option.value);
+                      if (option.value === 'none') onClose();
+                    }}
+                    className={`px-3 py-2 rounded-lg text-sm ${
+                      selectedRating === option.value ? 'bg-gray-700 text-white' : 'bg-gray-800'
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
   return (
     <div className='min-h '>
-      <div className='flex flex-col md:flex-row justify-between items-center gap-4 mb-6'>
-        <div className='flex items-center gap-4'>
-          <button
-            onClick={() => handleTabChange('popular')}
-            className={`px-4 py-2 rounded-lg ${
-              activeTab === 'popular' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 hover:text-white '
-            }`}
-          >
-            인기순위
-          </button>
-          <button
-            onClick={() => handleTabChange('trending')}
-            className={`px-4 py-2 rounded-lg ${
-              activeTab === 'trending' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 hover:text-white'
-            }`}
-          >
-            베스트
-          </button>
+      <div className='min-h'>
+        <div className='flex flex-col md:flex-row justify-between items-center gap-4 mb-6'>
+          <div className='flex items-center gap-4'>
+            <button
+              onClick={() => handleTabChange('popular')}
+              className={`px-4 py-2 rounded-lg ${
+                activeTab === 'popular' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 hover:text-white'
+              }`}
+            >
+              인기순위
+            </button>
+            <button
+              onClick={() => handleTabChange('trending')}
+              className={`px-4 py-2 rounded-lg ${
+                activeTab === 'trending' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 hover:text-white'
+              }`}
+            >
+              베스트
+            </button>
+
+            {/* 모바일 필터 버튼 */}
+            <button className='md:hidden p-2 rounded-lg bg-gray-800' onClick={() => setIsMobileFilterOpen(true)}>
+              <Filter className='w-5 h-5' />
+            </button>
+          </div>
+
+          {/* 데스크톱 필터 */}
+          <div className='hidden md:flex gap-3 scrollbar-hide'>
+            <FilterDropdown
+              label='플랫폼'
+              options={[{ label: '전체 플랫폼', value: 'all' }, ...PLATFORM_FILTERS]}
+              value={selectedPlatform}
+              onChange={setSelectedPlatform}
+            />
+            <FilterDropdown
+              label='장르'
+              options={[{ label: '전체 장르', value: 'all' }, ...GENRE_FILTERS]}
+              value={selectedGenre}
+              onChange={setSelectedGenre}
+            />
+            <FilterDropdown
+              label='정렬'
+              options={[{ label: '정렬 기준', value: 'none' }, ...RATING_FILTERS]}
+              value={selectedRating}
+              onChange={setSelectedRating}
+            />
+          </div>
         </div>
 
-        {/* 셀렉트 필터 */}
-        <div className='flex gap-3  scrollbar-hide'>
-          <FilterDropdown
-            label='플랫폼'
-            options={[{ label: '전체 플랫폼', value: 'all' }, ...PLATFORM_FILTERS]}
-            value={selectedPlatform}
-            onChange={setSelectedPlatform}
-          />
+        {/* 모바일 필터 모달 */}
+        <MobileFilterModal isOpen={isMobileFilterOpen} onClose={() => setIsMobileFilterOpen(false)} />
 
-          <FilterDropdown
-            label='장르'
-            options={[{ label: '전체 장르', value: 'all' }, ...GENRE_FILTERS]}
-            value={selectedGenre}
-            onChange={setSelectedGenre}
-          />
-
-          <FilterDropdown
-            label='정렬'
-            options={[{ label: '정렬 기준', value: 'none' }, ...RATING_FILTERS]}
-            value={selectedRating}
-            onChange={setSelectedRating}
-          />
-        </div>
+        {/* 나머지 컴포넌트 내용... */}
       </div>
 
       {isLoading ? (

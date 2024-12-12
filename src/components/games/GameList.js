@@ -18,7 +18,7 @@ const GameList = ({ title, image, rating, review, type = 'default', tags }) => {
             loading='lazy'
             quality={85}
             onError={handleImageError}
-            sizes='280px'
+            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
           />
           <div className='absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/80 via-black/10 to-transparent'>
             <div className='space-y-3'>
@@ -53,7 +53,7 @@ const GameList = ({ title, image, rating, review, type = 'default', tags }) => {
             src={image || '/pattern/placeholder-game.png'}
             alt={title}
             fill
-            sizes='280px'
+            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
             className='object-cover transition-transform group-hover:scale-105 '
             loading='lazy'
             quality={85}
@@ -89,7 +89,7 @@ const GameList = ({ title, image, rating, review, type = 'default', tags }) => {
             src={image || '/pattern/placeholder-game.png'}
             alt={title}
             fill
-            sizes='280px'
+            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
             className='object-cover brightness-90 transition-transform group-hover:scale-105'
             loading='lazy'
             quality={85}
@@ -127,7 +127,7 @@ const GameList = ({ title, image, rating, review, type = 'default', tags }) => {
             src={image || '/pattern/placeholder-game.png'}
             alt={title}
             fill
-            sizes='280px'
+            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
             className='object-cover brightness-90 transition-transform group-hover:scale-105'
             loading='lazy'
             quality={85}
@@ -168,7 +168,7 @@ const GameList = ({ title, image, rating, review, type = 'default', tags }) => {
           loading='lazy'
           quality={85}
           onError={handleImageError}
-          sizes='280px'
+          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
         />
         <div className='absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/80 via-black/10 to-transparent'>
           <div className='space-y-3'>

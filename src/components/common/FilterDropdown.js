@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ChevronDown, X } from 'lucide-react';
+import { ChevronDown, Filter, X } from 'lucide-react';
 import { useColorMode } from '@chakra-ui/react';
 
 const FilterDropdown = ({ label, options, value, onChange, isMulti = false }) => {
@@ -18,71 +18,52 @@ const FilterDropdown = ({ label, options, value, onChange, isMulti = false }) =>
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const isSelected = (optionValue) => {
-    if (value === 'all') return false;
-    if (Array.isArray(value)) {
-      return JSON.stringify(value) === JSON.stringify(optionValue);
-    }
-    return value === optionValue;
-  };
-
-  const handleSelect = (optionValue) => {
-    onChange(optionValue);
-    if (!isMulti) {
-      setIsOpen(false);
-    }
-  };
-
-  const handleClear = () => {
-    onChange('all');
-    setIsOpen(false);
-  };
-
-  const selectedOption = options.find((opt) =>
-    Array.isArray(opt.value) ? JSON.stringify(opt.value) === JSON.stringify(value) : opt.value === value
-  );
-
   return (
     <div className='relative' ref={dropdownRef}>
       <button
         type='button'
-        className='px-4 py-2 hover:bg-gray-700 rounded-lg  flex items-center gap-2 transition-colors'
+        className='px-3 py-1.5 hover:bg-gray-700 rounded-lg flex items-center gap-1.5 transition-colors text-sm whitespace-nowrap'
         onClick={() => setIsOpen(!isOpen)}
         style={{
           backgroundColor: colorMode === 'dark' ? '#1f2937' : '#e5e7eb',
         }}
       >
-        <span>{label}</span>
-        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <span>{value === 'all' ? label : options.find((opt) => opt.value === value)?.label}</span>
+        <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
         <div
-          className='absolute z-50 mt-2 w-56 rounded-lg shadow-lg overflow-hidden left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-0'
+          className='absolute z-50 mt-2 w-48 rounded-lg shadow-lg overflow-hidden left-0 sm:left-auto sm:-right-0'
           style={{
             backgroundColor: colorMode === 'dark' ? '#1f2937' : '#e5e7eb',
-            maxWidth: 'calc(100vw - 2rem)',
           }}
         >
-          <div className='p-3 border-b border-gray-700 flex justify-between items-center'>
-            <span className='font-semibold '>{label}</span>
+          <div className='p-2 border-b border-gray-700 flex justify-between items-center'>
+            <span className='font-medium text-sm'>{label}</span>
             {value !== 'all' && (
-              <button onClick={handleClear} className='text-sm text-gray-400 hover:text-white transition-colors'>
-                Clear
+              <button
+                onClick={() => onChange('all')}
+                className='text-xs text-gray-400 hover:text-white transition-colors'
+              >
+                초기화
               </button>
             )}
           </div>
-          <div className='max-h-64 overflow-y-auto'>
+          <div className='max-h-60 overflow-y-auto'>
             {options.map((option) => (
               <button
                 key={option.label}
-                className={`w-full px-3 py-2 text-left hover:bg-gray-500 hover:text-white transition-colors flex items-center justify-between ${
-                  isSelected(option.value) ? 'bg-gray-700' : ''
+                className={`w-full px-3 py-2 text-sm text-left hover:bg-gray-500 hover:text-white transition-colors flex items-center justify-between ${
+                  value === option.value ? 'bg-gray-700' : ''
                 }`}
-                onClick={() => handleSelect(option.value)}
+                onClick={() => {
+                  onChange(option.value);
+                  setIsOpen(false);
+                }}
               >
-                <span className=''>{option.label}</span>
-                {isSelected(option.value) && <X className='w-4 h-4 text-gray-400' />}
+                <span>{option.label}</span>
+                {value === option.value && <X className='w-3.5 h-3.5 text-gray-400' />}
               </button>
             ))}
           </div>
@@ -91,4 +72,5 @@ const FilterDropdown = ({ label, options, value, onChange, isMulti = false }) =>
     </div>
   );
 };
+
 export default FilterDropdown;

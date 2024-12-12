@@ -12,11 +12,11 @@ const GameGenreList = ({ games = [], title }) => {
     });
   };
   return (
-    <div className='bg-gray-800/50 rounded-lg h-full hover:bg-gray-800/70 transition-colors'>
+    <div className=' rounded-lg h-full hover:bg-gray-700/30 transition-colors'>
       <div className='p-4 border-b border-gray-700/50 flex items-center justify-between'>
-        <h3 className='text-lg font-bold text-white'>{title}</h3>
+        <h3 className='text-lg font-bold '>{title}</h3>
         <Link href={'/games'}>
-          <span className='px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-medium rounded-full'>더보기</span>
+          <span className='px-3 py-1 bg-purple-500/20 text-xs font-medium rounded-full'>더보기</span>
         </Link>
       </div>
       <div className='p-3'>
@@ -35,8 +35,8 @@ const GameGenreList = ({ games = [], title }) => {
                   />
                 </div>
                 <div className='ml-3 flex-1 min-w-0'>
-                  <h4 className='text-sm font-medium text-white truncate'>{title}</h4>
-                  <p className='text-xs text-gray-400 mt-1'>출시일: {formatReleaseDate(released)}</p>
+                  <h4 className='text-sm font-medium  truncate'>{title}</h4>
+                  <p className='text-xs opacity-70 mt-1'>출시일: {formatReleaseDate(released)}</p>
                 </div>
               </div>
             </Link>
