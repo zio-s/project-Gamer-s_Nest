@@ -1,3 +1,4 @@
+import { useColorMode } from '@chakra-ui/react';
 import { Cpu, HardDrive, Microchip } from 'lucide-react';
 
 // 시스템 요구사항을 파싱하는 함수
@@ -21,6 +22,7 @@ const parseRequirements = (reqString) => {
 };
 
 export function SystemRequirements({ game }) {
+  const { colorMode } = useColorMode();
   const pcPlatform = game?.platforms?.find((p) => p.platform.name.toLowerCase().includes('pc'));
 
   const minimumReqs = parseRequirements(pcPlatform?.requirements?.minimum);
@@ -35,14 +37,14 @@ export function SystemRequirements({ game }) {
       <div className='grid md:grid-cols-2 gap-6'>
         {/* 최소 사양 */}
         {minimumReqs && (
-          <div className='bg-gray-800 rounded-lg p-6'>
+          <div className=' rounded-lg p-6' style={{ backgroundColor: colorMode === 'dark' ? '#1f2937' : '#e9e9e9' }}>
             <h4 className='text-lg font-semibold mb-4'>최소 사양</h4>
             <div className='space-y-4'>
               {minimumReqs.os && (
                 <div className='flex items-start gap-3'>
                   <HardDrive className='w-5 h-5 mt-1 text-gray-400' />
                   <div>
-                    <p className='font-medium text-gray-300'>운영체제</p>
+                    <p className='font-medium opacity-70'>운영체제</p>
                     <p className='text-gray-400 text-sm'>{minimumReqs.os}</p>
                   </div>
                 </div>
@@ -51,7 +53,7 @@ export function SystemRequirements({ game }) {
                 <div className='flex items-start gap-3'>
                   <Cpu className='w-5 h-5 mt-1 text-gray-400' />
                   <div>
-                    <p className='font-medium text-gray-300'>프로세서</p>
+                    <p className='font-medium opacity-70'>프로세서</p>
                     <p className='text-gray-400 text-sm'>{minimumReqs.processor}</p>
                   </div>
                 </div>
@@ -60,7 +62,7 @@ export function SystemRequirements({ game }) {
                 <div className='flex items-start gap-3'>
                   <Microchip className='w-5 h-5 mt-1 text-gray-400' />
                   <div>
-                    <p className='font-medium text-gray-300'>메모리</p>
+                    <p className='font-medium opacity-70'>메모리</p>
                     <p className='text-gray-400 text-sm'>{minimumReqs.memory}</p>
                   </div>
                 </div>
@@ -78,7 +80,7 @@ export function SystemRequirements({ game }) {
                     <path d='M6 12h.01M8 12h.01' />
                   </svg>
                   <div>
-                    <p className='font-medium text-gray-300'>그래픽</p>
+                    <p className='font-medium opacity-70'>그래픽</p>
                     <p className='text-gray-400 text-sm'>{minimumReqs.graphics}</p>
                   </div>
                 </div>
@@ -87,7 +89,7 @@ export function SystemRequirements({ game }) {
                 <div className='flex items-start gap-3'>
                   <HardDrive className='w-5 h-5 mt-1 text-gray-400' />
                   <div>
-                    <p className='font-medium text-gray-300'>저장공간</p>
+                    <p className='font-medium opacity-70'>저장공간</p>
                     <p className='text-gray-400 text-sm'>{minimumReqs.storage}</p>
                   </div>
                 </div>
@@ -98,14 +100,14 @@ export function SystemRequirements({ game }) {
 
         {/* 권장 사양 */}
         {recommendedReqs && (
-          <div className='bg-gray-800 rounded-lg p-6'>
+          <div className=' rounded-lg p-6' style={{ backgroundColor: colorMode === 'dark' ? '#1f2937' : '#e9e9e9' }}>
             <h4 className='text-lg font-semibold mb-4'>권장 사양</h4>
             <div className='space-y-4'>
               {recommendedReqs.os && (
                 <div className='flex items-start gap-3'>
                   <HardDrive className='w-5 h-5 mt-1 text-gray-400' />
                   <div>
-                    <p className='font-medium text-gray-300'>운영체제</p>
+                    <p className='font-medium opacity-70'>운영체제</p>
                     <p className='text-gray-400 text-sm'>{recommendedReqs.os}</p>
                   </div>
                 </div>
@@ -114,7 +116,7 @@ export function SystemRequirements({ game }) {
                 <div className='flex items-start gap-3'>
                   <Cpu className='w-5 h-5 mt-1 text-gray-400' />
                   <div>
-                    <p className='font-medium text-gray-300'>프로세서</p>
+                    <p className='font-medium opacity-70'>프로세서</p>
                     <p className='text-gray-400 text-sm'>{recommendedReqs.processor}</p>
                   </div>
                 </div>
@@ -123,7 +125,7 @@ export function SystemRequirements({ game }) {
                 <div className='flex items-start gap-3'>
                   <Microchip className='w-5 h-5 mt-1 text-gray-400' />
                   <div>
-                    <p className='font-medium text-gray-300'>메모리</p>
+                    <p className='font-medium opacity-70'>메모리</p>
                     <p className='text-gray-400 text-sm'>{recommendedReqs.memory}</p>
                   </div>
                 </div>
@@ -141,7 +143,7 @@ export function SystemRequirements({ game }) {
                     <path d='M6 12h.01M8 12h.01' />
                   </svg>
                   <div>
-                    <p className='font-medium text-gray-300'>그래픽</p>
+                    <p className='font-medium opacity-70'>그래픽</p>
                     <p className='text-gray-400 text-sm'>{recommendedReqs.graphics}</p>
                   </div>
                 </div>
@@ -150,7 +152,7 @@ export function SystemRequirements({ game }) {
                 <div className='flex items-start gap-3'>
                   <HardDrive className='w-5 h-5 mt-1 text-gray-400' />
                   <div>
-                    <p className='font-medium text-gray-300'>저장공간</p>
+                    <p className='font-medium opacity-70'>저장공간</p>
                     <p className='text-gray-400 text-sm'>{recommendedReqs.storage}</p>
                   </div>
                 </div>

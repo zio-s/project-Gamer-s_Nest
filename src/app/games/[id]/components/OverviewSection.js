@@ -1,12 +1,19 @@
-import { translateESRB, translateGenre, translateTag } from '@/utils/translations';
+import { translateESRB, translateTag } from '@/utils/translations';
+import { useColorMode } from '@chakra-ui/react';
 
 export const OverviewSection = ({ game }) => {
+  const { colorMode } = useColorMode();
   return (
     <div id='overview' className='space-y-8 flex flex-col gap-10'>
       <div>
         <h2 className='text-2xl font-bold mb-4'>게임 개요</h2>
-        <div className=' w-full bg-slate-800 rounded-lg p-6'>
-          <p className='text-gray-300'>{game?.description_raw}</p>
+        <div
+          className=' w-full  rounded-lg p-6'
+          style={{
+            backgroundColor: colorMode === 'dark' ? '#1f2937' : '#e9e9e9',
+          }}
+        >
+          <p className=''>{game?.description_raw}</p>
         </div>
       </div>
 
@@ -66,7 +73,11 @@ export const OverviewSection = ({ game }) => {
         <h4 className='font-semibold mb-2'>주요 특징</h4>
         <div className='flex flex-wrap gap-2'>
           {game?.tags?.slice(0, 8).map((tag) => (
-            <span key={tag.id} className='px-3 py-1 bg-gray-700 rounded-full text-sm'>
+            <span
+              key={tag.id}
+              className='px-3 py-1  rounded-full text-sm'
+              style={{ backgroundColor: colorMode === 'dark' ? '#374151' : '#e9e9e9' }}
+            >
               {translateTag(tag.name)}
             </span>
           ))}

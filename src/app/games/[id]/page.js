@@ -62,7 +62,7 @@ export default function GameDetailPage() {
         {/* 게임 정보 */}
         <div className='absolute bottom-0 left-0 right-0 p-8'>
           <div className='max-w-7xl mx-auto'>
-            <h1 className='text-5xl font-bold mb-4'>{game?.name}</h1>
+            <h1 className='text-5xl text-white font-bold mb-4'>{game?.name}</h1>
             <div className='flex items-center gap-4 text-sm text-gray-300'>
               <div className='flex items-center'>
                 <Star className='w-4 h-4 text-yellow-400 fill-current mr-1' />
@@ -77,33 +77,6 @@ export default function GameDetailPage() {
         </div>
       </Box>
 
-      {/* 내비게이션 */}
-      {/* <nav className='bg-gray-800 sticky top-16 z-40'>
-        <div className='max-w-7xl mx-auto px-4'>
-          <ul className='flex gap-8 text-sm'>
-            <li className='py-4'>
-              <a href='#overview' className='hover:text-blue-400'>
-                개요
-              </a>
-            </li>
-            <li className='py-4'>
-              <a href='#media' className='hover:text-blue-400'>
-                미디어
-              </a>
-            </li>
-            <li className='py-4'>
-              <a href='#editions' className='hover:text-blue-400'>
-                에디션
-              </a>
-            </li>
-            <li className='py-4'>
-              <a href='#reviews' className='hover:text-blue-400'>
-                리뷰
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav> */}
       <DetailNav />
 
       {/* 메인 콘텐츠 */}

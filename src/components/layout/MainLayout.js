@@ -41,7 +41,7 @@ const MainLayout = ({ children, headerType, showAside = true }) => {
             activeMenu={activeMenu}
             setActiveMenu={setActiveMenu}
           />
-          <main className={`flex-1 min-h-screen bg-[#1e1e1e]  ${showAside ? '' : ''}`}>
+          <main className={`flex-1 min-h-screen   ${showAside ? '' : ''}`}>
             <div className='relative w-full flex flex-col gap-0 z-5 '>{children}</div>
           </main>
         </div>

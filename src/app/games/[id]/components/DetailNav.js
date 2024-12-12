@@ -1,6 +1,8 @@
+import { useColorMode } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 const DetailNav = () => {
+  const { colorMode } = useColorMode();
   const [activeSection, setActiveSection] = useState('overview');
 
   const scrollToSection = (sectionId) => {
@@ -47,16 +49,19 @@ const DetailNav = () => {
   ];
 
   return (
-    <nav className='bg-gray-800 sticky top-16 z-40'>
+    <nav
+      className='bg-gray-800 sticky top-16 z-40'
+      style={{
+        backgroundColor: colorMode === 'dark' ? '#1f2937' : '#e9e9e9',
+      }}
+    >
       <div className='max-w-7xl mx-auto px-4'>
         <ul className='flex gap-8 text-sm'>
           {navItems.map(({ id, label }) => (
             <li key={id} className='py-4'>
               <button
                 onClick={() => scrollToSection(id)}
-                className={`hover:text-blue-400 transition-colors ${
-                  activeSection === id ? 'text-blue-400' : 'text-gray-300'
-                }`}
+                className={`hover:text-blue-400 transition-colors ${activeSection === id ? 'text-blue-400' : ''}`}
               >
                 {label}
               </button>
