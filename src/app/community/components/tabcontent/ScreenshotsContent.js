@@ -8,15 +8,15 @@ import 'yet-another-react-lightbox/styles.css';
 import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import { useGameCommunity } from '@/contexts/FilterContext';
 import Image from 'next/image';
+import { useColorMode } from '@chakra-ui/react';
 
 const ScreenshotsContent = () => {
   const { screenshotCategories, mockScreenshots, filters, handleSearch } = useGameCommunity();
-
+  const { colorMode } = useColorMode();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Filter screenshots based on search and category
   const filteredScreenshots = mockScreenshots.filter((screenshot) => {
     const matchesSearch = filters.searchQuery
       ? screenshot.title.toLowerCase().includes(filters.searchQuery.toLowerCase()) ||
@@ -26,7 +26,6 @@ const ScreenshotsContent = () => {
     return matchesSearch && matchesCategory;
   });
 
-  // Prepare images for lightbox
   const lightboxImages = filteredScreenshots.map((screenshot) => ({
     src: screenshot.imageUrl,
     alt: screenshot.title,
@@ -40,22 +39,21 @@ const ScreenshotsContent = () => {
   };
 
   return (
-    <div className='bg-[#1a1b1e] min-h-screen'>
+    <div className={`min-h-screen ${colorMode === 'dark' ? 'bg-[#171923]' : 'bg-gray-50'}`}>
       <div className='mb-6'>
         <SearchBar onSearch={handleSearch} />
 
-        {/* Categories */}
         <div className='flex gap-2 mt-4 overflow-x-auto pb-2'>
           {screenshotCategories.map((category) => (
             <button
               key={category.value}
               onClick={() => setSelectedCategory(category.value)}
               className={`px-4 py-2 rounded-full text-sm whitespace-nowrap
-                           ${
-                             selectedCategory === category.value
-                               ? 'bg-purple-600 text-white'
-                               : 'bg-[#2d2d3a] text-gray-300 hover:bg-[#3d3d4a]'
-                           }`}
+                          ${
+                            selectedCategory === category.value
+                              ? 'bg-purple-600 text-white'
+                              : 'bg-[#2d2d3a] text-gray-300 hover:bg-[#3d3d4a]'
+                          }`}
             >
               {category.label}
             </button>
@@ -63,7 +61,6 @@ const ScreenshotsContent = () => {
         </div>
       </div>
 
-      {/* Screenshots Grid */}
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
         {filteredScreenshots.map((screenshot, index) => (
           <div key={screenshot.id} className='bg-[#2d2d3a] rounded-lg overflow-hidden'>
@@ -104,7 +101,6 @@ const ScreenshotsContent = () => {
         ))}
       </div>
 
-      {/* Lightbox */}
       <Lightbox
         open={lightboxOpen}
         close={() => setLightboxOpen(false)}

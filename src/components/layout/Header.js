@@ -62,7 +62,7 @@ const Header = ({ onMenuClick, activeMenu = { activeMenu }, setActiveMenu = { se
             : 'rgba(255, 255, 255, 1)', // 라이트모드
           boxShadow:
             colorMode === 'dark'
-              ? '0 4px 6px rgba(0, 0, 0, 0.2)' // 다크모드 그림자
+              ? '0 4px 6px rgba(0, 0, 0, 0.1)' // 다크모드 그림자
               : '0 4px 6px rgba(0, 0, 0, 0.1)', // 라이트모드 그림자
           borderBottom: 'none',
           transition: 'background-color 0.3s ease',

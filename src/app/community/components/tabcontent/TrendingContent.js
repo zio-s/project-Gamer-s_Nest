@@ -3,6 +3,7 @@ import FilterSection from '../FilterSection';
 import ResetButton from '../ResetButton';
 import SearchBar from '../SearchBar';
 import { useGameCommunity } from '@/contexts/FilterContext';
+import { useColorMode } from '@chakra-ui/react';
 const dummyPosts = [
   {
     id: 1,
@@ -269,10 +270,11 @@ const PostCard = ({ post }) => (
 );
 
 const TrendingContent = () => {
+  const { colorMode } = useColorMode();
   const { resetFilters } = useGameCommunity();
   const sortedPosts = [...dummyPosts].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   return (
-    <div className='bg-[#1a1b1e] min-h-screen'>
+    <div className={`min-h-screen ${colorMode === 'dark' ? 'bg-[#171923]' : 'bg-gray-50'}`}>
       <SearchBar />
 
       <div className='flex flex-col md:flex-row gap-6 mt-6 '>

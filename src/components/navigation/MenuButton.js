@@ -12,7 +12,7 @@ const MenuButton = ({ icon: Icon, label, href }) => {
     <Link
       style={{
         backgroundColor: colorMode === 'dark' ? '#1f2937' : '#FFFFFF',
-        color: colorMode === 'dark' ? 'white' : '#444',
+        color: colorMode === 'dark' ? '#D1D5DB' : '#1F2937',
       }}
       href={href}
       className={`

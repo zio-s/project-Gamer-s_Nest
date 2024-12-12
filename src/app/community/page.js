@@ -40,8 +40,8 @@ export default function CommunityPage() {
                     ${colorMode === 'dark' ? 'bg-[#1a1b1e]/95 border-gray-800' : 'bg-white/95 border-gray-200'}
                     ${scrolledForMove ? 'top-0 translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
         >
-          <div className='px-4'>
-            <div className='py-4 flex items-center'>
+          <div className='px-6'>
+            <header className='flex items-center justify-between h-16'>
               <DrawerMenu />
               <div className='flex-1 flex items-center justify-between'>
                 <h2 className={`text-xl font-bold ${colorMode === 'dark' ? 'text-white' : 'text-gray-900'}`}>
@@ -51,7 +51,7 @@ export default function CommunityPage() {
                   <HeaderSearch />
                 </Suspense>
               </div>
-            </div>
+            </header>
           </div>
         </div>
 

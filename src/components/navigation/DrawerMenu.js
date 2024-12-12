@@ -8,6 +8,7 @@ import {
   DrawerCloseButton,
   Button,
   useDisclosure,
+  useColorMode,
 } from '@chakra-ui/react';
 import { Menu } from 'lucide-react';
 import Navigation from './Navigation';
@@ -15,10 +16,11 @@ import { menuItems } from '@/data/menuItems';
 import Image from 'next/image';
 import { ThemeToggle } from '../ThemeToggle';
 const DrawerMenu = ({ className }) => {
+  const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <>
+    <nav>
       <Button
         onClick={onOpen}
         variant='ghost'
@@ -30,9 +32,18 @@ const DrawerMenu = ({ className }) => {
 
       <Drawer isOpen={isOpen} placement='left' onClose={onClose}>
         <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader className='border-b'>
+        <DrawerContent
+          style={{
+            backgroundColor: colorMode === 'dark' ? '#1F2937' : '#FFFFFF',
+            color: colorMode === 'dark' ? '#D1D5DB' : '#1F2937',
+          }}
+        >
+          <DrawerCloseButton
+            style={{
+              color: colorMode === 'dark' ? '#D1D5DB' : '#1F2937',
+            }}
+          />
+          <DrawerHeader className={`border-b ${colorMode === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
             <div className='flex justify-center items-center ml-[-15px]'>
               <Image src='/pattern/logo2.png' width={75} height={75} priority alt='logo' />
               <h1 className='text-xl flex flex-col font-bold text-left ml-[-10px]'>
@@ -57,7 +68,7 @@ const DrawerMenu = ({ className }) => {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-    </>
+    </nav>
   );
 };
 

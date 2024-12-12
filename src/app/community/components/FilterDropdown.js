@@ -3,22 +3,21 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { useGameCommunity } from '@/contexts/FilterContext';
+import { useColorMode } from '@chakra-ui/react';
 
 const FilterDropdown = ({ title, filterType, options }) => {
   const { filters, updateFilters } = useGameCommunity();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const { colorMode } = useColorMode();
 
-  // 다중 선택이 가능한 필터 타입 정의
   const isMultiSelect = ['categories', 'roles', 'requirements'].includes(filterType);
 
-  // 현재 선택된 값 가져오기
   const getCurrentValue = () => {
     const value = filters[filterType];
     return value || (isMultiSelect ? [] : '');
   };
 
-  // 클릭 이벤트 핸들러
   const handleSelect = (option) => {
     const currentValue = getCurrentValue();
 
@@ -33,7 +32,6 @@ const FilterDropdown = ({ title, filterType, options }) => {
     }
   };
 
-  // 표시될 텍스트 계산
   const getDisplayValue = () => {
     const currentValue = getCurrentValue();
 
@@ -65,29 +63,34 @@ const FilterDropdown = ({ title, filterType, options }) => {
     <div className='relative' ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className='w-full flex items-center justify-between px-4 py-2 bg-[#2d2d3a] 
-                  text-gray-300 rounded-lg border border-gray-600 hover:border-purple-500
-                  transition-colors duration-200'
+        className={`w-full flex items-center justify-between px-4 py-2 rounded-lg 
+              transition-colors duration-200 ${
+                colorMode === 'dark'
+                  ? 'bg-[#1e1f24] text-gray-300 border border-gray-600 hover:border-purple-500'
+                  : 'bg-white text-gray-700 border border-gray-200 hover:border-purple-500'
+              }`}
       >
         <span className='truncate'>{getDisplayValue()}</span>
         <ChevronDown
           className={`w-4 h-4 transition-transform duration-200 
-                    ${isOpen ? 'rotate-180' : ''}`}
+              ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
 
       {isOpen && (
         <div
-          className='absolute z-50 w-full mt-1 bg-[#2d2d3a] border border-gray-600 
-                        rounded-lg shadow-lg overflow-hidden'
+          className={`absolute z-50 w-full mt-1 rounded-lg shadow-lg overflow-hidden
+                ${colorMode === 'dark' ? 'bg-[#1e1f24] border border-gray-600' : 'bg-white border border-gray-200'}`}
         >
           <div className='max-h-60 overflow-y-auto'>
             {options.map((option) => (
               <div
                 key={option.value}
                 onClick={() => handleSelect(option.value)}
-                className='px-4 py-2 hover:bg-[#3d3d4a] cursor-pointer text-gray-300
-                          flex items-center gap-2 transition-colors duration-150'
+                className={`px-4 py-2 cursor-pointer flex items-center gap-2 
+                      transition-colors duration-150 ${
+                        colorMode === 'dark' ? 'text-gray-300 hover:bg-[#2d2d3a]' : 'text-gray-700 hover:bg-gray-50'
+                      }`}
               >
                 {isMultiSelect && (
                   <form>
@@ -100,7 +103,9 @@ const FilterDropdown = ({ title, filterType, options }) => {
                       type='checkbox'
                       checked={getCurrentValue().includes(option.value)}
                       readOnly
-                      className='rounded border-gray-600 bg-[#1a1b1e]'
+                      className={`rounded ${
+                        colorMode === 'dark' ? 'border-gray-600 bg-[#171923]' : 'border-gray-300 bg-gray-50'
+                      }`}
                     />
                   </form>
                 )}

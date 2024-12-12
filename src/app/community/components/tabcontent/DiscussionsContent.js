@@ -5,12 +5,13 @@ import SearchBar from '../SearchBar';
 import FilterSection from '../FilterSection';
 import QuestionList from '../QuestionList';
 import ResetButton from '../ResetButton';
+import { useColorMode } from '@chakra-ui/react';
 
 const DiscussionsContent = () => {
   const { resetFilters } = useGameCommunity();
-
+  const { colorMode } = useColorMode();
   return (
-    <div className='bg-[#1a1b1e] min-h-screen'>
+    <div className={`min-h-screen ${colorMode === 'dark' ? 'bg-[#171923]' : 'bg-gray-50'}`}>
       <SearchBar />
 
       <div className='flex flex-col md:flex-row gap-6 mt-6 '>
