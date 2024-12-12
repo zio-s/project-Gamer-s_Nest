@@ -1,5 +1,5 @@
 'use client';
-import { Menu, Filter, Search, ShoppingCart, User } from 'lucide-react';
+import { User } from 'lucide-react';
 import { useColorMode } from '@chakra-ui/react';
 import { ThemeToggle } from '../ThemeToggle';
 import Input from '../common/Input';
@@ -27,37 +27,55 @@ const Header = ({ onMenuClick, activeMenu = { activeMenu }, setActiveMenu = { se
         return {
           backgroundColor: scrolled
             ? colorMode === 'dark'
-              ? 'rgba(17, 24, 39, 0.95)'
-              : 'rgba(255, 255, 255, 0.95)'
+              ? 'rgba(17, 24, 39, 0.95)' // 다크모드
+              : 'rgba(255, 255, 255, 0.95)' // 라이트모드
             : 'transparent',
-          borderBottom: '1px solid #E5E7EB',
+          borderBottom:
+            colorMode === 'dark'
+              ? '1px solid rgb(45, 45, 58)' // 다크모드 테두리
+              : '1px solid #E5E7EB', // 라이트모드 테두리
           transition: 'background-color 0.3s ease',
+          color: colorMode === 'dark' ? '#D1D5DB' : '#1F2937',
         };
+
       case 'list':
         return {
-          backgroundColor: colorMode === 'dark' ? '#1F2937' : '#F3F4F6',
-          borderBottom: '2px solid #3B82F6',
+          backgroundColor:
+            colorMode === 'dark'
+              ? '#1F2937' // 다크모드
+              : '#F3F4F6', // 라이트모드
+          borderBottom:
+            colorMode === 'dark'
+              ? '2px solid #6366F1' // 다크모드 테두리
+              : '2px solid #3B82F6', // 라이트모드 테두리
           color: colorMode === 'dark' ? '#FFFFFF' : '#1F2937',
         };
+
       case 'community':
         return {
           backgroundColor: scrolled
             ? colorMode === 'dark'
-              ? 'rgba(23, 25, 35, 1)'
-              : 'rgba(255, 255, 255, 0.95)'
-            : 'rgba(23, 25, 35, 1)',
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+              ? 'rgba(23, 25, 35, 0.95)' // 다크모드
+              : 'rgba(255, 255, 255, 0.95)' // 라이트모드
+            : colorMode === 'dark'
+            ? 'rgba(23, 25, 35, 1)' // 다크모드
+            : 'rgba(255, 255, 255, 1)', // 라이트모드
+          boxShadow:
+            colorMode === 'dark'
+              ? '0 4px 6px rgba(0, 0, 0, 0.2)' // 다크모드 그림자
+              : '0 4px 6px rgba(0, 0, 0, 0.1)', // 라이트모드 그림자
           borderBottom: 'none',
           transition: 'background-color 0.3s ease',
+          color: colorMode === 'dark' ? '#D1D5DB' : '#1F2937',
         };
+
       default: // 'default' 헤더 스타일
         return {
           backgroundColor: scrolled
             ? colorMode === 'dark'
-              ? 'rgba(17, 24, 39, 0.95)'
-              : 'rgba(255, 255, 255, 0.95)'
+              ? 'rgba(17, 24, 39, 0.95)' // 다크모드
+              : 'rgba(255, 255, 255, 0.95)' // 라이트모드
             : 'transparent',
-          // borderBottom: '1px solid #E5E7EB',
           color: colorMode === 'dark' ? '#D1D5DB' : '#1F2937',
           transition: 'background-color 0.3s ease',
         };
@@ -124,9 +142,10 @@ const Header = ({ onMenuClick, activeMenu = { activeMenu }, setActiveMenu = { se
 
   return (
     <header
-      className={`sticky top-0 z-50 px-6 backdrop-blur-sm ${
-        headerType === 'default' ? 'flex items-center justify-between p-6' : ''
-      } ${headerType === 'detail' && !scrolled ? 'bg-transparent' : ''}
+      className={`sticky top-0 z-50 px-6 backdrop-blur-sm 
+        ${headerType === 'default' ? 'flex items-center justify-between p-6' : ''} 
+        ${headerType === 'detail' && !scrolled ? 'bg-transparent' : ''}
+        ${colorMode === 'dark' ? 'dark' : ''}
       `}
       style={getHeaderStyle()}
     >

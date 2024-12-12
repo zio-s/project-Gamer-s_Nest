@@ -13,6 +13,7 @@ import { Menu } from 'lucide-react';
 import Navigation from './Navigation';
 import { menuItems } from '@/data/menuItems';
 import Image from 'next/image';
+import { ThemeToggle } from '../ThemeToggle';
 const DrawerMenu = ({ className }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -43,8 +44,16 @@ const DrawerMenu = ({ className }) => {
             </div>
           </DrawerHeader>
 
-          <DrawerBody className='p-0'>
-            <Navigation menuItems={menuItems} />
+          <DrawerBody className='p-0 flex flex-col'>
+            <div className='flex-1'>
+              <Navigation menuItems={menuItems} />
+            </div>
+            <div className='border-t p-4'>
+              <div className='flex items-center justify-between'>
+                <span className='font-medium'>다크 모드</span>
+                <ThemeToggle />
+              </div>
+            </div>
           </DrawerBody>
         </DrawerContent>
       </Drawer>
