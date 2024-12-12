@@ -33,7 +33,6 @@ const MainLayout = ({ children, headerType, showAside = true }) => {
           </div>
         )}
 
-        {/* Main Content */}
         <div className=' flex flex-col '>
           <Header
             type={headerType}
